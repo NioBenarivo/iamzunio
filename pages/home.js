@@ -24,7 +24,7 @@ const boxConstant = {
     top: 0,
   },
   animate: {
-    scaleY: 0,
+    height: 0,
     originY: 0,
     transition: {
       duration: 1.2,
@@ -42,7 +42,7 @@ const blackBox = {
     top: 0,
   },
   animate: {
-    scaleY: 0,
+    height: 0,
     originY: 0,
     transition: {
       when: "afterChildren",
@@ -256,7 +256,7 @@ export default function Home({ isFirstMount }) {
         </FadeInWrapper>
         <FadeInWrapper>
           <div className="flex flex-wrap justify-around items-start my4 work">
-            <motion.div className="col-7 order-0 imageContainer" variants={image}>
+            <motion.div className="col-7 order-0" variants={image}>
               <Image
                 alt="Logistic-1"
                 src="/assets/tokopedia-logistic.png"
@@ -286,7 +286,7 @@ export default function Home({ isFirstMount }) {
         </FadeInWrapper>
         <FadeInWrapper>
           <div className="flex flex-wrap justify-around items-start my4 work">
-            <motion.div className="col-7 order-0 imageContainer" variants={image}>
+            <motion.div className="col-7 order-0" variants={image}>
               <Image
                 alt="Logistic-1"
                 src="/assets/tokopedia-ds.png"

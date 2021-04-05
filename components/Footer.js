@@ -8,11 +8,7 @@ export default function Footer() {
         <SiZeit size={24} title="Vercel" />
         <SiNextDotJs size={24} title="NextJS" />
       </div>
-      <div className="flex flex-wrap items-center justify-between footer-bottom px3 py1">
-        <div className="flex items-center justify-center">
-          <SiGmail size={24} className="mx1" title="Gmail" />
-          <p>zunibenarivo@gmail.com</p>
-        </div>
+      <div className="flex flex-wrap items-center justify-between footer-bottom p3">
         <div className="flex items-center justify-center">
           <a href="https://github.com/NioBenarivo" className="mr1" target="_blank" rel="noopener">
             <SiGithub size={24} title="Github" />
@@ -20,6 +16,10 @@ export default function Footer() {
           <a href="https://www.linkedin.com/in/zunio-benarivo-954679118/" target="_blank" rel="noopener">
             <SiLinkedin size={24} title="LinkedIn" />
           </a>
+        </div>
+        <div className="flex items-center justify-center">
+          <SiGmail size={24} className="m1" title="Gmail" />
+          <p className="m0">zunibenarivo@gmail.com</p>
         </div>
       </div>
     </div>

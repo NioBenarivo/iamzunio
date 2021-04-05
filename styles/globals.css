@@ -86,8 +86,13 @@ a {
     margin-bottom: 2em;
   }
 
-  .work .imageContainer {
-    max-width: 320px;
+  .work h2 {
+    font-size: 1.4em;
+  }
+
+  .work p {
+    font-size: 1em;
+    line-height: 1.4;
   }
 }
 
