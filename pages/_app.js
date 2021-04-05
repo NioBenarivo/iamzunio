@@ -1,10 +1,32 @@
-import { AnimatePresence } from "framer-motion";
+import { useState, useEffect } from 'react'
+import { AnimatePresence } from "framer-motion"
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps, router }) {
+  const [isFirstMount, setIsFirstMount] = useState(true)
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      isFirstMount && setIsFirstMount(false);
+    };
+
+    if (isFirstMount) {
+      console.log(isFirstMount, "ISFIRSTMOUNT")
+      window.history.scrollRestoration = 'manual'
+    }
+
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method:
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
+  }, []);
+
   return (
     <AnimatePresence exitBeforeEnter>
-      <Component key={router.route} {...pageProps} />
+      <Component isFirstMount={isFirstMount} key={router.route} {...pageProps} />
     </AnimatePresence>
   )
 }

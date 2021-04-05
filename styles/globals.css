@@ -1,9 +1,13 @@
+@import '~basscss/css/basscss.css';
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  box-sizing: border-box;
+  color: #2d2d2a;
 }
 
 @font-face {
@@ -22,10 +26,214 @@ body {
 }
 
 a {
-  color: inherit;
+  display: inline-block;
+  color: #55d6c2;
   text-decoration: none;
 }
 
 * {
   box-sizing: border-box;
+}
+
+.footer-top {
+  background-color: #f2f5ff;
+  color: #2d2d2a;
+}
+
+.footer-top img {
+  height: 16px;
+}
+
+.footer-bottom {
+  background-color: #2d2d2a;
+  color: #f2f5ff;
+}
+
+.footer-bottom a {
+  color: #f2f5ff;
+}
+
+@media (max-width: 425px) {
+  .footer-bottom {
+    flex-direction: column;
+  }
+}
+
+.work h2 {
+  font-size: 2em;
+}
+
+.work p {
+  font-size: 1.2em;
+  line-height: 1.4;
+}
+
+.work span {
+  white-space: nowrap;
+}
+
+@media (max-width: 40em) {
+  .work {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    margin: 2em 0;
+  }
+
+  .work > div {
+    width: 100%;
+    margin-bottom: 2em;
+  }
+
+  .work .imageContainer {
+    max-width: 320px;
+  }
+}
+
+/* 
+  black: #2d2d2a;
+  red: #c14953;
+  white: #f2f5ff;
+  yellow: #f5e960;
+  green : #55d6c2;
+*/
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.initialPageBg {
+  color: #f2f5ff;
+  background-color: #2d2d2a;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  z-index: 50;
+}
+
+.afterBox {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.redBox {
+  z-index: 49;
+  background-color: #c14953;
+}
+
+.yellowBox {
+  z-index: 48;
+  background-color: #f5e960;
+}
+
+.greenBox {
+  z-index: 47;
+  background-color: #55d6c2;
+}
+
+.box {
+  width: 80px;
+	height: 80px;
+	position: relative;
+	display: inline-block;
+}
+
+.box span {
+  position: absolute;
+  display: block;
+  border-radius: 8px;
+  background: #f2f5ff;
+}
+
+.box .top,
+.box .bottom {
+  width: 100%;
+  height: 5px;
+  transform: scaleX(0);
+}
+.box .left,
+.box .right {
+  width: 5px;
+  height: 100%;
+  transform: scaleY(0);
+}
+
+.box .top {
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+}
+.box .right {
+  top: 0;
+  right: 0;
+  transform-origin: top left;
+}
+.box .bottom {
+  bottom: 0;
+  right: 0;
+  transform-origin: top right;
+}
+.box .left {
+  top: 0;
+  left: 0;
+  transform-origin: bottom left;
+}
+
+.box .logo {
+  font-size: 2em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  transform: translate(-50%, -50%);
+}
+
+.content {
+  width: 100%;
+}
+
+.content h1 {
+  font-size: 4em;
+}
+
+@media only screen and (max-width: 52em) {
+  .content h1 {
+    font-size: 2em;
+  }
+}
+
+@media only screen and (min-width: 52em) and (max-width: 64em) {
+  .content h1 {
+    font-size: 3em;
+  }
+}
+
+.bgtest {
+  background-color: #55d6c2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 750px;
+  height: 750px;
+  border-radius: 100%;
+}
+
+.landing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
 }
