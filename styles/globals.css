@@ -1,4 +1,12 @@
 @import '~basscss/css/basscss.css';
+ 
+/* 
+  black: #2d2d2a;
+  red: #c14953;
+  white: #f2f5ff;
+  yellow: #f5e960;
+  green : #55d6c2;
+*/
 
 html,
 body {
@@ -35,6 +43,27 @@ a {
   box-sizing: border-box;
 }
 
+.color-red {
+  color: #c14953;
+}
+
+.color-black {
+  color: #2d2d2a;
+}
+
+.color-white {
+  color: #f2f5ff;
+}
+
+.color-green {
+  color: #55d6c2;
+}
+
+.color-yellow {
+  color: #f5e960;
+}
+
+/************ FOOTER ************/
 .footer-top {
   background-color: #f2f5ff;
   color: #2d2d2a;
@@ -59,6 +88,7 @@ a {
   }
 }
 
+/************ WORK ************/
 .work h2 {
   font-size: 2em;
 }
@@ -94,16 +124,17 @@ a {
     font-size: 1em;
     line-height: 1.4;
   }
+
+  .work-text {
+    order: 1;
+  }
+
+  .work-image {
+    order: 0;
+  }
 }
 
-/* 
-  black: #2d2d2a;
-  red: #c14953;
-  white: #f2f5ff;
-  yellow: #f5e960;
-  green : #55d6c2;
-*/
-
+/************ HOME PAGE ************/
 .container {
   min-height: 100vh;
   display: flex;
@@ -124,6 +155,35 @@ a {
   z-index: 50;
 }
 
+.content {
+  width: 100%;
+}
+
+.content h1 {
+  font-size: 4em;
+}
+
+@media only screen and (max-width: 52em) {
+  .content h1 {
+    font-size: 2em;
+  }
+}
+
+@media only screen and (min-width: 52em) and (max-width: 64em) {
+  .content h1 {
+    font-size: 3em;
+  }
+}
+
+.landing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/************ BOX ************/
 .afterBox {
   width: 100%;
   position: absolute;
@@ -205,40 +265,87 @@ a {
   transform: translate(-50%, -50%);
 }
 
-.content {
-  width: 100%;
+/************ Books ************/
+.books {
+  background-color: #2d2d2a;
+  color: #f2f5ff;
+  min-height: 300px;
 }
 
-.content h1 {
+.books h2 {
   font-size: 4em;
 }
 
-@media only screen and (max-width: 52em) {
-  .content h1 {
-    font-size: 2em;
-  }
-}
-
-@media only screen and (min-width: 52em) and (max-width: 64em) {
-  .content h1 {
-    font-size: 3em;
-  }
-}
-
-.bgtest {
-  background-color: #55d6c2;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 750px;
-  height: 750px;
-  border-radius: 100%;
-}
-
-.landing {
+.book-slides {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  min-height: 100vh;
+  font-size: 50px;
+  color: #fff;
+  font-weight: 500;
+  height: 300px;
+  max-height: 100vh;
 }
+
+@media (max-width: 40em) {
+  .books > div > div {
+    flex-direction: column;
+  }
+
+  .books > div > div > div {
+    width: 100%;
+  }
+
+  .books h2 {
+    font-size: 1.8em;
+    margin-bottom: 1em;
+    text-align: center;
+  }
+}
+
+/************ Profile ************/
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-color: #2d2d2a; */
+  opacity: 0.75;
+  z-index: 50;
+  color: #f2f5ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: right;
+  padding: 4em;
+  background: linear-gradient(to top, black 0%, rgba(0, 0, 0, 0.738) 19%, rgba(0, 0, 0, 0.541) 34%, rgba(0, 0, 0, 0.382) 47%, rgba(0, 0, 0, 0.278) 56.5%, rgba(0, 0, 0, 0.194) 65%, rgba(0, 0, 0, 0.126) 73%, rgba(0, 0, 0, 0.075) 80.2%, rgba(0, 0, 0, 0.042) 86.1%, rgba(0, 0, 0, 0.021) 91%, rgba(0, 0, 0, 0.008) 95.2%, rgba(0, 0, 0, 0.002) 98.2%, transparent 100%);
+}
+
+.overlay h2 {
+  font-size: 4em;
+}
+
+.overlay a {
+  font-size: 1.4em;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 40em) {
+  .overlay {
+    padding: 1em;
+    background: linear-gradient(to top, black 0%, rgba(0, 0, 0, 0.738) 38%, transparent 100%);
+  }
+
+  .overlay h2 {
+    font-size: 1.4em;
+  }
+
+  .overlay a {
+    font-size: 0.8em;
+    margin: 0;
+  }
+}
+
+

@@ -1,3 +1,6 @@
+import { useEffect, useRef } from 'react'
+import Image from 'next/image'
+import Head from 'next/head'
 import { motion } from 'framer-motion'
 import { 
   SiTypescript,
@@ -13,10 +16,10 @@ import {
   SiWebpack,
   SiWordpress
 } from 'react-icons/si'
-import Image from 'next/image'
-import Head from 'next/head'
-import Footer from '../components/Footer'
-import FadeInWrapper from '../components/FadeInWrapper'
+import { useKeenSlider } from "keen-slider/react"
+import "keen-slider/keen-slider.min.css"
+import Footer from '@components/Footer'
+import FadeInWrapper from '@components/FadeInWrapper'
 
 const boxConstant = {
   initial: {
@@ -105,7 +108,7 @@ const intro = {
       duration: 1,
       ease: [0.87, 0, 0.13, 1],
       staggerChildren: 0.3,
-    }
+    },
   },
 }
 
@@ -136,24 +139,24 @@ const content = isFirstMount => ({
 });
 
 const landingText = {
-  initial: { y: -30, opacity: 0 },
+  initial: { y: 20, opacity: 0 },
   animate: {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.7,
+      duration: 0.5,
       ease: [0.6, -0.05, 0.01, 0.99],
     },
   },
 }
 
 const text = {
-  hidden: { y: -30, opacity: 0 },
+  hidden: { y: 20, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.7,
+      duration: 0.5,
       ease: [0.6, -0.05, 0.01, 0.99],
     },
   },
@@ -169,6 +172,21 @@ const image = {
     opacity: 1,
     transition: {
       duration: 1,
+      ease: [0.6, -0.05, 0.01, 0.99],
+    }
+  }
+}
+
+const profileText = {
+  hidden: {
+    x: 20, 
+    opacity: 0,
+  },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
       ease: [0.6, -0.05, 0.01, 0.99],
     }
   }
@@ -216,6 +234,41 @@ const InitialTransition = () => {
 }
 
 export default function Home({ isFirstMount }) {
+  const timer = useRef()
+  const [sliderRef, slider] = useKeenSlider({ 
+    loop: true, 
+    duration: 1000,
+    dragSpeed: 0,
+  })
+
+  useEffect(() => {
+    timer.current = setInterval(() => {
+      if (slider) {
+        slider.next()
+      }
+    }, 5000)
+    return () => {
+      clearInterval(timer.current)
+    }
+  }, [slider])
+
+  const renderBooks = () => {
+    let content = [];
+    for (let i = 1; i < 10; i++) {
+      content.push(
+        <div className="keen-slider__slide book-slides">
+          <Image
+            alt={`book-${i}`}
+            src={`/assets/book-${i}.jpeg`}
+            width={180}
+            height={280}
+          />
+        </div>
+      );
+    }
+    return content;
+  }
+
   return (
     <motion.div className="container" exit={{ opacity: 0 }}>
       <Head>
@@ -233,8 +286,8 @@ export default function Home({ isFirstMount }) {
             UX Engineer based in {' '}
             <a 
               href="https://goo.gl/maps/mnDwan2rYUTHeLKL8" 
-              target="_blank" 
-              rel="noopener">
+              target="_blank"
+              rel="noopener noreferrer">
               Jakarta.
             </a> 
             <br />
@@ -286,15 +339,7 @@ export default function Home({ isFirstMount }) {
         </FadeInWrapper>
         <FadeInWrapper>
           <div className="flex flex-wrap justify-around items-start my4 work">
-            <motion.div className="col-7 order-0" variants={image}>
-              <Image
-                alt="Logistic-1"
-                src="/assets/tokopedia-ds.png"
-                width={840}
-                height={620}
-              />
-            </motion.div>
-            <div className="flex flex-column col-5 px2 order-1">
+            <div className="flex flex-column col-5 px2 work-text">
               <motion.h2 className="mt0 mb1" variants={text}>Design System</motion.h2>
               <motion.p className="mt0" variants={text}>Build Internal Design System and Design Guidelines</motion.p>
               <motion.div className="flex flex-wrap items-center mb1" variants={text}>
@@ -314,8 +359,50 @@ export default function Home({ isFirstMount }) {
                 <SiSlack className="mr1" size={24} />
               </motion.div>
             </div>
+            <motion.div className="col-7 work-img" variants={image}>
+              <Image
+                alt="Logistic-1"
+                src="/assets/tokopedia-ds.png"
+                width={840}
+                height={620}
+              />
+            </motion.div>
           </div>
         </FadeInWrapper>
+      </div>
+      <div className="col-12 books mt4">
+        <FadeInWrapper>
+          <div className="max-width-4 mx-auto flex items-center my4 px3">
+            <h2 className="m0 col-8">Book Collections</h2>
+            <div ref={sliderRef} className="keen-slider col-4">
+              {renderBooks()}
+            </div>
+          </div>
+        </FadeInWrapper>
+      </div>
+      <div className="col-12 relative">
+        <FadeInWrapper>
+          <Image
+            alt="Profile"
+            src="/assets/profile.jpg"
+            layout="responsive"
+            width="1200"
+            height="720"
+            objectFit="cover"
+          />
+        </FadeInWrapper>
+          <div className="overlay">
+            <FadeInWrapper customVariant={profileText}>
+              <h2 className="m0">Zunio <br />Benarivo</h2>
+              <a 
+                href="mailto:zunibenarivo@gmail.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="mb1"
+              >Get in Touch</a>
+            </FadeInWrapper>
+          </div>
+        {/* </FadeInWrapper> */}
       </div>
       <Footer />
     </motion.div>

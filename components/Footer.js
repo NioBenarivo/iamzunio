@@ -1,4 +1,4 @@
-import { SiZeit, SiGithub, SiLinkedin, SiNextDotJs, SiGmail } from "react-icons/si"
+import { SiZeit, SiGithub, SiLinkedin, SiNextDotJs, SiGmail, SiFramer } from "react-icons/si"
 
 export default function Footer() {
   return (
@@ -7,13 +7,14 @@ export default function Footer() {
         <p className="my0 mr1">Powered by</p>
         <SiZeit size={24} title="Vercel" />
         <SiNextDotJs size={24} title="NextJS" />
+        <SiFramer size={24} title="Framer Motion" />
       </div>
       <div className="flex flex-wrap items-center justify-between footer-bottom p3">
         <div className="flex items-center justify-center">
-          <a href="https://github.com/NioBenarivo" className="mr1" target="_blank" rel="noopener">
+          <a href="https://github.com/NioBenarivo" className="mr1" target="_blank" rel="noopener noreferrer">
             <SiGithub size={24} title="Github" />
           </a>
-          <a href="https://www.linkedin.com/in/zunio-benarivo-954679118/" target="_blank" rel="noopener">
+          <a href="https://www.linkedin.com/in/zunio-benarivo-954679118/" target="_blank" rel="noopener noreferrer">
             <SiLinkedin size={24} title="LinkedIn" />
           </a>
         </div>
