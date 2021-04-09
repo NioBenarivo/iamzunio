@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Head from 'next/head'
-import { motion } from 'framer-motion'
+import { motion, useViewportScroll } from 'framer-motion'
 import { 
   SiTypescript,
   SiReact, 
@@ -16,6 +16,8 @@ import {
   SiWebpack,
   SiWordpress
 } from 'react-icons/si'
+import { GiSwimfins, GiNoodles, GiStairsCake, GiBriefcase } from "react-icons/gi";
+import { IoBicycleOutline, IoLaptopOutline, IoFlagOutline } from "react-icons/io5";
 import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
 import Footer from '@components/Footer'
@@ -192,6 +194,32 @@ const profileText = {
   }
 }
 
+const backToTop = isComplete => ({
+  animate: {
+    y: isComplete ? 0 : 30,
+    opacity: isComplete ? 1 : 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.6, -0.05, 0.01, 0.99]
+    }
+  }
+})
+
+const svgIcon = {
+  hidden: {
+    scale: 0,
+    opacity: 0,
+  },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      ease: [0.6, -0.05, 0.01, 0.99],
+    }
+  }
+}
+
 const InitialTransition = () => {
   return (
     <>
@@ -234,12 +262,18 @@ const InitialTransition = () => {
 }
 
 export default function Home({ isFirstMount }) {
+  const [isComplete, setIsComplete] = useState(false);
+  const { scrollYProgress } = useViewportScroll();
   const timer = useRef()
-  const [sliderRef, slider] = useKeenSlider({ 
+  const [sliderRef, slider] = useKeenSlider({
+    mode: "free-snap",
     loop: true, 
     duration: 1000,
-    dragSpeed: 0,
   })
+
+  useEffect(() => {
+    scrollYProgress.onChange(y => setIsComplete(y >= 1))
+  }, [scrollYProgress]);
 
   useEffect(() => {
     timer.current = setInterval(() => {
@@ -256,12 +290,12 @@ export default function Home({ isFirstMount }) {
     let content = [];
     for (let i = 1; i < 10; i++) {
       content.push(
-        <div className="keen-slider__slide book-slides">
+        <div className="keen-slider__slide book-slides" key={`content-${i}`}>
           <Image
             alt={`book-${i}`}
             src={`/assets/book-${i}.jpeg`}
             width={180}
-            height={280}
+            height={260}
           />
         </div>
       );
@@ -339,6 +373,14 @@ export default function Home({ isFirstMount }) {
         </FadeInWrapper>
         <FadeInWrapper>
           <div className="flex flex-wrap justify-around items-start my4 work">
+            <motion.div className="col-7 work-img" variants={image}>
+              <Image
+                alt="Logistic-1"
+                src="/assets/tokopedia-ds.png"
+                width={840}
+                height={620}
+              />
+            </motion.div>
             <div className="flex flex-column col-5 px2 work-text">
               <motion.h2 className="mt0 mb1" variants={text}>Design System</motion.h2>
               <motion.p className="mt0" variants={text}>Build Internal Design System and Design Guidelines</motion.p>
@@ -359,22 +401,54 @@ export default function Home({ isFirstMount }) {
                 <SiSlack className="mr1" size={24} />
               </motion.div>
             </div>
-            <motion.div className="col-7 work-img" variants={image}>
-              <Image
-                alt="Logistic-1"
-                src="/assets/tokopedia-ds.png"
-                width={840}
-                height={620}
-              />
-            </motion.div>
           </div>
         </FadeInWrapper>
       </div>
-      <div className="col-12 books mt4">
+      <div className="col-12 bio p3 relative">
+        <FadeInWrapper className="flex flex-wrap flex-column items-center">
+          <div className="flex items-center flex-auto">
+            <GiStairsCake size={64} className="mr1" />
+            <motion.h2 variants={text}>22 June 1994</motion.h2>
+          </div>
+          <div className="flex items-center flex-auto">
+            <IoFlagOutline size={64} className="mr1" />
+            <motion.h2 variants={text}>Indonesia</motion.h2>
+          </div>
+          <div className="flex items-center flex-auto">
+            <GiBriefcase size={64} className="mr1" />
+            <motion.h2 variants={text}>4+ Years Experience</motion.h2>
+          </div>
+        </FadeInWrapper>
+      </div>
+      <div className="col-12 activities">
+        <FadeInWrapper className="flex flex-wrap items-center">
+          <div className="col-3 center px1">
+            <IoBicycleOutline size={96} />
+            <motion.h2 variants={text}>Bicycle</motion.h2>
+            <motion.p variants={text}>Ride multiple times a week. <br />Strengthen your core</motion.p>
+          </div>
+          <div className="col-3 center px1">
+            <GiSwimfins size={96} />
+            <motion.h2 variants={text}>Swimming</motion.h2>
+            <motion.p variants={text}>Never sweat cause you're in water!<br />Love the deep blue sea</motion.p>
+          </div>
+          <div className="col-3 center px1">
+            <IoLaptopOutline size={96} />
+            <motion.h2 variants={text}>Coding</motion.h2>
+            <motion.p variants={text}>Work and Hobby, why not?<br />Tech and Product enthusiast</motion.p>
+          </div>
+          <div className="col-3 center px1" >
+            <GiNoodles size={96} />
+            <motion.h2 variants={text}>Ramen</motion.h2>
+            <motion.p variants={text}>Who doesn't love Ramen?<br />Slurpy noodles at its best</motion.p>
+          </div>
+        </FadeInWrapper>
+      </div>
+      <div className="col-12 books">
         <FadeInWrapper>
-          <div className="max-width-4 mx-auto flex items-center my4 px3">
+          <div className="max-width-4 mx-auto flex items-center my2 px3">
             <h2 className="m0 col-8">Book Collections</h2>
-            <div ref={sliderRef} className="keen-slider col-4">
+            <div ref={sliderRef} className="keen-slider col-4 relative">
               {renderBooks()}
             </div>
           </div>
@@ -391,18 +465,28 @@ export default function Home({ isFirstMount }) {
             objectFit="cover"
           />
         </FadeInWrapper>
-          <div className="overlay">
-            <FadeInWrapper customVariant={profileText}>
-              <h2 className="m0">Zunio <br />Benarivo</h2>
-              <a 
-                href="mailto:zunibenarivo@gmail.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="mb1"
-              >Get in Touch</a>
-            </FadeInWrapper>
-          </div>
-        {/* </FadeInWrapper> */}
+        <div className="overlay">
+          <FadeInWrapper customVariant={profileText}>
+            <h2 className="m0">Zunio <br />Benarivo</h2>
+            <a 
+              href="mailto:zunibenarivo@gmail.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="mb1">
+                Get in Touch
+            </a>
+          </FadeInWrapper>
+        </div>
+        <motion.div 
+          className="btt"
+          animate="animate"
+          whileHover={{ scale: 1.12 }}
+          whileTap={{ scale: 0.93 }}
+          variants={backToTop(isComplete)}
+          onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
+        >
+          Back to top
+        </motion.div>
       </div>
       <Footer />
     </motion.div>

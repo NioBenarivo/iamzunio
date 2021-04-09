@@ -1,4 +1,4 @@
-import { SiZeit, SiGithub, SiLinkedin, SiNextDotJs, SiGmail, SiFramer } from "react-icons/si"
+import { SiZeit, SiGithub, SiLinkedin, SiNextDotJs, SiFramer } from "react-icons/si"
 
 export default function Footer() {
   return (
@@ -19,8 +19,7 @@ export default function Footer() {
           </a>
         </div>
         <div className="flex items-center justify-center">
-          <SiGmail size={24} className="m1" title="Gmail" />
-          <p className="m0">zunibenarivo@gmail.com</p>
+          <p className="m0">© 2021 Zunio Benarivo</p>
         </div>
       </div>
     </div>
