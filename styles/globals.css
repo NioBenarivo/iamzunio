@@ -143,6 +143,18 @@ a {
 }
 
 /************ HOME PAGE ************/
+.dark-theme {
+  color: #f2f5ff;
+  background-color: #2d2d2a;
+  transition: 0.3s all ease-in-out;
+}
+
+.light-theme {
+  color: #2d2d2a;
+  background-color: #FFFFFF;
+  transition: 0.3s all ease-in-out;
+}
+
 .container {
   min-height: 100vh;
   display: flex;
@@ -221,6 +233,30 @@ a {
 	height: 80px;
 	position: relative;
 	display: inline-block;
+}
+
+.circle {
+  width: 120px;
+  height: 120px;
+  position: relative;
+	display: inline-block;
+}
+
+.circle-loader {
+  transform: rotate(-90deg);
+}
+
+.circle-loader__el {
+  stroke-linecap: round;
+}
+
+.circle .logo {
+  font-size: 3em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  transform: translate(-50%, -50%);
 }
 
 .box span {
@@ -364,6 +400,7 @@ a {
 /************ Side Project ************/
 .activities {
   background-color: #f5e960;
+  color: #2d2d2a;
 }
 
 .activities h2 {
@@ -437,4 +474,25 @@ a {
   border-radius: 1em;
   padding: 0.5em 1em;
   cursor: pointer;
+}
+
+.theme-mode {
+  position: fixed;
+  right: 3em;
+  top: 1.5em;
+  z-index: 40;
+}
+
+.theme-mode__btn {
+  display: block;
+  padding: 0.5em;
+  border-radius: 50%;
+}
+
+.theme-mode svg {
+  width: 2em;
+  height: 2em;
+  flex: 1 1 100%;
+  max-width: 2em;
+  max-height: 2em;
 }
