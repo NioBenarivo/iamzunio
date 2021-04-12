@@ -496,3 +496,9 @@ a {
   max-width: 2em;
   max-height: 2em;
 }
+
+@media (max-width: 40em) {
+  .theme-mode {
+    display: none;
+  }
+}

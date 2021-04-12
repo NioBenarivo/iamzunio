@@ -9,7 +9,8 @@ const boxConstantMotion = {
     top: 0,
   },
   animate: {
-    height: 0,
+    scaleY: 0,
+    originY: 0,
     transition: {
       duration: 1.2,
       ease: [0.87, 0, 0.13, 1],
@@ -26,7 +27,7 @@ export const blackBoxMotion = {
     top: 0,
   },
   animate: {
-    height: 0,
+    scaleY: 0,
     originY: 0,
     transition: {
       when: "afterChildren",

@@ -6,7 +6,7 @@ import {
   yellowBoxMotion,
   introMotion,
   circleProps,
-  circleWidth
+  circleWidth,
 } from '@utils/constants'
 
 export default function InitialTransition() {
