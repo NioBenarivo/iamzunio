@@ -258,22 +258,21 @@ export default function Home({ isFirstMount }) {
             <a 
               href="mailto:zunibenarivo@gmail.com" 
               target="_blank" 
-              rel="noopener noreferrer"
-              className="mb1">
+              rel="noopener noreferrer">
                 Get in Touch
             </a>
+            <motion.button 
+              className="btt mt1"
+              animate="animate"
+              whileHover={{ scale: 1.12 }}
+              whileTap={{ scale: 0.93 }}
+              variants={backToTopMotion(isComplete)}
+              onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
+            >
+              Back to top
+            </motion.button>
           </FadeInWrapper>
         </div>
-        <motion.div 
-          className="btt"
-          animate="animate"
-          whileHover={{ scale: 1.12 }}
-          whileTap={{ scale: 0.93 }}
-          variants={backToTopMotion(isComplete)}
-          onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
-        >
-          Back to top
-        </motion.div>
       </div>
       <Footer />
     </motion.div>
