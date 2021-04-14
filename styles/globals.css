@@ -8,6 +8,21 @@
   green : #55d6c2;
 */
 
+:root {
+  /* --white: #f7f7ff;
+  --black: #41463d;
+  --primary: #4357ad;
+  --danger: #e63946;
+  --alert: #fff3b0; */
+
+  --whiteBg: #FFFFFF;
+  --white: #f2f5ff;
+  --black: #2d2d2a;
+  --primary: #55d6c2;
+  --danger: #c14953;
+  --alert: #f5e960;
+}
+
 html,
 body {
   padding: 0;
@@ -15,7 +30,7 @@ body {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   box-sizing: border-box;
-  color: #2d2d2a;
+  color: var(--black);
 }
 
 @font-face {
@@ -35,7 +50,7 @@ body {
 
 a {
   display: inline-block;
-  color: #55d6c2;
+  color: var(--primary);
   text-decoration: none;
 }
 
@@ -43,30 +58,30 @@ a {
   box-sizing: border-box;
 }
 
-.color-red {
-  color: #c14953;
+.color-danger {
+  color: var(--danger);
 }
 
 .color-black {
-  color: #2d2d2a;
+  color: var(--black);
 }
 
 .color-white {
-  color: #f2f5ff;
+  color: var(--white);
 }
 
-.color-green {
-  color: #55d6c2;
+.color-primary {
+  color: var(--primary);
 }
 
-.color-yellow {
-  color: #f5e960;
+.color-alert {
+  color: var(--alert);
 }
 
 /************ FOOTER ************/
 .footer-top {
-  background-color: #f2f5ff;
-  color: #2d2d2a;
+  background-color: var(--white);
+  color: var(--black);
 }
 
 .footer-top img {
@@ -74,12 +89,12 @@ a {
 }
 
 .footer-bottom {
-  background-color: #2d2d2a;
-  color: #f2f5ff;
+  background-color: var(--black);
+  color: var(--white);
 }
 
 .footer-bottom a {
-  color: #f2f5ff;
+  color: var(--white);
 }
 
 @media (max-width: 425px) {
@@ -144,14 +159,14 @@ a {
 
 /************ HOME PAGE ************/
 .dark-theme {
-  color: #f2f5ff;
-  background-color: #2d2d2a;
+  color: var(--white);
+  background-color: var(--black);
   transition: 0.3s all ease-in-out;
 }
 
 .light-theme {
-  color: #2d2d2a;
-  background-color: #FFFFFF;
+  color: var(--black);
+  background-color: var(--whiteBg);
   transition: 0.3s all ease-in-out;
 }
 
@@ -164,8 +179,8 @@ a {
 }
 
 .initialPageBg {
-  color: #f2f5ff;
-  background-color: #2d2d2a;
+  color: var(--white);
+  background-color: var(--black);
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -215,17 +230,17 @@ a {
 
 .redBox {
   z-index: 49;
-  background-color: #c14953;
+  background-color: var(--danger);
 }
 
 .yellowBox {
   z-index: 48;
-  background-color: #f5e960;
+  background-color: var(--alert);
 }
 
 .greenBox {
   z-index: 47;
-  background-color: #55d6c2;
+  background-color: var(--primary);
 }
 
 .box {
@@ -263,7 +278,7 @@ a {
   position: absolute;
   display: block;
   border-radius: 8px;
-  background: #f2f5ff;
+  background: var(--white);
 }
 
 .box .top,
@@ -311,8 +326,8 @@ a {
 
 /************ Books ************/
 .books {
-  background-color: #2d2d2a;
-  color: #f2f5ff;
+  background-color: var(--black);
+  color: var(--white);
 }
 
 .books h2 {
@@ -324,7 +339,7 @@ a {
   align-items: center;
   justify-content: center;
   font-size: 50px;
-  color: #fff;
+  color: var(--white);
   font-weight: 500;
   height: 300px;
   max-height: 100vh;
@@ -362,13 +377,14 @@ a {
   bottom: 0;
   opacity: 0.75;
   z-index: 50;
-  color: #f2f5ff;
+  color: var(--white);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   text-align: right;
   padding: 4em;
-  background: linear-gradient(to top, black 0%, rgba(0, 0, 0, 0.738) 19%, rgba(0, 0, 0, 0.541) 34%, rgba(0, 0, 0, 0.382) 47%, rgba(0, 0, 0, 0.278) 56.5%, rgba(0, 0, 0, 0.194) 65%, rgba(0, 0, 0, 0.126) 73%, rgba(0, 0, 0, 0.075) 80.2%, rgba(0, 0, 0, 0.042) 86.1%, rgba(0, 0, 0, 0.021) 91%, rgba(0, 0, 0, 0.008) 95.2%, rgba(0, 0, 0, 0.002) 98.2%, transparent 100%);
+  background-color: var(--black);
+  opacity: 0.7;
 }
 
 .overlay h2 {
@@ -382,8 +398,8 @@ a {
 }
 
 .overlay .btt {
-  background-color: #f2f5ff;
-  color: #2d2d2a;
+  background-color: var(--white);
+  color: var(--black);
   border-radius: 1em;
   padding: 0.5em 1em;
   cursor: pointer;
@@ -397,7 +413,8 @@ a {
 @media (max-width: 40em) {
   .overlay {
     padding: 1em;
-    background: linear-gradient(to top, black 0%, rgba(0, 0, 0, 0.738) 38%, transparent 100%);
+    background-color: var(--black);
+    opacity: 0.7;
   }
 
   .overlay h2 {
@@ -416,8 +433,8 @@ a {
 
 /************ Side Project ************/
 .activities {
-  background-color: #f5e960;
-  color: #2d2d2a;
+  background-color: var(--alert);
+  color: var(--black);
 }
 
 .activities h2 {
@@ -449,18 +466,19 @@ a {
 
 /************ Bio ************/
 .bio {
-  background-color: #c14953;
-  color: #f2f5ff;
-}
-
-.bio > div {
-  min-height: 500px;
+  background-color: var(--danger);
+  color: var(--white);
 }
 
 .bio h2 {
-  font-size: 4em;
-  margin: 0;
+  font-size: 3em;
+  margin: 0 0 0.5em 0;
   text-transform: uppercase;
+}
+
+.bio p {
+  font-size: 1.6em;
+  line-height: 1.4;
 }
 
 @media (max-width: 40em) {
@@ -470,6 +488,10 @@ a {
 
   .bio h2 {
     font-size: 1.4em;
+  }
+
+  .bio p {
+    font-size: 1em;
   }
 
   .bio svg {
@@ -482,7 +504,7 @@ a {
 }
 
 .theme-mode {
-  position: fixed;
+  position: absolute;
   right: 3em;
   top: 1.5em;
   z-index: 40;
@@ -495,11 +517,11 @@ a {
 }
 
 .theme-mode svg {
-  width: 2em;
-  height: 2em;
+  width: 2.5em;
+  height: 2.5em;
   flex: 1 1 100%;
-  max-width: 2em;
-  max-height: 2em;
+  max-width: 2.5em;
+  max-height: 2.5em;
 }
 
 @media (max-width: 40em) {

@@ -15,7 +15,8 @@ import {
   SiStorybook,
   SiWebpack,
   SiWordpress,
-  SiApollographql
+  SiApollographql,
+  SiJest
 } from 'react-icons/si'
 import { GiSwimfins, GiNoodles, GiStairsCake, GiBriefcase } from "react-icons/gi";
 import { IoBicycleOutline, IoLaptopOutline, IoFlagOutline } from "react-icons/io5";
@@ -180,6 +181,7 @@ export default function Home({ isFirstMount }) {
                 <SiWebpack className="mr1" size={24} title="Webpack" />
                 <SiTypescript className="mr1" size={24} title="TypeScript" />
                 <SiWordpress className="mr1" size={24} title="Wordpress" />
+                <SiJest className="mr1" size={24} title="Jest" />
               </motion.div>
               <motion.div className="flex flex-wrap items-center" variants={textMotion}>
                 <span className="mr1">Operation Stack:</span>
@@ -192,18 +194,17 @@ export default function Home({ isFirstMount }) {
         </FadeInWrapper>
       </div>
       <div className="col-12 bio p3 relative">
-        <FadeInWrapper className="flex flex-wrap flex-column items-center">
-          <div className="flex items-center flex-auto">
-            <GiStairsCake size={64} className="mr1" />
-            <motion.h2 variants={textMotion}>22 June 1994</motion.h2>
-          </div>
-          <div className="flex items-center flex-auto">
-            <IoFlagOutline size={64} className="mr1" />
-            <motion.h2 variants={textMotion}>Indonesia</motion.h2>
-          </div>
-          <div className="flex items-center flex-auto">
-            <GiBriefcase size={64} className="mr1" />
-            <motion.h2 variants={textMotion}>4+ Years Experience</motion.h2>
+        <FadeInWrapper className="my4">
+          <div className="clearfix">
+            <div className="sm-col lg-col-6 sm-col-12">
+              <h2>UX Engineer</h2>
+              <h2>Design System</h2>
+              <h2>Web Developer</h2>
+            </div>
+            <div className="sm-col lg-col-6 sm-col-12">
+              <p className="m0 mb3">Hello, I'm Zunio, an experienced web developer that creates Websites and Design System.</p>
+              <p className="m0">I have worked at Tokopedia for 4 years, contributing in Design System and internal logistic feature.</p>
+            </div>
           </div>
         </FadeInWrapper>
       </div>
