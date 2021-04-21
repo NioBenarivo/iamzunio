@@ -5,7 +5,7 @@ import {
   circleProps,
   circleWidth,
 } from '@utils/constants'
-import { useDarkmodeContext } from '@context/darkmodeProvider'
+import { useDarkmodeContext } from '@context/darkModeProvider'
 
 export default function InitialTransition() {
   const { darkmode } = useDarkmodeContext();

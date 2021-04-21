@@ -18,7 +18,7 @@ import {
   SiStorybook
 } from 'react-icons/si'
 import { IoLocation, IoPhonePortraitOutline } from "react-icons/io5"
-import { useDarkmodeContext } from '@context/darkmodeProvider'
+import { useDarkmodeContext } from '@context/darkModeProvider'
 import InitialTransitionPage from '@components/InitialTransitionPage'
 import StaggerWrapper from '@components/StaggerWrapper'
 import GlobalNav from '@components/GlobalNav'
