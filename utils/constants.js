@@ -41,6 +41,26 @@ export const blackBoxMotion = {
   },
 };
 
+export const blackBox = {
+  initial: {
+    height: "100vh",
+    top: 0,
+  },
+  animate: {
+    scaleY: 0,
+    originY: 0,
+    transition: {
+      when: "afterChildren",
+      duration: 1.2,
+      ease: [0.87, 0, 0.13, 1],
+      staggerChildren: 0.5,
+    },
+    transitionEnd: {
+      display: "none"
+    }
+  },
+};
+
 export const redBoxMotion = {
   initial: {
     ...boxConstantMotion.initial,
@@ -81,6 +101,24 @@ export const greenBoxMotion = {
 }
 
 export const introMotion = {
+  initial: { 
+    opacity: 0, 
+    y: 50,
+    scale: 1
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      delayChildren: 0.5,
+      duration: 1.5,
+      ease: [0.87, 0, 0.13, 1],
+      staggerChildren: 0.1,
+    },
+  },
+}
+
+export const intro = {
   initial: { 
     opacity: 0, 
     y: 50,

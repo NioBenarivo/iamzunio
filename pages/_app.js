@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { AnimatePresence } from "framer-motion"
+import { AnimatePresence } from 'framer-motion'
+import DarkModeProvider from '@context/darkmodeProvider'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps, router }) {
@@ -11,7 +12,6 @@ function MyApp({ Component, pageProps, router }) {
     };
 
     if (isFirstMount) {
-      console.log(isFirstMount, "ISFIRSTMOUNT")
       window.history.scrollRestoration = 'manual'
     }
 
@@ -25,9 +25,11 @@ function MyApp({ Component, pageProps, router }) {
   }, []);
 
   return (
-    <AnimatePresence exitBeforeEnter>
-      <Component isFirstMount={isFirstMount} key={router.route} {...pageProps} />
-    </AnimatePresence>
+    <DarkModeProvider>
+      <AnimatePresence exitBeforeEnter>
+          <Component isFirstMount={isFirstMount} key={router.route} {...pageProps} />
+      </AnimatePresence>
+    </DarkModeProvider>
   )
 }
 

@@ -4,7 +4,6 @@ import { motion, useAnimation } from "framer-motion";
 
 export default function FadeInWrapper({ children, className, customVariant, inViewProps }) {
   const controls = useAnimation();
-
   const [ref, inView] = useInView({
     threshold: 1,
     triggerOnce: true,
@@ -19,17 +18,12 @@ export default function FadeInWrapper({ children, className, customVariant, inVi
 
   const normalVariant = {
     hidden: {
-      scaleY: 0,
-      originY: 0,
       opacity: 0,
     },
     visible: {
-      scaleY: 1,
-      originY: 0,
       opacity: 1,
       transition: {
-        duration: 0.4,
-        ease: [0.6, -0.05, 0.01, 0.99],
+        staggerChildren: 0.2,
       }
     }
   }
@@ -39,6 +33,7 @@ export default function FadeInWrapper({ children, className, customVariant, inVi
       ref={ref}
       animate={controls}
       initial="hidden"
+      whileHover="hover"
       className={className}
       variants={customVariant ? customVariant : normalVariant}
     >
