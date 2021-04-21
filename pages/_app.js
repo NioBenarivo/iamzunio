@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
-import DarkModeProvider from '@context/darkmodeProvider'
+import DarkModeProvider from '@context/darkModeProvider'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps, router }) {
