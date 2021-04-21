@@ -22,6 +22,38 @@ import { useDarkmodeContext } from '@context/darkModeProvider'
 import InitialTransitionPage from '@components/InitialTransitionPage'
 import StaggerWrapper from '@components/StaggerWrapper'
 import GlobalNav from '@components/GlobalNav'
+import useDimensions from '@utils/useDimensions'
+
+const imagePosition = [
+  {
+    x: '-110%',
+    y: '-80%'
+  },
+  {
+    x: '-110%',
+    y: '0%'
+  },
+  {
+    x: '10%',
+    y: '-80%'
+  },
+  {
+    x: '10%',
+    y: '0%',
+  },
+  {
+    x: '-50%',
+    y: '30%'
+  },
+  {
+    x: '-50%',
+    y: '-120%'
+  },
+  {
+    x: '-50%',
+    y: '-50%'
+  }
+]
 
 const headline = isFirstMount => ({
   hidden: {
@@ -87,11 +119,11 @@ const divider = {
 
 const imageGallery = {
   initial: {
-    x: 100,
+    x: 0,
     y: 0,
   },
   hover: {
-    x: 100,
+    x: 0,
     y: 0,
     transition: {
       staggerChildren: 0.015,
@@ -99,14 +131,14 @@ const imageGallery = {
   }
 }
 
-const imageEl = (index) => ({
+const projectImg = (x = '-50%', y = '-50%') => ({
   initial: {
-    x: 0,
-    y: 0,
+    x: '-50%',
+    y: '-50%',
   },
   hover: {
-    x: (0 + index * 40),
-    y: (0 + index * 40)
+    x: x,
+    y: y
   }
 })
 
@@ -118,7 +150,7 @@ const renderPetProject = () => {
         key={`digital-garden-img-${i}`}
         alt={`digital-garden-${i}`} 
         src={`/assets/digital-garden-${i}.png`} 
-        variants={imageEl(i)} 
+        variants={projectImg(imagePosition[i-1].x, imagePosition[i-1].y)}
       />
     );
   }
@@ -171,11 +203,13 @@ const floatText = {
 
 export default function Porto({ isFirstMount }) {
   const constraintsRef = useRef(null);
+  const containerRef = useRef(null);
   const { darkmode, toggleMode } = useDarkmodeContext()
   const themeClassname = darkmode ? 'dark-mode' : 'light-mode';
+  const { height } = useDimensions(containerRef);
 
   return (
-    <motion.div exit={{ opacity: 0 }} className={`${themeClassname} top`}>
+    <motion.div exit={{ opacity: 0 }} className={`${themeClassname} top`} ref={containerRef}>
       {isFirstMount && <InitialTransitionPage />}
       <div className="landing">
         <motion.h1 initial="hidden" animate="visible" variants={headline(isFirstMount)}>
@@ -264,7 +298,7 @@ export default function Porto({ isFirstMount }) {
           <StaggerWrapper inViewProps={{ threshold: 0.5 }}>
             <div className="recent-project">
                 <motion.h2 variants={text}>Pet Project</motion.h2>
-                <div className="flex">
+                <div className="flex flex-column">
                   <motion.h3 variants={text}>Digital Garden App</motion.h3>
                   <motion.div 
                     initial="initial"
@@ -514,7 +548,7 @@ export default function Porto({ isFirstMount }) {
           </StaggerWrapper>
         </div>
       </section>
-      <GlobalNav darkmode={darkmode} toggleMode={toggleMode} />
+      <GlobalNav height={height} darkmode={darkmode} toggleMode={toggleMode} />
     </motion.div>
   )
 }

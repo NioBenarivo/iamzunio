@@ -753,6 +753,8 @@ section {
 }
 
 .contact svg {
+  width: 6vw;
+  height: 4vw;
   margin-right: 6vw;
 }
 
@@ -762,10 +764,10 @@ section {
 
 .contact-info svg {
   flex: 1 1 100%;
-  width: 48px;
-  height: 48px;
-  max-width: 48px;
-  max-height: 48px;
+  width: 6vw;
+  height: 4vw;
+  max-width: 6vw;
+  max-height: 4vw;
 }
 
 .contact-info p {
@@ -799,14 +801,15 @@ section {
 
 .recent-project .img-wrapper {
   position: relative;
-  min-height: 400px;
+  min-height: 60vh;
   width: 100%;
+  margin: 10vh 0;
 }
 
 .recent-project img {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
   width: 30vw;
 }
 
@@ -816,6 +819,11 @@ section {
   align-items: center;
   position: relative;
   min-height: 50vh;
+}
+
+.stack-container svg {
+  width: 6vw;
+  height: 4vw;
 }
 
 .stack-container__mobile {
@@ -843,6 +851,11 @@ section {
   justify-content: flex-start;
   align-items: flex-start;
   text-align: left;
+}
+
+.powered-by svg {
+  width: 6vw;
+  height: 4vw;
 }
 
 @media (max-width: 40em) {
