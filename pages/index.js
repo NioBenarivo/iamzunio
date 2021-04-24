@@ -1,281 +1,384 @@
-import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
+import { motion } from 'framer-motion'
+import { useRef } from 'react'
 import Head from 'next/head'
-import { motion, useViewportScroll } from 'framer-motion'
-import { 
-  SiTypescript,
-  SiReact, 
-  SiJira, 
-  SiHtml5, 
-  SiStyledComponents,
-  SiCss3,
-  SiNodeDotJs,
-  SiGithub,
-  SiSlack,
-  SiStorybook,
-  SiWebpack,
-  SiWordpress,
-  SiApollographql,
-  SiJest
-} from 'react-icons/si'
-import { GiSwimfins, GiNoodles, GiStairsCake, GiBriefcase } from "react-icons/gi";
-import { IoBicycleOutline, IoLaptopOutline, IoFlagOutline } from "react-icons/io5";
-import { useKeenSlider } from "keen-slider/react"
-import "keen-slider/keen-slider.min.css"
-import Footer from '@components/Footer'
-import FadeInWrapper from '@components/FadeInWrapper'
-import InitialTransition from '@components/InitialTransition'
+import Image from 'next/image'
 import {
-  contentMotion,
-  landingTextMotion,
-  textMotion,
-  imageMotion,
-  profileTextMotion,
-  backToTopMotion,
-} from '@utils/constants'
+  SiCss3,
+  SiGithub,
+  SiHtml5,
+  SiLinkedin,
+  SiReact,
+  SiNodeDotJs,
+  SiApollographql,
+  SiStyledComponents,
+  SiZeit,
+  SiFramer,
+  SiNextDotJs,
+  SiWordpress,
+  SiJest,
+  SiStorybook
+} from 'react-icons/si'
+import { IoLocation, IoPhonePortraitOutline } from "react-icons/io5"
+import { useDarkmodeContext } from '@context/darkModeProvider'
+import InitialTransitionPage from '@components/InitialTransitionPage'
+import StaggerWrapper from '@components/StaggerWrapper'
+import GlobalNav from '@components/GlobalNav'
+import useDimensions from '@utils/useDimensions'
 
-export default function Home({ isFirstMount }) {
-  const [darkMode, setDarkMode] = useState(false);
-  const [isComplete, setIsComplete] = useState(false);
-  const { scrollYProgress } = useViewportScroll();
-  const timer = useRef()
-  const [sliderRef, slider] = useKeenSlider({
-    mode: "free-snap",
-    loop: true, 
-    duration: 1000,
-  })
-
-  useEffect(() => {
-    scrollYProgress.onChange(y => setIsComplete(y >= 1))
-  }, [scrollYProgress]);
-
-  useEffect(() => {
-    timer.current = setInterval(() => {
-      if (slider) {
-        slider.next()
-      }
-    }, 5000)
-    return () => {
-      clearInterval(timer.current)
+const headline = isFirstMount => ({
+  hidden: {
+    y: 30,
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.09,
+      delayChildren: isFirstMount ? 2.8 : 0
     }
-  }, [slider])
-
-  const renderBooks = () => {
-    let content = [];
-    for (let i = 1; i < 10; i++) {
-      content.push(
-        <div className="keen-slider__slide book-slides" key={`content-${i}`}>
-          <Image
-            alt={`book-${i}`}
-            src={`/assets/book-${i}.jpeg`}
-            width={180}
-            height={260}
-          />
-        </div>
-      );
-    }
-    return content;
   }
+})
+
+const text = {
+  hidden: {
+    scaleY: 0,
+    originY: 0,
+    opacity: 0,
+  },
+  visible: {
+    scaleY: 1,
+    originY: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.4,
+      ease: [0.6, -0.05, 0.01, 0.99],
+    }
+  },
+}
+
+const scaledIcon = {
+  hidden: { opacity: 0, scale: 0 },
+  visible: { 
+    opacity: 1,
+    scale: 1,
+    originX: 'bottom',
+    originY: 'center',
+    transition: {
+      duration: 0.8,
+      ease: [0.6, -0.05, 0.01, 0.99],
+    }
+  }
+}
+
+const divider = {
+  hidden: {
+    scale: 0,
+    opacity: 0,
+    originX: 0,
+  },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.4,
+      ease: [0.6, -0.05, 0.01, 0.99],
+    }
+  }
+}
+
+const projectImg = index => ({
+  initial: {
+    x: `${( index - 1 ) * 25}%`,
+    y: index % 2 === 0 ? '-50%' : 0,
+    zIndex: 4 - index,
+  },
+  hover: {
+    scale: 1.25,
+    zIndex: 10,
+  }
+})
+
+const renderPetProject = () => {
+  let content = [];
+  for (let i = 1; i <= 4; i++) {
+    content.push(
+      <motion.div 
+        key={`digital-garden-img-${i}`}
+        initial="initial"
+        variants={projectImg(i)}
+        whileHover="hover"
+      >
+        <Image
+          alt={`digital-garden-${i}`} 
+          src={`/assets/digital-garden-${i}.png`}
+          layout="responsive"
+          width={500}
+          height={300} 
+          objectFit="cover" />
+      </motion.div>
+    );
+  }
+  return content;
+}
+
+const tokopediaLogo = {
+  hidden: {
+    strokeDashoffset: 2296,
+  },
+  visible: {
+    strokeDashoffset: 0,
+    transition: {
+      duration: 2,
+      ease: [0.85, 0, 0.15, 1]
+    },
+  }
+}
+
+export default function Porto({ isFirstMount }) {
+  const constraintsRef = useRef(null);
+  const containerRef = useRef(null);
+  const { darkmode, toggleMode } = useDarkmodeContext()
+  const themeClassname = darkmode ? 'dark-mode' : 'light-mode';
+  const { height } = useDimensions(containerRef);
 
   return (
-    <motion.div className={`container ${darkMode ? 'dark-theme' : 'light-theme'}`} exit={{ opacity: 0 }}>
+    <motion.div exit={{ opacity: 0 }} className={`${themeClassname} top`} ref={containerRef}>
       <Head>
         <title>Hi, I am Zunio</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {isFirstMount && <InitialTransition />}
-      <motion.div 
-        className="theme-mode" 
-        onClick={() => setDarkMode(!darkMode)}
-        whileHover={{ scale: 1.25, cursor: 'pointer' }}
-      >
-        <div className="theme-mode__btn">
-          {
-            darkMode ? <svg fill="#f2f5ff" id="Capa_1" enableBackground="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m123.467 31.566h9.066v9.067c0 4.143 3.357 7.5 7.5 7.5s7.5-3.357 7.5-7.5v-9.067h9.066c4.143 0 7.5-3.357 7.5-7.5s-3.357-7.5-7.5-7.5h-9.066v-9.066c0-4.143-3.357-7.5-7.5-7.5s-7.5 3.357-7.5 7.5v9.066h-9.066c-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5z"/><path d="m388.533 480.434h-9.066v-9.067c0-4.143-3.357-7.5-7.5-7.5s-7.5 3.357-7.5 7.5v9.067h-9.067c-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5h9.066v9.066c0 4.143 3.357 7.5 7.5 7.5s7.5-3.357 7.5-7.5v-9.066h9.066c4.143 0 7.5-3.357 7.5-7.5s-3.356-7.5-7.499-7.5z"/><path d="m139.25 305.7c0-13.271-10.796-24.066-24.066-24.066s-24.068 10.796-24.068 24.066 10.797 24.066 24.067 24.066 24.067-10.795 24.067-24.066zm-24.066 9.067c-5 0-9.067-4.067-9.067-9.066s4.067-9.066 9.067-9.066c4.999 0 9.066 4.067 9.066 9.066s-4.067 9.066-9.066 9.066z"/><path d="m131.75 263.5c13.27 0 24.066-10.796 24.066-24.066s-10.796-24.067-24.066-24.067-24.066 10.797-24.066 24.067 10.795 24.066 24.066 24.066zm0-33.134c4.999 0 9.066 4.067 9.066 9.067 0 4.999-4.067 9.066-9.066 9.066s-9.066-4.067-9.066-9.066 4.067-9.067 9.066-9.067z"/><path d="m462.3 255.666c-.011-6.411-4.423-11.787-10.729-13.074-6.296-1.279-12.45 1.93-14.968 7.814-21.044 49.196-69.145 80.929-122.624 80.929-.117 0-.242-.001-.359-.001-73.116-.195-132.759-59.838-132.953-132.953-.143-53.619 31.623-101.894 80.929-122.983 5.884-2.518 9.097-8.672 7.812-14.968-1.287-6.306-6.663-10.718-13.087-10.729h-.321c-49.345 0-97.096 17.697-134.458 49.832-3.141 2.701-3.496 7.437-.796 10.577 2.702 3.142 7.437 3.495 10.577.796 32.781-28.195 74.191-44.403 117.316-46.063-50.804 24.916-83.125 76.527-82.973 133.577.217 81.343 66.569 147.696 147.913 147.914.134 0 .266.001.4.001 56.893-.002 108.324-32.289 133.18-82.979-3.882 102.084-88.141 183.944-191.159 183.944-8.348 0-16.77-.549-25.034-1.632-.476-.062-.641-.589-.663-.892-.071-.97-.205-1.953-.397-2.922-2.131-10.735-11.224-18.696-22.113-19.359-8.759-.518-17.137 3.747-21.829 11.172-.079.126-.434.221-.782.082-19.635-7.83-37.752-18.818-53.85-32.661-3.139-2.701-7.875-2.346-10.576.797-2.701 3.141-2.344 7.876.797 10.576 17.356 14.926 36.895 26.776 58.071 35.221 7.049 2.812 15.046.287 19.021-6.003 1.768-2.799 4.926-4.42 8.236-4.211 4.024.245 7.52 3.318 8.311 7.308.073.371.125.742.151 1.102.562 7.652 6.185 13.683 13.673 14.664 8.908 1.167 17.986 1.759 26.983 1.759 113.754 0 206.3-92.546 206.3-206.3v-.335z"/><path d="m64.7 256c0-45.757 16.409-90.035 46.205-124.677 2.7-3.141 2.345-7.876-.796-10.577-3.14-2.7-7.875-2.346-10.577.796-32.135 37.362-49.832 85.113-49.832 134.458 0 49.343 17.699 97.092 49.837 134.451 1.483 1.724 3.58 2.608 5.688 2.608 1.732 0 3.473-.597 4.889-1.815 3.14-2.701 3.495-7.436.794-10.577-29.798-34.637-46.208-78.912-46.208-124.667z"/><path d="m463.083 381.033c-4.143 0-7.5 3.357-7.5 7.5v16.567c0 4.143 3.357 7.5 7.5 7.5s7.5-3.357 7.5-7.5v-16.566c0-4.143-3.357-7.501-7.5-7.501z"/><path d="m463.083 447.3c-4.143 0-7.5 3.357-7.5 7.5v16.566c0 4.143 3.357 7.5 7.5 7.5s7.5-3.357 7.5-7.5v-16.566c0-4.143-3.357-7.5-7.5-7.5z"/><path d="m504.5 422.45h-16.566c-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5h16.566c4.143 0 7.5-3.357 7.5-7.5s-3.357-7.5-7.5-7.5z"/><path d="m438.233 422.45h-16.566c-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5h16.566c4.143 0 7.5-3.357 7.5-7.5s-3.357-7.5-7.5-7.5z"/><path d="m48.917 64.7c4.143 0 7.5-3.357 7.5-7.5v-16.566c0-4.143-3.357-7.5-7.5-7.5s-7.5 3.357-7.5 7.5v16.566c0 4.143 3.357 7.5 7.5 7.5z"/><path d="m56.417 123.467v-16.567c0-4.143-3.357-7.5-7.5-7.5s-7.5 3.357-7.5 7.5v16.566c0 4.143 3.357 7.5 7.5 7.5s7.5-3.357 7.5-7.499z"/><path d="m73.767 89.55h16.566c4.143 0 7.5-3.357 7.5-7.5s-3.357-7.5-7.5-7.5h-16.566c-4.143 0-7.5 3.357-7.5 7.5 0 4.142 3.357 7.5 7.5 7.5z"/><path d="m24.066 74.55h-16.566c-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5h16.566c4.143 0 7.5-3.357 7.5-7.5s-3.357-7.5-7.5-7.5z"/></g></svg> :
-            <svg fill="#2d2d2a" id="Capa_1" enableBackground="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m256 115.967c-77.214 0-140.033 62.819-140.033 140.033 0 32.03 10.526 62.177 30.441 87.18 2.581 3.24 7.298 3.774 10.54 1.194 3.24-2.581 3.774-7.299 1.194-10.539-17.778-22.32-27.174-49.234-27.174-77.835 0-68.943 56.09-125.033 125.033-125.033s125.032 56.09 125.032 125.033-56.09 125.033-125.033 125.033c-28.603 0-55.52-9.398-77.84-27.179-3.239-2.581-7.958-2.047-10.539 1.193s-2.047 7.958 1.193 10.539c25.004 19.918 55.152 30.446 87.186 30.446 77.214 0 140.033-62.819 140.033-140.033s-62.819-140.032-140.033-140.032z"/><path d="m256 97.834c4.142 0 7.5-3.358 7.5-7.5v-26.417c0-4.142-3.358-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v26.417c0 4.142 3.358 7.5 7.5 7.5z"/><path d="m256 41.417c4.142 0 7.5-3.358 7.5-7.5v-26.417c0-4.142-3.358-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v26.417c0 4.142 3.358 7.5 7.5 7.5z"/><path d="m133.553 144.159c1.464 1.464 3.384 2.197 5.303 2.197s3.839-.732 5.303-2.197c2.929-2.929 2.929-7.678 0-10.606l-58.572-58.572c-2.929-2.929-7.678-2.929-10.606 0-2.929 2.929-2.929 7.678 0 10.606z"/><path d="m97.834 256c0-4.142-3.358-7.5-7.5-7.5h-82.834c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h82.834c4.142 0 7.5-3.358 7.5-7.5z"/><path d="m133.553 367.841-58.572 58.572c-2.929 2.929-2.929 7.678 0 10.606 1.464 1.464 3.384 2.197 5.303 2.197s3.839-.732 5.303-2.197l58.572-58.572c2.929-2.929 2.929-7.678 0-10.607-2.929-2.928-7.678-2.928-10.606.001z"/><path d="m256 414.167c-4.142 0-7.5 3.358-7.5 7.5v82.833c0 4.142 3.358 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-82.833c0-4.143-3.358-7.5-7.5-7.5z"/><path d="m378.447 367.841c-2.929-2.929-7.678-2.929-10.606 0-2.929 2.929-2.929 7.678 0 10.607l58.572 58.572c1.464 1.464 3.384 2.197 5.303 2.197 1.92 0 3.839-.732 5.303-2.197 2.929-2.929 2.929-7.678 0-10.606z"/><path d="m504.5 248.5h-82.833c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h82.833c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5z"/><path d="m373.144 146.356c1.919 0 3.839-.732 5.303-2.197l58.572-58.572c2.929-2.929 2.929-7.678 0-10.606-2.929-2.929-7.678-2.929-10.606 0l-58.572 58.572c-2.929 2.929-2.929 7.678 0 10.606 1.464 1.465 3.384 2.197 5.303 2.197z"/><path d="m185.673 105.814c1.197 2.888 3.989 4.632 6.932 4.632.956 0 1.929-.184 2.867-.573 3.827-1.585 5.644-5.973 4.059-9.799l-15.85-38.264c-1.586-3.827-5.974-5.644-9.799-4.059-3.827 1.585-5.644 5.973-4.059 9.799z"/><path d="m61.81 183.682 38.264 15.85c.938.389 1.911.573 2.867.573 2.943 0 5.736-1.744 6.932-4.632 1.585-3.827-.232-8.214-4.059-9.799l-38.264-15.85c-3.826-1.584-8.214.232-9.799 4.059-1.585 3.826.232 8.213 4.059 9.799z"/><path d="m109.873 316.528c-1.585-3.827-5.973-5.644-9.799-4.059l-38.264 15.85c-3.827 1.585-5.644 5.973-4.059 9.799 1.196 2.888 3.989 4.632 6.932 4.632.957 0 1.929-.184 2.867-.573l38.264-15.85c3.827-1.585 5.644-5.973 4.059-9.799z"/><path d="m195.472 402.127c-3.826-1.585-8.214.232-9.799 4.059l-15.85 38.264c-1.585 3.827.232 8.214 4.059 9.799.939.389 1.911.573 2.867.573 2.943 0 5.736-1.744 6.932-4.632l15.85-38.264c1.585-3.826-.232-8.214-4.059-9.799z"/><path d="m326.327 406.186c-1.585-3.827-5.973-5.644-9.799-4.059-3.827 1.585-5.644 5.973-4.059 9.799l15.85 38.264c1.197 2.888 3.989 4.632 6.932 4.632.957 0 1.929-.184 2.867-.573 3.827-1.585 5.644-5.973 4.059-9.799z"/><path d="m450.19 328.318-38.264-15.85c-3.826-1.585-8.214.232-9.799 4.059s.232 8.214 4.059 9.799l38.264 15.85c.939.389 1.911.573 2.867.573 2.943 0 5.736-1.744 6.932-4.632 1.585-3.826-.232-8.213-4.059-9.799z"/><path d="m402.127 195.472c1.196 2.888 3.989 4.632 6.932 4.632.956 0 1.929-.184 2.867-.573l38.264-15.85c3.827-1.585 5.644-5.973 4.059-9.799-1.585-3.827-5.973-5.643-9.799-4.059l-38.264 15.85c-3.827 1.585-5.644 5.972-4.059 9.799z"/><path d="m316.528 109.873c.939.389 1.911.573 2.867.573 2.943 0 5.736-1.744 6.932-4.632l15.85-38.264c1.585-3.827-.232-8.214-4.059-9.799s-8.214.232-9.799 4.059l-15.85 38.264c-1.585 3.826.232 8.214 4.059 9.799z"/></g></svg> 
-          }
+      {isFirstMount && <InitialTransitionPage />}
+      <div className="landing">
+        <motion.h1 initial="hidden" animate="visible" variants={headline(isFirstMount)}>
+          <motion.span variants={text}>UX</motion.span>{' '}
+          <motion.span variants={text}>Engineer</motion.span>{' '}
+          <br />
+          <motion.span variants={text}>based</motion.span>{' '}
+          <motion.span variants={text}>in</motion.span>{' '}
+          <motion.a variants={text}
+            href="https://goo.gl/maps/mnDwan2rYUTHeLKL8" 
+            target="_blank"
+            rel="noopener noreferrer">
+            Jakarta.
+          </motion.a> 
+          <br />
+          <motion.span variants={text}>Passionate</motion.span>{' '}
+          <motion.span variants={text}>about</motion.span>{' '}
+          <br />
+          <motion.span variants={text}>design</motion.span>{' '}
+          <motion.span variants={text}>and</motion.span> {' '}
+          <motion.span variants={text}>engineering</motion.span>
+        </motion.h1>
+      </div>
+      <section>
+        <div className="wrapper exp">
+          <StaggerWrapper inViewProps={{ threshold: 0.8 }}>
+            <motion.h2 variants={text}>Experiences</motion.h2>
+            <motion.svg
+              variants={tokopediaLogo}
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="-61.48365 -22.04525 532.8583 132.2715">
+                <motion.path
+                  stroke={darkmode ? '#FFFFFF' : '#0b0b0a'}
+                  fill='transparent'
+                  id="logo"
+                  d="M219.135 61.998c-4.453 4.518-9.782 6.794-15.957 6.794-4.993 0-9.239-1.021-13.571-3.537V54.893c3.486 2.362 7.861 4.613 12.182 4.613 9.006 0 14.371-6.199 14.371-14.985 0-8.795-5.55-15.179-14.558-15.179-4.029 0-7.288 1.447-9.838 4.346-2.733 3.144-4.144 7.635-4.144 13.572v40.921h-.679c-4.963 0-8.989-4.025-8.989-8.988V45.726c0-14.201 8.684-25.667 23.607-25.667 7.364 0 13.349 2.518 17.886 7.579 4.266 4.727 6.382 10.723 6.382 17.932 0 6.418-2.229 11.904-6.692 16.428zm104.671-.344c-4.438 4.762-10.147 7.138-17.074 7.138-7.304 0-13.261-2.522-17.792-7.582-4.262-4.786-6.382-10.784-6.382-17.932 0-12.65 9.768-23.219 22.611-23.219 4.959 0 9.262 1.042 13.611 3.429v10.467c-3.489-2.362-7.865-4.613-12.182-4.613-9.006 0-14.371 6.198-14.371 14.986 0 8.675 5.675 15.178 14.555 15.178 4.02 0 7.334-1.51 9.983-4.543 2.631-3.018 4-7.449 4-13.404V8.989c0-4.963 4.024-8.989 8.992-8.989h.675v43.086c0 7.59-2.194 13.8-6.626 18.568zm27.298-46.196c-1.016 1.136-2.47 1.66-4.247 1.66-3.316 0-5.689-2.45-5.689-5.74 0-3.371 2.331-5.646 5.689-5.646 3.237 0 5.695 2.398 5.695 5.646 0 1.606-.469 2.982-1.448 4.08zm49.118 26.101c0-3.81-1.441-6.826-4.342-9.114-2.609-2.056-5.872-3.103-9.832-3.103-8.749 0-14.364 6.839-14.364 15.271 0 8.121 5.949 14.893 14.275 14.893 5.784 0 8.882-3.383 12.183-7.592v12.144c-1.684 1.259-3.618 2.632-5.594 3.438-2.083.871-4.567 1.296-7.442 1.296-13.914 0-23.091-11.526-23.091-24.845 0-6.839 2.124-12.491 6.4-16.901 4.54-4.67 10.489-6.987 17.776-6.987 13.816 0 23.7 7.931 23.7 22.263v25.514h-.68c-4.964 0-8.989-4.024-8.989-8.988zm-132.334-2.736c-1.225-3.78-2.754-5.638-6.28-7.604-8.374-4.683-16.618-.699-20.455 7.566zm-7.376 29.826c-6.176 1.31-12.235.3-18.145-3.001-5.765-3.223-9.631-8.014-11.564-14.339-3.912-12.798 4.105-27.06 16.995-30.516 6.39-1.711 12.52-.935 18.341 2.32 9.671 5.403 13.194 13.764 12.58 24.538l-38.948-.081c.572 4.395 3.298 7.834 7.125 9.972 3.881 2.17 7.452 2.688 10.766 1.66 3.674-1.155 6.656-4.154 9.083-6.948l7.939 5.783c-3.24 5.793-7.649 9.222-14.172 10.612zm81.514-47.636h9.665v46.823h-.677c-4.961 0-8.988-4.024-8.988-8.988zM14.145 67.836C4.694 67.836 0 61.404 0 52.424V18.349c0-4.964 4.023-8.988 8.99-8.988h.677v11.652H26v9.286H9.667v23.199c0 3.946 1.762 5.055 5.53 5.055H26v9.283zm56.146-5.92c-4.78 4.581-10.519 6.876-17.187 6.876-6.606 0-12.316-2.297-17.088-6.876-4.793-4.595-7.184-10.443-7.184-17.491 0-13.751 10.504-24.366 24.272-24.366 6.609 0 12.331 2.314 17.137 6.922 4.823 4.625 7.23 10.456 7.23 17.444 0 7.048-2.391 12.896-7.18 17.491zm45.193-29.637c-1.418 2.378-2.516 4.085-3.29 5.115-.854 1.119-1.695 2.015-2.528 2.632 6.718 2.173 9.22 6.827 9.22 13.761v14.049h-.68c-4.965 0-8.99-4.024-8.99-8.988v-4.109c0-4.487-2.01-7.536-6.769-7.536h-8.78v20.633h-.677c-4.965 0-8.99-4.024-8.99-8.988V8.989C84 4.026 88.025 0 92.99 0h.677v37.822h2.857c3.139 0 5.205-1.071 6.387-3.103l8.122-13.704 11.016-.01zm49.903 29.637c-4.776 4.581-10.517 6.876-17.186 6.876-6.604 0-12.312-2.297-17.09-6.876-4.79-4.595-7.178-10.443-7.178-17.491 0-13.751 10.499-24.366 24.268-24.366 6.611 0 12.334 2.314 17.139 6.922 4.821 4.625 7.23 10.456 7.23 17.444 0 7.048-2.391 12.896-7.183 17.491zM158.41 33.53c-2.664-2.79-6.052-4.188-10.209-4.188-8.896 0-14.221 6.487-14.221 15.083 0 8.477 5.453 15.081 14.221 15.081 8.775 0 14.22-6.604 14.22-15.081 0-4.501-1.349-8.112-4.011-10.895zm-95.1 0c-2.664-2.79-6.048-4.188-10.206-4.188-8.898 0-14.221 6.487-14.221 15.083 0 8.477 5.452 15.081 14.221 15.081 8.771 0 14.223-6.604 14.223-15.081 0-4.501-1.351-8.112-4.017-10.895z" 
+                  strokeDasharray="2296 2296"
+                  strokeWidth="2"
+                />
+            </motion.svg>
+          </StaggerWrapper>
+          <StaggerWrapper className="exp-desc">
+              <motion.p variants={text}>working at Tokopedia for 4+ years</motion.p>
+              <motion.p variants={text}>contributing into 4 different teams and division</motion.p>
+              <motion.p variants={text}>build responsive and interactive page</motion.p>
+              <motion.p variants={text}>create design system library and guidelines</motion.p>
+          </StaggerWrapper>
+          
+          <div className="flex flex-column">
+            <StaggerWrapper inViewProps={{ threshold: 0.5 }}>
+              <motion.h3 variants={text}>Tokopedia - Operational</motion.h3>
+              <div className="exp-img">
+                <img alt="Logistic-1" src="/assets/tokopedia-ops.png" />
+              </div>
+            </StaggerWrapper>
+            <StaggerWrapper inViewProps={{ threshold: 0.5 }}>
+              <motion.h3 variants={text}>Tokopedia - Design System - UNIFY</motion.h3>
+              <div className="exp-img">
+                <img alt="Logistic-1" src="/assets/tokopedia-ds.png" />
+              </div>
+            </StaggerWrapper>
+            <StaggerWrapper inViewProps={{ threshold: 0.5 }}>
+              <motion.h3 variants={text}>Tokopedia - Logistic Tribe</motion.h3>
+              <div className="exp-img">
+                <img alt="Logistic-1" src="/assets/tokopedia-logistic.png" />
+              </div>
+            </StaggerWrapper>
+          </div>
         </div>
-        
-      </motion.div>
-      <motion.div 
-        initial="initial"
-        animate="animate"
-        variants={contentMotion(isFirstMount)} 
-        className="content max-width-4 mx-auto">
-        <div className="relative px3 landing">
-          <motion.h1 className="regular" variants={landingTextMotion}>
-            UX Engineer based in {' '}
-            <a 
-              href="https://goo.gl/maps/mnDwan2rYUTHeLKL8" 
-              target="_blank"
-              rel="noopener noreferrer">
-              Jakarta.
-            </a> 
-            <br />
-            Passionate about product design and engineering.
-          </motion.h1>
+      </section>
+      <section>
+        <div className="wrapper">
+          <StaggerWrapper>
+            <div className="recent-project__mobile">
+              <motion.h2 variants={text}>Pet Project</motion.h2>
+              <motion.h3 variants={text}>Digital Garden App</motion.h3>
+              <Image 
+                alt="Digital Garden App"
+                src="/assets/digital-garden-1.png" 
+                width={320}
+                height={240}
+                layout="responsive" 
+              />
+            </div>
+          </StaggerWrapper>
+          <StaggerWrapper inViewProps={{ threshold: 0.5 }}>
+            <div className="recent-project">
+                <motion.h2 variants={text}>Pet Project</motion.h2>
+                <div className="flex flex-column">
+                  <motion.h3 variants={text}>Digital Garden App</motion.h3>
+                  <div className="img-wrapper">
+                    {renderPetProject()}
+                  </div>
+                </div>
+            </div>
+          </StaggerWrapper>
         </div>
-      </motion.div>
-
-      <div className="relative flex flex-wrap flex-column justify-around items-center px3 my4 max-width-4 mx-auto">
-        <FadeInWrapper>
-          <div className="center">
-            <Image
-              alt="Tokopedia"
-              src="/assets/tokopedia.logo-min.png"
-              width={180}
-              height={40}
-            />
-          </div>
-        </FadeInWrapper>
-        <FadeInWrapper>
-          <div className="flex flex-wrap justify-around items-start my4 work">
-            <motion.div className="col-7 order-0" variants={imageMotion}>
-              <Image
-                alt="Logistic-1"
-                src="/assets/tokopedia-logistic.png"
-                width={840}
-                height={620}
-              />
-            </motion.div>
-            <div className="flex flex-column col-5 px2 order-1">
-              <motion.h2 className="mt0 mb1" variants={textMotion}>Logistic</motion.h2>
-              <motion.p className="mt0" variants={textMotion}>Collaborate with merchant and payment team<br /> to produce user-merchant app</motion.p>
-              <motion.div className="flex flex-wrap items-center mb1" variants={textMotion}>
-                <span className="mr1">Tech Stack:</span>
-                <SiReact className="mr1" size={24} title="React" />
-                <SiHtml5 className="mr1" size={24} title="HTML5" />
-                <SiStyledComponents className="mr1" size={24} title="CSS-in-JS" />
-                <SiCss3 className="mr1" size={24} title="CSS3" />
-                <SiNodeDotJs className="mr1" size={24} title="NodeJS" />
-                <SiApollographql className="mr1" size={24} title="Apollo GraphQL" />
-              </motion.div>
-              <motion.div className="flex flex-wrap items-center" variants={textMotion}>
-                <span className="mr1">Operation Stack:</span>
-                <SiGithub className="mr1" size={24} title="Github" />
-                <SiJira className="mr1" size={24} title="Jira" />
-                <SiSlack className="mr1" size={24} title="Slack" />
-              </motion.div>
+      </section>
+      <section className="stack">
+        <div className="wrapper">
+          <StaggerWrapper>
+            <div className="stack-container">  
+              <motion.h2 variants={text} className="center">My Stack Universe</motion.h2>
+              <div className="stack-container__list">
+                <motion.div variants={scaledIcon}>
+                  <SiCss3 size={48} title="CSS3" />
+                  <p className="center">CSS3</p>
+                </motion.div>
+                <motion.div variants={scaledIcon}>
+                  <SiHtml5 size={48} title="HTML5" />
+                  <p className="center">HTML5</p>
+                </motion.div>
+                <motion.div variants={scaledIcon}>
+                  <SiReact size={48} title="React" />
+                  <p className="center">React</p>
+                </motion.div>
+                <motion.div variants={scaledIcon}>
+                  <SiStorybook size={48} title="Storybook" />
+                  <p className="center">Storybook</p>
+                </motion.div>
+                <motion.div variants={scaledIcon}>
+                  <SiNodeDotJs size={48} title="NodeJS" />
+                  <p className="center">NodeJS</p> 
+                </motion.div>
+                <motion.div variants={scaledIcon}>
+                  <SiApollographql size={48} title="Apollo GraphQL" />
+                  <p className="center">GraphQL</p>
+                </motion.div>
+                <motion.div variants={scaledIcon}>
+                  <SiStyledComponents size={48} title="Styled Components" />
+                  <p className="center">Css-in-JS</p>
+                </motion.div>
+                <motion.div variants={scaledIcon}>
+                  <SiWordpress size={48} title="Wordpress" />
+                  <p className="center">Wordpress</p>
+                </motion.div>
+                <motion.div variants={scaledIcon}>
+                  <SiJest size={48} title="Jest" />
+                  <p className="center">Jest</p>
+                </motion.div>
+              </div>
             </div>
-          </div>
-        </FadeInWrapper>
-        <FadeInWrapper>
-          <div className="flex flex-wrap justify-around items-start my4 work">
-            <motion.div className="col-7 work-img" variants={imageMotion}>
-              <Image
-                alt="Logistic-1"
-                src="/assets/tokopedia-ds.png"
-                width={840}
-                height={620}
-              />
-            </motion.div>
-            <div className="flex flex-column col-5 px2 work-text">
-              <motion.h2 className="mt0 mb1" variants={textMotion}>Design System</motion.h2>
-              <motion.p className="mt0" variants={textMotion}>Build Internal Design System and Design Guidelines</motion.p>
-              <motion.div className="flex flex-wrap items-center mb1" variants={textMotion}>
-                <span className="mr1">Tech Stack:</span>
-                <SiReact className="mr1" size={24} title="React" />
-                <SiStorybook className="mr1" size={24} title="Storybook" />
-                <SiStyledComponents className="mr1" size={24} title="Css-in-JS" />
-                <SiNodeDotJs className="mr1" size={24} title="NodeJS" />
-                <SiWebpack className="mr1" size={24} title="Webpack" />
-                <SiTypescript className="mr1" size={24} title="TypeScript" />
-                <SiWordpress className="mr1" size={24} title="Wordpress" />
-                <SiJest className="mr1" size={24} title="Jest" />
-              </motion.div>
-              <motion.div className="flex flex-wrap items-center" variants={textMotion}>
-                <span className="mr1">Operation Stack:</span>
-                <SiGithub className="mr1" size={24} />
-                <SiJira className="mr1" size={24} />
-                <SiSlack className="mr1" size={24} />
-              </motion.div>
-            </div>
-          </div>
-        </FadeInWrapper>
-      </div>
-      <div className="col-12 bio p3 relative">
-        <FadeInWrapper className="my4">
-          <div className="clearfix">
-            <div className="sm-col lg-col-6 sm-col-12">
-              <h2>UX Engineer</h2>
-              <h2>Design System</h2>
-              <h2>Web Developer</h2>
-            </div>
-            <div className="sm-col lg-col-6 sm-col-12">
-              <p className="m0 mb3">Hello, I'm Zunio, an experienced web developer that creates Websites and Design System.</p>
-              <p className="m0">I have worked at Tokopedia for 4 years, contributing in Design System and internal logistic feature.</p>
-            </div>
-          </div>
-        </FadeInWrapper>
-      </div>
-      <div className="col-12 activities">
-        <FadeInWrapper className="flex flex-wrap items-center">
-          <div className="col-3 center px1">
-            <IoBicycleOutline size={96} />
-            <motion.h2 variants={textMotion}>Bicycle</motion.h2>
-            <motion.p variants={textMotion}>Ride multiple times a week. <br />Strengthen your core</motion.p>
-          </div>
-          <div className="col-3 center px1">
-            <GiSwimfins size={96} />
-            <motion.h2 variants={textMotion}>Swimming</motion.h2>
-            <motion.p variants={textMotion}>Never sweat cause you're in water!<br />Love the deep blue sea</motion.p>
-          </div>
-          <div className="col-3 center px1">
-            <IoLaptopOutline size={96} />
-            <motion.h2 variants={textMotion}>Coding</motion.h2>
-            <motion.p variants={textMotion}>Work and Hobby, why not?<br />Tech and Product enthusiast</motion.p>
-          </div>
-          <div className="col-3 center px1" >
-            <GiNoodles size={96} />
-            <motion.h2 variants={textMotion}>Ramen</motion.h2>
-            <motion.p variants={textMotion}>Who doesn't love Ramen?<br />Slurpy noodles at its best</motion.p>
-          </div>
-        </FadeInWrapper>
-      </div>
-      <div className="col-12 books">
-        <FadeInWrapper>
-          <div className="max-width-4 mx-auto flex items-center my2 px3">
-            <h2 className="m0 col-8">Book Collections</h2>
-            <div ref={sliderRef} className="keen-slider col-4 relative">
-              {renderBooks()}
-            </div>
-          </div>
-        </FadeInWrapper>
-      </div>
-      <div className="col-12 relative">
-        <FadeInWrapper>
-          <Image
-            alt="Profile"
-            src="/assets/profile.jpg"
-            layout="responsive"
-            width="1200"
-            height="720"
-            objectFit="cover"
-          />
-        </FadeInWrapper>
-        <div className="overlay">
-          <FadeInWrapper customVariant={profileTextMotion}>
-            <h2 className="m0">Zunio <br />Benarivo</h2>
-            <a 
-              href="mailto:zunibenarivo@gmail.com" 
+            </StaggerWrapper>
+        </div>
+      </section>
+      <section className="education">
+        <div className="wrapper">
+          <StaggerWrapper inViewProps={{ threshold: '0.5' }}>
+            <motion.h2 variants={text}>Education</motion.h2>
+            <motion.a
+              href="https://goo.gl/maps/tTQp9hymLBvNz39s7" 
               target="_blank" 
               rel="noopener noreferrer">
-                Get in Touch
-            </a>
-            <motion.button 
-              className="btt mt1"
-              animate="animate"
-              whileHover={{ scale: 1.12 }}
-              whileTap={{ scale: 0.93 }}
-              variants={backToTopMotion(isComplete)}
-              onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
-            >
-              Back to top
-            </motion.button>
-          </FadeInWrapper>
+              <motion.p variants={text} className="left-align">Binus</motion.p>
+              <motion.p variants={text} className="center">International</motion.p>
+              <motion.p variants={text} className="right-align">University</motion.p>
+            </motion.a>
+            <motion.h4 variants={text} className="right-align">Bachelor of Computer Science</motion.h4>
+          </StaggerWrapper>
         </div>
-      </div>
-      <Footer />
+      </section>
+      <section>
+        <div className="wrapper">
+          <StaggerWrapper className="contact">
+            <div className="contact-me">
+              <motion.a 
+                href="mailto:zunibenarivo@gmail.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                variants={text}>
+                  Get in Touch
+              </motion.a>
+              <motion.div variants={divider} className="divider" />
+            </div>
+            <br />
+            <motion.a href="https://github.com/NioBenarivo" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              variants={scaledIcon}
+            >
+              <SiGithub size={48} title="Github" />
+            </motion.a>
+            <motion.a href="https://www.linkedin.com/in/zunio-benarivo-954679118/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              variants={scaledIcon}
+            >
+              <SiLinkedin size={48} title="LinkedIn" />
+            </motion.a>
+            <br />
+            <div className="flex items-center contact-info">
+              <motion.a 
+                href="https://goo.gl/maps/mnDwan2rYUTHeLKL8" 
+                target="_blank"
+                rel="noopener noreferrer"
+                variants={scaledIcon}
+              >
+                <IoLocation size={48} title="Location" />
+              </motion.a>
+              <motion.p variants={text}>Jl. Pantai Indah Selatan 2, RT.3/RW.3, Kapuk Muara, Kec. Penjaringan, Kota Jkt Utara, Daerah Khusus Ibukota Jakarta 14460</motion.p>
+            </div>
+            <div className="flex items-center contact-info">
+              <motion.div variants={scaledIcon}>
+                <IoPhonePortraitOutline size={48} title="Phone" />
+              </motion.div>
+              <motion.p variants={text}>+62 813 2970 6944</motion.p>
+            </div>
+          </StaggerWrapper>
+        </div>
+      </section>
+      <section>
+        <div className="wrapper">
+          <StaggerWrapper>
+            <div className="powered-by">
+              <motion.h2 variants={text}>Powered By</motion.h2>
+              <div className="flex">
+                <motion.div variants={scaledIcon}>
+                  <SiZeit size={48} className="mr2" title="Vercel" />
+                </motion.div>
+                <motion.div variants={scaledIcon}>
+                  <SiNextDotJs size={48} className="mr2" title="NextJS" />
+                </motion.div>
+                <motion.div variants={scaledIcon}>
+                  <SiFramer size={48} title="Framer Motion" />
+                </motion.div>
+              </div>
+            </div>
+          </StaggerWrapper>
+        </div>
+      </section>
+      <GlobalNav height={height} darkmode={darkmode} toggleMode={toggleMode} />
     </motion.div>
   )
 }

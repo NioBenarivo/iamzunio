@@ -12,7 +12,7 @@ export default function InitialTransition() {
   return (
     <>
       <motion.div
-        className="initialPageBg"
+        className="initial-page__bg"
         initial="initial"
         animate="animate"
         variants={blackBox}
