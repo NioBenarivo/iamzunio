@@ -1,34 +1,8 @@
 import { motion } from 'framer-motion'
 
-const themeController = {
-  open: (height = 1000) => ({
-    clipPath: `circle(${height * 2 + 200}px at 2em 2em)`,
-    transition: {
-      type: "spring",
-      stiffness: 10,
-      restDelta: 3
-    },
-  }),
-  closed: {
-    clipPath: "circle(0.1px at 3em 3em)",
-    transition: {
-      type: "spring",
-      stiffness: 400,
-      damping: 40
-    },
-  }
-};
-
-export default function GlobalNav({ darkmode, toggleMode, height }) {
+export default function GlobalNav({ darkmode, toggleMode }) {
   return (
     <>
-      <motion.div 
-        className="background" 
-        initial={darkmode ? 'open' : 'closed'} 
-        animate={darkmode ? 'open' : 'closed'} 
-        custom={height}
-        variants={themeController}
-      />
       <motion.button
         className="global-nav__button"
         onClick={() => {

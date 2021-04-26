@@ -16,14 +16,16 @@ import {
   SiNextDotJs,
   SiWordpress,
   SiJest,
-  SiStorybook
+  SiStorybook,
+  SiFigma,
+  SiSketch,
+  SiAbstract
 } from 'react-icons/si'
 import { IoLocation, IoPhonePortraitOutline } from "react-icons/io5"
 import { useDarkmodeContext } from '@context/darkModeProvider'
 import InitialTransitionPage from '@components/InitialTransitionPage'
 import StaggerWrapper from '@components/StaggerWrapper'
 import GlobalNav from '@components/GlobalNav'
-import useDimensions from '@utils/useDimensions'
 
 const headline = isFirstMount => ({
   hidden: {
@@ -94,7 +96,7 @@ const projectImg = index => ({
     zIndex: 4 - index,
   },
   hover: {
-    scale: 1.25,
+    scale: 1.15,
     zIndex: 10,
   }
 })
@@ -140,7 +142,6 @@ export default function Porto({ isFirstMount }) {
   const containerRef = useRef(null);
   const { darkmode, toggleMode } = useDarkmodeContext()
   const themeClassname = darkmode ? 'dark-mode' : 'light-mode';
-  const { height } = useDimensions(containerRef);
 
   return (
     <motion.div exit={{ opacity: 0 }} className={`${themeClassname} top`} ref={containerRef}>
@@ -195,26 +196,49 @@ export default function Porto({ isFirstMount }) {
               <motion.p variants={text}>build responsive and interactive page</motion.p>
               <motion.p variants={text}>create design system library and guidelines</motion.p>
           </StaggerWrapper>
-          
           <div className="flex flex-column">
             <StaggerWrapper inViewProps={{ threshold: 0.5 }}>
               <motion.h3 variants={text}>Tokopedia - Operational</motion.h3>
-              <div className="exp-img">
-                <img alt="Logistic-1" src="/assets/tokopedia-ops.png" />
-              </div>
             </StaggerWrapper>
+            <div className="flex">
+              <div className="sm-col-12 lg-col-8">
+                <Image 
+                  alt="Logistic-1" 
+                  src="/assets/tokopedia-ops.png" 
+                  width={1200}
+                  height={800} 
+                  objectFit="cover"
+                />
+              </div>
+            </div>
             <StaggerWrapper inViewProps={{ threshold: 0.5 }}>
               <motion.h3 variants={text}>Tokopedia - Design System - UNIFY</motion.h3>
-              <div className="exp-img">
-                <img alt="Logistic-1" src="/assets/tokopedia-ds.png" />
-              </div>
             </StaggerWrapper>
+            <div className="flex">
+              <div className="sm-col-12 lg-col-8">
+                <Image 
+                  alt="Logistic-1" 
+                  src="/assets/tokopedia-ds.png"
+                  width={1200}
+                  height={800} 
+                  objectFit="cover"
+                />
+              </div>
+            </div>
             <StaggerWrapper inViewProps={{ threshold: 0.5 }}>
               <motion.h3 variants={text}>Tokopedia - Logistic Tribe</motion.h3>
-              <div className="exp-img">
-                <img alt="Logistic-1" src="/assets/tokopedia-logistic.png" />
-              </div>
             </StaggerWrapper>
+            <div className="flex">
+              <div className="sm-col-12 lg-col-8">
+                <Image 
+                  alt="Logistic-1" 
+                  src="/assets/tokopedia-logistic.png"
+                  width={1200}
+                  height={800} 
+                  objectFit="cover"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -224,6 +248,7 @@ export default function Porto({ isFirstMount }) {
             <div className="recent-project__mobile">
               <motion.h2 variants={text}>Pet Project</motion.h2>
               <motion.h3 variants={text}>Digital Garden App</motion.h3>
+              <motion.p variants={text}>Side project with my old classmate about his digital footprint</motion.p>
               <Image 
                 alt="Digital Garden App"
                 src="/assets/digital-garden-1.png" 
@@ -233,17 +258,19 @@ export default function Porto({ isFirstMount }) {
               />
             </div>
           </StaggerWrapper>
-          <StaggerWrapper inViewProps={{ threshold: 0.5 }}>
             <div className="recent-project">
+              <StaggerWrapper inViewProps={{ threshold: 0.5 }}>
                 <motion.h2 variants={text}>Pet Project</motion.h2>
+              </StaggerWrapper>
                 <div className="flex flex-column">
-                  <motion.h3 variants={text}>Digital Garden App</motion.h3>
+                  <StaggerWrapper inViewProps={{ threshold: 0.5 }}>
+                    <motion.h3 variants={text}>Digital Garden App</motion.h3>
+                  </StaggerWrapper>
                   <div className="img-wrapper">
                     {renderPetProject()}
                   </div>
                 </div>
             </div>
-          </StaggerWrapper>
         </div>
       </section>
       <section className="stack">
@@ -288,6 +315,18 @@ export default function Porto({ isFirstMount }) {
                   <SiJest size={48} title="Jest" />
                   <p className="center">Jest</p>
                 </motion.div>
+                <motion.div variants={scaledIcon}>
+                  <SiSketch size={48} title="Sketch" />
+                  <p className="center">Sketch</p>
+                </motion.div>
+                <motion.div variants={scaledIcon}>
+                  <SiFigma size={48} title="Figma" />
+                  <p className="center">Figma</p>
+                </motion.div>
+                <motion.div variants={scaledIcon}>
+                  <SiAbstract size={48} title="Abstract" />
+                  <p className="center">Abstract</p>
+                </motion.div>
               </div>
             </div>
             </StaggerWrapper>
@@ -311,7 +350,7 @@ export default function Porto({ isFirstMount }) {
       </section>
       <section>
         <div className="wrapper">
-          <StaggerWrapper className="contact">
+          <StaggerWrapper className="contact" inViewProps={{ threshold: '0.5' }}>
             <div className="contact-me">
               <motion.a 
                 href="mailto:zunibenarivo@gmail.com" 
@@ -355,12 +394,6 @@ export default function Porto({ isFirstMount }) {
               </motion.div>
               <motion.p variants={text}>+62 813 2970 6944</motion.p>
             </div>
-          </StaggerWrapper>
-        </div>
-      </section>
-      <section>
-        <div className="wrapper">
-          <StaggerWrapper>
             <div className="powered-by">
               <motion.h2 variants={text}>Powered By</motion.h2>
               <div className="flex">
@@ -378,7 +411,14 @@ export default function Porto({ isFirstMount }) {
           </StaggerWrapper>
         </div>
       </section>
-      <GlobalNav height={height} darkmode={darkmode} toggleMode={toggleMode} />
+      {/* <section> */}
+        {/* <div className="wrapper"> */}
+          {/* <StaggerWrapper>
+            
+          </StaggerWrapper> */}
+        {/* </div> */}
+      {/* </section> */}
+      <GlobalNav darkmode={darkmode} toggleMode={toggleMode} />
     </motion.div>
   )
 }
