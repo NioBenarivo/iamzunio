@@ -1,7 +1,8 @@
 import { Client } from '@notionhq/client';
+import Link from 'next/link';
 import styles from 'styles/contentList.module.css';
 
-const ContentList = ({ media }) => {
+const MediaList = ({ media }) => {
   const renderList = () => {
     const allMedia = media.map((item, index) => {
       const icon = item?.icon?.emoji;
@@ -11,9 +12,12 @@ const ContentList = ({ media }) => {
       const status = properties?.Status?.select?.name || '';
       const year = properties?.Year?.multi_select[0]?.name || '';
       const author = properties?.Author?.rich_text[0]?.plain_text || '';
+      const mediaID = item?.id;
 
-      return (
-        <div className={styles.item} key={index}>
+      const ready = status === 'Finished' || status === 'Reading';
+
+      const content = (
+        <>
           <div className={styles.itemHeader}>
             <div className={styles.itemIcon}>{icon}</div>{' '}
             <h5 className={styles.itemTitle}>{name}</h5>
@@ -26,8 +30,27 @@ const ContentList = ({ media }) => {
             <span className={styles.itemType}>{type}</span>
             <span className={styles.itemStatus}>{status}</span>
           </div>
-        </div>
+        </>
       )
+
+      if (ready) {
+        return (
+          <Link 
+            href={`/contents/${mediaID}`} 
+            key={index}
+          >
+            <a className={styles.item}>
+              {content}
+            </a>
+          </Link>
+        )
+      } else {
+        return (
+          <div className={styles.item} key={index}>
+            {content}
+          </div>
+        )
+      }
     })
 
     return allMedia;
@@ -52,4 +75,4 @@ export async function getStaticProps() {
   }
 }
 
-export default ContentList;
+export default MediaList;
