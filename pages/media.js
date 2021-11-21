@@ -3,8 +3,9 @@ import Link from 'next/link';
 import styles from 'styles/contentList.module.css';
 
 const MediaList = ({ media }) => {
+  console.log(media, "MEDIA")
   const renderList = () => {
-    const allMedia = media.map((item, index) => {
+    const allMedia = media?.map((item, index) => {
       const icon = item?.icon?.emoji;
       const properties = item?.properties || {};
       const name = properties?.Name?.title[0]?.plain_text || '';
