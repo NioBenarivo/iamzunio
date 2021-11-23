@@ -49,8 +49,8 @@
 
 .itemStatus {
   display: inline-block;
-  background: var(--black);
-  color: var(--white);
+  background: var(--greyScale-2);
+  color: var(--greyScale-6);
   padding: 4px 8px;
   border-radius: 4px;
   margin-right: 4px

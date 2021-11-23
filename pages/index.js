@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
 import {
   SiCss3,
   SiGithub,
@@ -101,29 +100,6 @@ const projectImg = index => ({
   }
 })
 
-const renderPetProject = () => {
-  let content = [];
-  for (let i = 1; i <= 4; i++) {
-    content.push(
-      <motion.div 
-        key={`digital-garden-img-${i}`}
-        initial="initial"
-        variants={projectImg(i)}
-        whileHover="hover"
-      >
-        <Image
-          alt={`digital-garden-${i}`} 
-          src={`/assets/digital-garden-${i}.png`}
-          layout="responsive"
-          width={500}
-          height={300} 
-          objectFit="cover" />
-      </motion.div>
-    );
-  }
-  return content;
-}
-
 const tokopediaLogo = {
   hidden: {
     strokeDashoffset: 2296,
@@ -138,7 +114,6 @@ const tokopediaLogo = {
 }
 
 export default function Porto({ isFirstMount }) {
-  const constraintsRef = useRef(null);
   const containerRef = useRef(null);
   const { darkmode, toggleMode } = useDarkmodeContext()
   const themeClassname = darkmode ? 'dark-mode' : 'light-mode';
@@ -336,13 +311,6 @@ export default function Porto({ isFirstMount }) {
           </StaggerWrapper>
         </div>
       </section>
-      {/* <section> */}
-        {/* <div className="wrapper"> */}
-          {/* <StaggerWrapper>
-            
-          </StaggerWrapper> */}
-        {/* </div> */}
-      {/* </section> */}
       <GlobalNav darkmode={darkmode} toggleMode={toggleMode} />
     </motion.div>
   )

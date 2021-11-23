@@ -1,9 +1,12 @@
 import { Client } from '@notionhq/client';
 import Link from 'next/link';
 import styles from 'styles/contentList.module.css';
+import { useDarkmodeContext } from '@context/darkModeProvider'
 
 const MediaList = ({ media }) => {
-  console.log(media, "MEDIA")
+  const { darkmode, toggleMode } = useDarkmodeContext()
+  const themeClassname = darkmode ? 'dark-mode' : 'light-mode';
+  // console.log(media, "MEDIA")
   const renderList = () => {
     const allMedia = media?.map((item, index) => {
       const icon = item?.icon?.emoji;
@@ -28,7 +31,7 @@ const MediaList = ({ media }) => {
             <span className={styles.sub}>Year: <b>{year}</b></span>
           </div>
           <div className={styles.itemWrapper}>
-            <span className={styles.itemType}>{type}</span>
+            {/* <span className={styles.itemType}>{type}</span> */}
             <span className={styles.itemStatus}>{status}</span>
           </div>
         </>
@@ -57,7 +60,11 @@ const MediaList = ({ media }) => {
     return allMedia;
   }
 
-  return <div className={styles.container}>{renderList()}</div>
+  return (
+    <div className={themeClassname}>
+      <div className={styles.container}>{renderList()}</div>
+    </div>
+  );
 }
 
 export async function getStaticProps() {
