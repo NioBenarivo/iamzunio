@@ -72,6 +72,11 @@
   margin: 48px;
 }
 
+.contentWrapper > figure > img {
+  width: 100%;
+  height: 100%;
+}
+
 .title {
   font-size: 46px;
   line-height: 56px;
@@ -95,6 +100,7 @@
   letter-spacing: -0.003em;
   margin-top: 1em;
   font-size: 18px;
+  font-weight: 300;
   word-break: break-word;
 }
 
@@ -102,6 +108,24 @@
   font-size: 30px;
   font-weight: 500;
   line-height: 36px;
+  word-break: break-word;
+  margin-top: 1em;
+  margin-bottom: -0.2em;
+}
+
+.heading2 {
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 30px;
+  word-break: break-word;
+  margin-top: 1em;
+  margin-bottom: -0.2em;
+}
+
+.heading3 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
   word-break: break-word;
   margin-top: 1em;
   margin-bottom: -0.2em;
@@ -156,3 +180,4 @@
   word-break: break-word;
   margin: 0;
 }
+

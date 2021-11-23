@@ -1,10 +1,13 @@
+import { Fragment } from 'react';
 import { Client } from '@notionhq/client';
+import classNames from 'classnames';
 import styles from 'styles/contentList.module.css';
+import { getBlocks } from 'notion';
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const MediaContent = ({ 
-  pageData, 
-  allBlocks,
+  pageData,
+  blocksWithChildren,
 }) => {
   const renderHead = () => {
     // Head Data
@@ -29,86 +32,105 @@ const MediaContent = ({
     )
   }
 
-  const renderContent = (block, index) => {
-    const type = block.type;
-    let el;
-    if (type === 'heading_1') {
-      el = <h1 className={styles.heading1} key={index}>{block.heading_1.text[0].plain_text}</h1>
+  const renderBlock = (block, index) => {
+    const { type } = block;
+    const value = block[type];
+    switch (type) {
+      case "heading_1":
+        return <h1 className={styles.heading1} key={index}>{block.heading_1.text[0].plain_text}</h1>;
+      case "heading_2":
+        return <h2 className={styles.heading2} key={index}>{block.heading_2.text[0].plain_text}</h2>;
+      case "heading_3":
+        return <h3 className={styles.heading3} key={index}>{block.heading_3.text[0].plain_text}</h3>;
+      case 'bulleted_list_item':
+        const bulletedItems = block?.bulleted_list_item?.text?.map((bullet, idx) => {
+          const bulletClass = classNames({
+            'bold': bullet.annotations.bold,
+            'italic': bullet.annotations.italic,
+            'underline': bullet.annotations.underline
+          })
+  
+          return <span key={idx} className={bulletClass}>{bullet.plain_text}</span>
+        });
+        return (
+          <ul key={index} className={styles.ul}>
+            <li className={styles.li}>
+              {bulletedItems}
+              {value.children?.map((block) => (
+                <Fragment key={block.id}>{renderBlock(block)}</Fragment>
+              ))}
+            </li>
+          </ul>
+        );
+      case 'numbered_list_item': 
+        const numberedItems = block?.numbered_list_item?.text?.map((num, idx) => {
+          const bulletClass = classNames({
+            'bold': num.annotations.bold,
+            'italic': num.annotations.italic,
+            'underline': num.annotations.underline
+          })
+  
+          return <span key={idx} className={bulletClass}>{num.plain_text}</span>
+        });
+        
+        return (
+          <ul key={index} className={styles.ul}>
+            <li className={styles.li}>
+              {numberedItems}
+              {value.children?.map((block) => (
+                <Fragment key={block.id}>{renderBlock(block)}</Fragment>
+              ))}
+            </li>
+          </ul>
+        );
+      case 'quote': 
+        return (
+          <blockquote className={styles.blockquote} key={index}>
+            <p className={styles.paragraph}>{block.quote.text[0].plain_text}</p>
+          </blockquote>
+        );
+      case 'callout':
+        return (
+          <div key={index} className={styles.callout}>
+            <span>{block.callout.icon.emoji}</span>
+            <p>{block.callout.text[0].plain_text}</p>
+          </div>
+        );
+      case 'paragraph':
+        const paragraph = block?.paragraph?.text?.map((p, idx) => {
+          const paragraphClass = classNames({
+            'bold': p.annotations.bold,
+            'italic': p.annotations.italic,
+            'underline': p.annotations.underline
+          })
+  
+          return <span key={idx} className={paragraphClass}>{p.plain_text}</span>
+        });
+        return <p className={styles.paragraph} key={index}>{paragraph}</p>;
+      case 'image':
+        const src =
+          value.type === "external" ? value?.external?.url : value?.file?.url;
+        const caption = value?.caption ? value?.caption[0]?.plain_text : "";
+        return (
+          <figure>
+            <img src={src} alt={caption} />
+            {caption && <figcaption>{caption}</figcaption>}
+          </figure>
+        );
+      default:
+        return `❌ Not Yet Implemented (${
+          type === "unsupported" ? "unsupported by Notion API" : type
+        })`;
     }
-
-    if (type === 'heading_3') {
-      el = <h3 key={index}>{block.heading_3.text[0].plain_text}</h3>
-    }
-
-    if (type === 'bulleted_list_item') {
-      const bulletedItems = block?.bulleted_list_item?.text?.map((bullet, idx) => {
-        const boldStyle = bullet.annotations.bold ? 'bold' : '';
-        const italicStyle = bullet.annotations.italic ? 'italic' : '';
-        const underlineStyle = bullet.annotations.underline ? 'underline' : '';
-        const bulletClass = `${boldStyle} ${italicStyle} ${underlineStyle}`;
-
-        return <span key={idx} className={bulletClass}>{bullet.plain_text}</span>
-      });
-      el = (
-        <ul key={index} className={styles.ul}>
-          <li className={styles.li}>{bulletedItems}</li>
-        </ul>
-      )
-    }
-
-    if (type === 'numbered_list_item') {
-      const numberedItems = block?.numbered_list_item?.text?.map((num, idx) => {
-        const boldStyle = num.annotations.bold ? 'bold' : '';
-        const italicStyle = num.annotations.italic ? 'italic' : '';
-        const underlineStyle = num.annotations.underline ? 'underline' : '';
-        const bulletClass = `${boldStyle} ${italicStyle} ${underlineStyle}`;
-
-        return <span key={idx} className={bulletClass}>{num.plain_text}</span>
-      });
-      el = (
-        <ul key={index} className={styles.ul}>
-          <li className={styles.li}>{numberedItems}</li>
-        </ul>
-      )
-    }
-
-    if (type === 'quote') {
-      el = (
-        <blockquote className={styles.blockquote} key={index}>
-          <p className={styles.paragraph}>{block.quote.text[0].plain_text}</p>
-        </blockquote>
-      )
-    }
-
-    if (type === 'callout') {
-      el = (
-        <div key={index} className={styles.callout}>
-          <span>{block.callout.icon.emoji}</span>
-          <p>{block.callout.text[0].plain_text}</p>
-        </div>
-      )
-    }
-
-    if (type === 'paragraph') {
-      const paragraph = block?.paragraph?.text?.map((p, idx) => {
-        const boldStyle = p.annotations.bold ? 'bold' : '';
-        const italicStyle = p.annotations.italic ? 'italic' : '';
-        const underlineStyle = p.annotations.underline ? 'underline' : '';
-        const paragraphClass = `${boldStyle} ${italicStyle} ${underlineStyle}`
-
-        return <span key={idx} className={paragraphClass}>{p.plain_text}</span>
-      });
-      el = <p className={styles.paragraph} key={index}>{paragraph}</p>
-    }
-
-    return el;
   }
   
   return (
     <div className={styles.content}>
       <div className={styles.contentWrapper}>
         {renderHead()}
-        {allBlocks?.map((blockArray, index) => renderContent(blockArray, index))}
+        {blocksWithChildren?.map((blck) => (
+          <Fragment key={blck.id}>{renderBlock(blck)}</Fragment>
+        ))}
       </div>
     </div>
   )
@@ -155,52 +177,33 @@ export async function getServerSideProps(context) {
   })
   
   const allBlocks = await fetchBlocks(content);
-  console.log(allBlocks)
+
+  const childBlocks = await Promise.all(
+    allBlocks
+      .filter((block) => block.has_children)
+      .map(async (block) => {
+        return {
+          id: block.id,
+          children: await getBlocks(block.id),
+        };
+      })
+  );
+
+  const blocksWithChildren = allBlocks.map((block) => {
+    if (block.has_children && !block[block.type].children) {
+      block[block.type]["children"] = childBlocks.find(
+        (x) => x.id === block.id
+      )?.children;
+    }
+    return block;
+  });
 
   return {
     props: {
       pageData,
-      allBlocks
+      blocksWithChildren
     }
   };
 }
-
-// export const getStaticPaths = async () => {
-//   const databaseId = process.env.NOTION_MEDIA_ID;
-//   const response = await notion.databases.query({
-//     database_id: databaseId
-//   })
-
-//   return {
-//     paths: response.results.map((page) => ({ params: { content: page.id } })),
-//     fallback: true,
-//   };
-// };
-
-// export const getStaticProps = async (context) => {
-//   const { content } = context.params;
-//   let fetchMoreBlocks = [];
-
-//   const pageData = await notion.pages.retrieve({
-//     page_id: content
-//   })
-//   const initialBlocksData = await notion.blocks.children.list({
-//     block_id: content,
-//   });
-
-//   // if (initialBlocksData?.has_more) {
-//   //   fetchMoreBlocks = await fetchBlocks(content, initialBlocksData?.next_cursor);
-//   // }
-
-//   const allBlocks = [...initialBlocksData?.results, ...fetchMoreBlocks];
-
-//   return {
-//     props: {
-//       pageData,
-//       allBlocks,
-//     },
-//     revalidate: 1,
-//   };
-// };
 
 export default MediaContent;

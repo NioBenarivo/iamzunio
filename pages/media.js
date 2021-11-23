@@ -4,9 +4,8 @@ import styles from 'styles/contentList.module.css';
 import { useDarkmodeContext } from '@context/darkModeProvider'
 
 const MediaList = ({ media }) => {
-  const { darkmode, toggleMode } = useDarkmodeContext()
+  const { darkmode } = useDarkmodeContext()
   const themeClassname = darkmode ? 'dark-mode' : 'light-mode';
-  // console.log(media, "MEDIA")
   const renderList = () => {
     const allMedia = media?.map((item, index) => {
       const icon = item?.icon?.emoji;
@@ -31,7 +30,7 @@ const MediaList = ({ media }) => {
             <span className={styles.sub}>Year: <b>{year}</b></span>
           </div>
           <div className={styles.itemWrapper}>
-            {/* <span className={styles.itemType}>{type}</span> */}
+            <span className={styles.itemType}>{type}</span>
             <span className={styles.itemStatus}>{status}</span>
           </div>
         </>
