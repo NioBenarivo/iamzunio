@@ -49,14 +49,7 @@ function MyApp({ Component, pageProps, router }) {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.3,
-        ease: [0.6, -0.05, 0.01, 0.99],
-      }
-    },
-    exit: {
-      opacity: 0,
-      transition: {
-        duration: 0.3,
+        duration: 0.5,
         ease: [0.6, -0.05, 0.01, 0.99],
       }
     }
@@ -73,7 +66,6 @@ function MyApp({ Component, pageProps, router }) {
           variants={pageAnimations} 
           initial="initial" 
           animate="animate" 
-          exit="exit"
         >
           <Component isFirstMount={isFirstMount} key={router.route} {...pageProps} />
         </motion.div>
