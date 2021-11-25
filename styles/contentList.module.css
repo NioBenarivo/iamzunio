@@ -6,48 +6,63 @@
   margin: 0 auto;
 }
 
-.item {
-  display: flex;
-  flex-direction: column;
+.light-mode { background-color: var(--greyScale-8); color: var(--greyScale-0); }
+.dark-mode { background-color: var(--greyScale-0); color: var(--greyScale-8); }
+
+/* MEDIA */
+.mediaSection {
+  width: 100%;
 }
 
-.itemHeader {
+.mediaItem {
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0;
+}
+
+.mediaItemHeader {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  padding: 8px 12px;
+  padding: 8px 0;
 }
 
-.itemIcon {
+.mediaItemIcon {
   display: block;
   width: 24px;
   height: 24px;
   margin-right: 8px;
 }
 
-.itemTitle {
+.mediaItemTitle {
   font-size: 16px;
   margin: 0;
 }
 
-.itemType {
+.mediaItemType {
   display: inline-block;
-  background: var(--primary);
-  color: var(--white);
+  color: var(--greyScale-8);
   padding: 4px 8px;
   border-radius: 4px;
   margin-right: 4px
 }
 
-.itemWrapper {
+.mediaItemWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.mediaItemFooter {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 8px 12px;
+  padding: 8px 0;
 }
 
-.itemStatus {
+.mediaItemStatus {
   display: inline-block;
   background: var(--greyScale-2);
   color: var(--greyScale-6);
@@ -59,6 +74,37 @@
 .sub {
   font-size: 12px;
   margin-right: 4px;
+}
+
+.notion-default {
+  background-color: #37352F;
+}
+.notion-gray {
+  background-color:#9B9A97;
+}
+.notion-brown {
+  background-color: #64473A;
+} 
+.notion-orange {
+  background-color: #D9730D;
+}
+.notion-yellow {
+  background-color: #DFAB01;
+}
+.notion-green {
+  background-color: #0F7B6C;
+} 
+.notion-blue {
+  background-color: #0B6E99;
+}
+.notion-purple {
+  background-color: #6940A5;
+} 
+.notion-pink {
+  background-color: #AD1A72;
+}
+.notion-red {
+  background-color: #E03E3E;
 }
 
 /* CONTENT PART */
