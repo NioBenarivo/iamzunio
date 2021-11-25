@@ -1,7 +1,7 @@
-import { Client } from '@notionhq/client';
-import styles from 'styles/contentList.module.css';
 import { useDarkmodeContext } from '@context/darkModeProvider'
 import { mediaStatus } from 'constants/mediaStatus';
+import { getDatabase, databaseId } from 'notion';
+import styles from 'styles/contentList.module.css';
 import MediaItem from './MediaItem';
 
 const MediaList = ({ finished, reading, summary }) => {
@@ -20,12 +20,8 @@ const MediaList = ({ finished, reading, summary }) => {
 }
 
 export async function getStaticProps() {
-  const notion = new Client({ auth: process.env.NOTION_API_KEY });
-
   // Get books database list
-  const databaseId = process.env.NOTION_MEDIA_ID;
-  const response = await notion.databases.query({
-    database_id: databaseId,
+  const options = {
     sorts: [
       {
         property: 'Type',
@@ -33,8 +29,8 @@ export async function getStaticProps() {
         direction: 'descending',
       }
     ]
-  });
-
+  }
+  const response = await getDatabase(databaseId, options);
   const allMedia = response?.results || [];
   const finished = allMedia.filter(item => item?.properties?.Status?.select?.name === mediaStatus.finished) || [];
   const reading = allMedia.filter(item => item?.properties?.Status?.select?.name === mediaStatus.reading) || [];

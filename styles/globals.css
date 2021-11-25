@@ -500,6 +500,23 @@ section {
   background-color: var(--greyScale-1);
 }
 
+/* Loader */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.loading {
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+  height: 50px;
+  width: 50px;
+}
+
+/* ALWAYS ON VERY BOTTOM  */
 /* DARK MODE LIGHT MODE */
 @media (prefers-color-scheme: light) {
   .top { background-color: var(--greyScale-8); color: var(--greyScale-0); }
