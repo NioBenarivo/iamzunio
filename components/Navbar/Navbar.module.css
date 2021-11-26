@@ -1,0 +1,19 @@
+.navbar {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  transition: top 0.2s;
+  background-color: var(--greyScale-0);
+  border-bottom: 1px solid var(--greyScale-1);
+}
+
+.navbar > span {
+  flex: 1;
+  padding: 8px;
+}
+
+.navbar > div {
+  padding: 8px;
+}

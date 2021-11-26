@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { Client } from '@notionhq/client';
 import classNames from 'classnames';
 import ScrollArrow from 'components/ScrollToTop';
+import NavBar from 'components/Navbar';
 import styles from 'styles/contentList.module.css';
 import { getBlocks, getPage } from 'notion';
 
@@ -125,8 +126,10 @@ const MediaContent = ({
     }
   }
   
+  const titleContent = pageData?.properties?.Name?.title[0]?.plain_text || '';
   return (
     <div className={styles.content}>
+      <NavBar title={titleContent} />
       <div className={styles.contentWrapper}>
         {renderHead()}
         {blocksWithChildren?.map((block) => (
