@@ -12,6 +12,7 @@
 .navbar > span {
   flex: 1;
   padding: 8px;
+  padding-right: 40px;
 }
 
 .navbar > div {
