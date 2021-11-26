@@ -85,7 +85,7 @@ const MediaContent = ({
         );
       case 'quote': 
         return (
-          <blockquote className={styles.blockquote} key={index}>
+          <blockquote className='blockquote' key={index}>
             <p className={styles.paragraph}>{value?.text[0]?.plain_text}</p>
           </blockquote>
         );

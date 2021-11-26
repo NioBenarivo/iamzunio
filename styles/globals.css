@@ -500,6 +500,14 @@ section {
   background-color: var(--greyScale-1);
 }
 
+.landing-page h2 {
+  margin: 16px 0 4px;
+}
+
+.landing-page p {
+  margin: 4px 0;
+}
+
 /* Loader */
 .loading-container {
   display: flex;
@@ -514,6 +522,23 @@ section {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
   height: 50px;
   width: 50px;
+}
+
+/* Custom Content */
+.blockquote {
+  box-shadow: inset 3px 0 0 0 var(--greyScale-0);
+  padding-left: 23px;
+  margin-left: 0;
+}
+
+.blockquote > p {
+  line-height: 26px;
+}
+
+@media only screen and (max-width: 720px) {
+  .blockquote > p {
+    line-height: 20px;
+  }
 }
 
 /* ALWAYS ON VERY BOTTOM  */
@@ -537,6 +562,12 @@ section {
   body {
     color: var(--greyScale-8);
     background: var(--greyScale-0);
+  }
+
+  .blockquote {
+    box-shadow: inset 3px 0 0 0 var(--greyScale-8);
+    padding-left: 23px;
+    margin-left: 0;
   }
 }
 
