@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Client } from '@notionhq/client';
 import classNames from 'classnames';
+import ScrollArrow from 'components/ScrollToTop';
 import styles from 'styles/contentList.module.css';
 import { getBlocks, getPage } from 'notion';
 
@@ -131,6 +132,7 @@ const MediaContent = ({
         {blocksWithChildren?.map((block) => (
           <Fragment key={block.id}>{renderBlock(block)}</Fragment>
         ))}
+      <ScrollArrow />
       </div>
     </div>
   )
