@@ -3,6 +3,7 @@ import { Client } from '@notionhq/client';
 import classNames from 'classnames';
 import ScrollArrow from 'components/ScrollToTop';
 import NavBar from 'components/Navbar';
+import NotionText from 'components/NotionText';
 import styles from 'styles/contentList.module.css';
 import { getBlocks, getPage } from 'notion';
 
@@ -45,40 +46,21 @@ const MediaContent = ({
       case "heading_3":
         return <h3 className={styles.heading3} key={index}>{value?.text[0].plain_text}</h3>;
       case 'bulleted_list_item':
-        const bulletedItems = value?.text?.map((bullet, idx) => {
-          const bulletClass = classNames({
-            'bold': bullet.annotations.bold,
-            'italic': bullet.annotations.italic,
-            'underline': bullet.annotations.underline
-          })
-  
-          return <span key={idx} className={bulletClass}>{bullet.plain_text}</span>
-        });
         return (
           <ul key={index} className={styles.ul}>
             <li className={styles.li}>
-              {bulletedItems}
+              <NotionText text={value?.text} />
               {value?.children?.map((block) => (
                 <Fragment key={block.id}>{renderBlock(block)}</Fragment>
               ))}
             </li>
           </ul>
         );
-      case 'numbered_list_item': 
-        const numberedItems = value?.text?.map((num, idx) => {
-          const bulletClass = classNames({
-            'bold': num.annotations.bold,
-            'italic': num.annotations.italic,
-            'underline': num.annotations.underline
-          })
-  
-          return <span key={idx} className={bulletClass}>{num.plain_text}</span>
-        });
-        
+      case 'numbered_list_item':         
         return (
           <ul key={index} className={styles.ul}>
             <li className={styles.li}>
-              {numberedItems}
+              <NotionText text={value?.text} />
               {value?.children?.map((block) => (
                 <Fragment key={block.id}>{renderBlock(block)}</Fragment>
               ))}
@@ -88,27 +70,24 @@ const MediaContent = ({
       case 'quote': 
         return (
           <blockquote className='blockquote' key={index}>
-            <p className={styles.paragraph}>{value?.text[0]?.plain_text}</p>
+            <p className={styles.paragraph}>
+              <NotionText text={value?.text} />
+            </p>
           </blockquote>
         );
       case 'callout':
         return (
           <div key={index} className={styles.callout}>
             <span>{value?.icon?.emoji}</span>
-            <p>{value?.text[0].plain_text}</p>
+            <p><NotionText text={value?.text} /></p>
           </div>
         );
       case 'paragraph':
-        const paragraph = value?.text?.map((p, idx) => {
-          const paragraphClass = classNames({
-            'bold': p.annotations.bold,
-            'italic': p.annotations.italic,
-            'underline': p.annotations.underline
-          })
-  
-          return <span key={idx} className={paragraphClass}>{p.plain_text}</span>
-        });
-        return <p className={styles.paragraph} key={index}>{paragraph}</p>;
+        return (
+          <p className={styles.paragraph} key={index}>
+            <NotionText text={value?.text} />
+          </p>
+        );
       case 'image':
         const src =
           value.type === "external" ? value?.external?.url : value?.file?.url;

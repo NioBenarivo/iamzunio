@@ -1,7 +1,5 @@
 .navbar {
   position: fixed;
-  display: flex;
-  align-items: center;
   width: 100%;
   text-align: center;
   transition: top 0.2s;
@@ -9,12 +7,20 @@
   border-bottom: 1px solid var(--greyScale-1);
 }
 
-.navbar > span {
+.innerNavbar > span {
   flex: 1;
   padding: 8px;
   padding-right: 40px;
+  margin-bottom: 5px;
 }
 
-.navbar > div {
+.innerNavbar > div {
   padding: 8px;
+}
+
+.innerNavbar {
+  display: flex;
+  align-items: center;
+  max-width: 680px;
+  margin: 0 auto;
 }
