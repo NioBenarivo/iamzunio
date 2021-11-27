@@ -42,7 +42,8 @@ export async function getStaticProps() {
       finished: finished,
       reading: reading,
       summary: summary,
-    }
+    },
+    revalidate: 1
   }
 }
 

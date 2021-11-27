@@ -4,6 +4,7 @@
   align-items: flex-start;
   max-width: 480px;
   margin: 0 auto;
+  padding: 8 12px;
 }
 
 .light-mode { background-color: var(--greyScale-8); color: var(--greyScale-0); }
