@@ -197,32 +197,6 @@
   font-size: 18px;
 }
 
-.callout {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  border-radius: 3px;
-  background: rgb(241, 241, 239);
-  padding: 16px 16px 16px 12px;
-}
-
-.callout > span {
-  font-size: 18px;
-  width: 24px;
-  height: 24px;
-  margin-right: 8px;
-  margin-bottom: 6px;
-}
-
-.callout > p {
-  line-height: 16px;
-  letter-spacing: -0.003em;
-  font-size: 16px;
-  word-break: break-word;
-  margin: 0;
-}
-
 @media only screen and (max-width: 720px) {
   .contentWrapper {
     margin: 32px 0;

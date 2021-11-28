@@ -77,7 +77,7 @@ const MediaContent = ({
         );
       case 'callout':
         return (
-          <div key={index} className={styles.callout}>
+          <div key={index} className='callout'>
             <span>{value?.icon?.emoji}</span>
             <p><NotionText text={value?.text} /></p>
           </div>
