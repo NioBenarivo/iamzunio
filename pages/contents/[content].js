@@ -107,16 +107,22 @@ const MediaContent = ({
   
   const titleContent = pageData?.properties?.Name?.title[0]?.plain_text || '';
   return (
-    <div className={styles.content}>
-      <NavBar title={titleContent} />
-      <div className={styles.contentWrapper}>
-        {renderHead()}
-        {blocksWithChildren?.map((block) => (
-          <Fragment key={block.id}>{renderBlock(block)}</Fragment>
-        ))}
-      <ScrollArrow />
+    <>
+      <Head>
+        <title>{titleContent}</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <div className={styles.content}>
+        <NavBar title={titleContent} />
+        <div className={styles.contentWrapper}>
+          {renderHead()}
+          {blocksWithChildren?.map((block) => (
+            <Fragment key={block.id}>{renderBlock(block)}</Fragment>
+          ))}
+        <ScrollArrow />
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
