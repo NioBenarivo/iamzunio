@@ -1,6 +1,6 @@
+import Head from 'next/head';
 import { Fragment } from 'react';
 import { Client } from '@notionhq/client';
-import classNames from 'classnames';
 import ScrollArrow from 'components/ScrollToTop';
 import NavBar from 'components/Navbar';
 import NotionText from 'components/NotionText';

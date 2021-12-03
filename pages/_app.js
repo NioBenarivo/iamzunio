@@ -1,7 +1,7 @@
+import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Router from "next/router";
-import DarkModeProvider from '@context/darkModeProvider';
 import Loader from 'components/Loader';
 import 'styles/globals.css';
 
@@ -56,7 +56,10 @@ function MyApp({ Component, pageProps, router }) {
   }
 
   return (
-    <DarkModeProvider>
+    <>
+      <Head>
+        <title>Loading...</title>
+      </Head>
       <AnimatePresence exitBeforeEnter>
       {loading ? (
         <Loader />
@@ -71,7 +74,7 @@ function MyApp({ Component, pageProps, router }) {
         </motion.div>
       )}
       </AnimatePresence>
-    </DarkModeProvider>
+    </>
   )
 }
 

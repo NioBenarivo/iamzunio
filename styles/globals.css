@@ -52,6 +52,8 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   box-sizing: border-box;
   height: 100%;
+  background-color: var(--greyScale-0); 
+  color: var(--greyScale-8);
 }
 
 @font-face {
@@ -599,7 +601,6 @@ section {
 
 @media (prefers-color-scheme: dark) {
   .top { background-color: var(--greyScale-0); color: var(--greyScale-8); }
-  .top.light-mode { background-color: var(--greyScale-8); color: var(--greyScale-0); }
   body {
     color: var(--greyScale-8);
     background: var(--greyScale-0);
@@ -622,7 +623,7 @@ section {
 }
 
 .light-mode { background-color: var(--greyScale-8); color: var(--greyScale-0); }
-.dark-mode { background-color: var(--greyScale-0); color: var(--greyScale-8); }
+
 
 .dark-mode .divider {
   background-color: var(--greyScale-8);

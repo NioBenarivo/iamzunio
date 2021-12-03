@@ -1,13 +1,9 @@
 import Link from 'next/link';
-import { useDarkmodeContext } from '@context/darkModeProvider'
 import { IoDocument, IoBookOutline } from 'react-icons/io5';
 
 export default function Portfolio() {
-  const { darkmode } = useDarkmodeContext()
-  const themeClassname = darkmode ? 'dark-mode' : 'light-mode';
-
   return (
-    <div className={themeClassname}>
+    <div>
       <div className='landing-page'>
         <Link href='/profile'>
           <a style={{ cursor: 'pointer' }}>

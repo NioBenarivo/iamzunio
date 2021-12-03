@@ -5,10 +5,8 @@ import {
   circleProps,
   circleWidth,
 } from '@utils/constants'
-import { useDarkmodeContext } from '@context/darkModeProvider'
 
 export default function InitialTransition() {
-  const { darkmode } = useDarkmodeContext();
   return (
     <>
       <motion.div
@@ -21,7 +19,7 @@ export default function InitialTransition() {
       >
         <motion.div className="circle" variants={intro}>
           <svg className="circle-loader" width={circleWidth} height={circleWidth} viewBox="0 0 120 120">
-            <motion.circle {...circleProps} stroke={ darkmode ? "#0b0b0a" : "#FFFFFF"} />
+            <motion.circle {...circleProps} stroke="#0b0b0a" />
           </svg>
           <h2 className="logo">Z</h2>
         </motion.div>

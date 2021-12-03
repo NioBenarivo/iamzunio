@@ -9,7 +9,7 @@ const Navbar = ({ title }) => {
     <div className='navbar'>
       <div className={styles.innerNavbar}>
         <div onClick={() => router.back()}>
-          <IoArrowBack size={24} />
+          <IoArrowBack size={24} style={{ cursor: 'pointer' }} />
         </div>
         <span>{title}</span>
       </div>

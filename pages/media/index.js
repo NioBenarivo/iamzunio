@@ -1,21 +1,17 @@
 import Head from 'next/head';
-import { useDarkmodeContext } from '@context/darkModeProvider';
 import { mediaStatus } from 'constants/mediaStatus';
 import { getDatabase, databaseId } from 'notion';
 import styles from 'styles/contentList.module.css';
 import MediaItem from './MediaItem';
 
 const MediaList = ({ finished, reading, summary }) => {
-  const { darkmode } = useDarkmodeContext()
-  const themeClassname = darkmode ? 'dark-mode' : 'light-mode';
-
   return (
     <>
       <Head>
         <title>Media</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={themeClassname}>
+      <div>
         <div className={styles.container}>
           <MediaItem title="Finished" list={finished} />
           <MediaItem title="Reading" list={reading} />
