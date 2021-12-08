@@ -197,6 +197,16 @@
   font-size: 18px;
 }
 
+.link {
+  display: block;
+  cursor: pointer;
+  margin: 16px 0;
+}
+
+.link:hover {
+  color: var(--greyScale-4);
+}
+
 @media only screen and (max-width: 720px) {
   .contentWrapper {
     margin: 32px 0;

@@ -116,7 +116,7 @@ export default function Porto({ isFirstMount }) {
   const containerRef = useRef(null);
 
   return (
-    <motion.div exit={{ opacity: 0 }} className={`${themeClassname} top`} ref={containerRef}>
+    <motion.div exit={{ opacity: 0 }} className="top" ref={containerRef}>
       <Head>
         <title>Hi, I am Zunio</title>
         <link rel="icon" href="/favicon.ico" />

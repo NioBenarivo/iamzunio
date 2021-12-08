@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { Fragment } from 'react';
 import { Client } from '@notionhq/client';
 import ScrollArrow from 'components/ScrollToTop';
@@ -19,18 +20,23 @@ const MediaContent = ({
     const emoji = icon.emoji || '';
 
     const properties = headData.properties || {};
-    const title = properties?.Name?.title[0]?.plain_text || '';
     const author = properties?.Author?.rich_text[0]?.plain_text || '';
     const year = properties?.Year?.multi_select[0]?.name || '';
+
+    const title = headData.parent?.type === 'page_id' ? 
+      properties?.title?.title[0]?.plain_text : properties?.Name?.title[0]?.plain_text;
     
     return (
       <div>
         <h1 className={styles.title}>{title}</h1>
-        <div className={styles.subtitle}>
-          <span>{emoji}</span>
-          <span>{author}</span>
-          <span>{year}</span>
-        </div>
+        {
+          headData.parent?.type !== 'page_id' &&
+          <div className={styles.subtitle}>
+            <span>{emoji}</span>
+            <span>{author}</span>
+            <span>{year}</span>
+          </div>
+        }
       </div>
     )
   }
@@ -98,6 +104,12 @@ const MediaContent = ({
             {caption && <figcaption>{caption}</figcaption>}
           </figure>
         );
+      case 'child_page':
+        return (
+          <Link href={`/contents/${index}`}>
+            <a className={styles.link}>{value?.title}</a>
+          </Link>
+        )
       default:
         return `❌ Not Yet Implemented (${
           type === "unsupported" ? "unsupported by Notion API" : type
