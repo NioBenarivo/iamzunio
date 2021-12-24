@@ -6,7 +6,7 @@ import ScrollArrow from 'components/ScrollToTop';
 import NavBar from 'components/Navbar';
 import NotionText from 'components/NotionText';
 import styles from 'styles/contentList.module.css';
-import { getBlocks, getPage } from 'notion';
+import { getBlocks, getPage, getDatabase, databaseId } from 'notion';
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const MediaContent = ({ 
@@ -172,7 +172,15 @@ const fetchBlocks = async (block) => {
   return fetchMoreBlocksCombined;
 }
 
-export async function getServerSideProps(context) {
+export const getStaticPaths = async () => {
+  const database = await getDatabase(databaseId);
+  return {
+    paths: database.results.map((page) => ({ params: { content: page.id } })),
+    fallback: true,
+  };
+};
+
+export async function getStaticProps(context) {
   const { content } = context.params;
   const pageData = await getPage(content);
   const allBlocks = await fetchBlocks(content);
