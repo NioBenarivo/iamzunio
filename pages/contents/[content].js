@@ -209,7 +209,8 @@ export async function getStaticProps(context) {
     props: {
       pageData,
       blocksWithChildren
-    }
+    },
+    revalidate: 300
   };
 }
 
