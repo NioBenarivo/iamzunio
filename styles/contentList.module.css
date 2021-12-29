@@ -20,12 +20,7 @@
   display: flex;
   flex-direction: column;
   margin: 16px 0;
-  padding: 8px;
   transition: 0.2s all ease-in-out;
-}
-
-.mediaItem:hover {
-  box-shadow: 0 6px 12px rgba(173, 181, 189, 0.2);
 }
 
 .mediaItemHeader {
@@ -44,7 +39,7 @@
 }
 
 .mediaItemTitle {
-  font-size: 16px;
+  font-size: 18px;
   margin: 0;
 }
 
@@ -146,41 +141,41 @@
 }
 
 .subtitle > span {
-  font-size: 16px;
+  font-size: 14px;
   margin-right: 8px;
 }
 
 .paragraph {
-  line-height: 26px;
+  line-height: 24px;
   letter-spacing: -0.003em;
   margin-top: 1em;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   word-break: break-word;
 }
 
 .heading1 {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 700;
-  line-height: 40px;
+  line-height: 38px;
   word-break: break-word;
   margin-top: 1em;
   margin-bottom: -0.2em;
 }
 
 .heading2 {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
-  line-height: 36px;
+  line-height: 34px;
   word-break: break-word;
   margin-top: 1em;
   margin-bottom: -0.2em;
 }
 
 .heading3 {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
-  line-height: 32px;
+  line-height: 30px;
   word-break: break-word;
   margin-top: 1em;
   margin-bottom: -0.2em;
@@ -200,14 +195,15 @@
   list-style-type: disc;
   list-style-position: outside;
   margin: 16px 0 16px 30px;
-  line-height: 28px;
-  font-size: 18px;
+  line-height: 24px;
+  font-size: 16px;
 }
 
 .link {
   display: block;
   cursor: pointer;
   margin: 16px 0;
+  text-decoration: underline;
 }
 
 .link:hover {
@@ -224,27 +220,27 @@
 
 @media only screen and (max-width: 720px) {
   .contentWrapper {
-    margin: 32px 0;
+    margin: 50px 0;
   }
 
   .title {
-    font-size: 32px;
-    line-height: 40px;
+    font-size: 30px;
+    line-height: 38px;
   }
 
   .heading1 {
-    font-size: 28px;
-    line-height: 36px;
+    font-size: 26px;
+    line-height: 34px;
   }
 
   .heading2 {
-    font-size: 24px;
-    line-height: 32px;
+    font-size: 22px;
+    line-height: 30px;
   }
 
   .heading3 {
-    font-size: 20px;
-    line-height: 28px;
+    font-size: 18px;
+    line-height: 26px;
   }
 
   .paragraph {
@@ -253,8 +249,9 @@
   }
 
   .li {
+    margin: 12px 0 12px 24px;
     font-size: 14px;
-    line-height: 20px;
+    line-height: 22px;
   }
 
   .subtitle > span {

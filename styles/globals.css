@@ -48,44 +48,12 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   box-sizing: border-box;
   height: 100%;
   background-color: var(--greyScale-0); 
   color: var(--greyScale-8);
-}
-
-@font-face {
-  font-family: "Raleway";
-  src: url("../public/fonts/Raleway/Raleway-ExtraLight.ttf");
-  font-style: normal;
-  font-weight: 200;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Raleway";
-  src: url("../public/fonts/Raleway/Raleway-Light.ttf");
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Raleway";
-  src: url("../public/fonts/Raleway/Raleway-Regular.ttf");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Raleway";
-  src: url("../public/fonts/Raleway/Raleway-Bold.ttf");
-  font-style: medium;
-  font-weight: 700;
-  font-display: swap;
 }
 
 a {
@@ -579,8 +547,12 @@ section {
   }
 
   .callout > p {
-    font-size: 18px;
-    line-height: 26px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .landing-page > a {
+    text-align: center;
   }
 }
 

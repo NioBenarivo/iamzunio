@@ -21,7 +21,6 @@ const MediaContent = ({
 
     const properties = headData.properties || {};
     const author = properties?.Author?.rich_text[0]?.plain_text || '';
-    const year = properties?.Year?.multi_select[0]?.name || '';
     const readingTime = properties?.['Reading Time']?.formula?.number || 0;
 
     const title = headData.parent?.type === 'page_id' ? 
@@ -39,7 +38,7 @@ const MediaContent = ({
             </div>
             {
               readingTime !== 0 &&
-              <span>Reading Time: <b>{readingTime}</b> min</span>
+              <span><b>{readingTime}</b> min read</span>
             }
           </>
         }

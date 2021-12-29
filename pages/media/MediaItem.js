@@ -27,7 +27,7 @@ const MediaItem = ({ title, list }) => {
             <span className={styles.sub}>Author: <b>{author}</b></span>
             {
               readingTime !== 0 &&
-              <span className={styles.sub}>Reading Time: <b>{readingTime}</b> min</span>
+              <span className={styles.sub}><b>{readingTime}</b> min read</span>
             }
           </div>
           <div className={styles.mediaItemFooter}>
