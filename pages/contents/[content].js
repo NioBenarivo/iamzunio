@@ -22,6 +22,7 @@ const MediaContent = ({
     const properties = headData.properties || {};
     const author = properties?.Author?.rich_text[0]?.plain_text || '';
     const year = properties?.Year?.multi_select[0]?.name || '';
+    const readingTime = properties?.['Reading Time']?.formula?.number || 0;
 
     const title = headData.parent?.type === 'page_id' ? 
       properties?.title?.title[0]?.plain_text : properties?.Name?.title[0]?.plain_text;
@@ -31,11 +32,16 @@ const MediaContent = ({
         <h1 className={styles.title}>{title}</h1>
         {
           headData.parent?.type !== 'page_id' &&
-          <div className={styles.subtitle}>
-            <span>{emoji}</span>
-            <span>{author}</span>
-            <span>{year}</span>
-          </div>
+          <>
+            <div className={styles.subtitle}>
+              <span>{emoji}</span>
+              <span>{author}</span>
+            </div>
+            {
+              readingTime !== 0 &&
+              <span>Reading Time: <b>{readingTime}</b> min</span>
+            }
+          </>
         }
       </div>
     )
