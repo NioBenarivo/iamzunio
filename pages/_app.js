@@ -58,7 +58,8 @@ function MyApp({ Component, pageProps, router }) {
   return (
     <>
       <Head>
-        <title>Loading...</title>
+        <title>Portfolio and Books keypoints</title>
+        <meta name="description" content="Personal website and digital garden of books and reading notes" />
       </Head>
       <AnimatePresence exitBeforeEnter>
       {loading ? (

@@ -110,6 +110,10 @@ const MediaContent = ({
             <a className={styles.link}>{value?.title}</a>
           </Link>
         )
+      case 'divider':
+        return (
+          <div className={styles.divider} />
+        )
       default:
         return `❌ Not Yet Implemented (${
           type === "unsupported" ? "unsupported by Notion API" : type

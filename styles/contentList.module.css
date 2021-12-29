@@ -13,12 +13,19 @@
 /* MEDIA */
 .mediaSection {
   width: 100%;
+  padding: 0 24px;
 }
 
 .mediaItem {
   display: flex;
   flex-direction: column;
   margin: 16px 0;
+  padding: 8px;
+  transition: 0.2s all ease-in-out;
+}
+
+.mediaItem:hover {
+  box-shadow: 0 6px 12px rgba(173, 181, 189, 0.2);
 }
 
 .mediaItemHeader {
@@ -207,10 +214,17 @@
   color: var(--greyScale-4);
 }
 
+.divider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: var(--greyScale-3);
+  margin: 16px 0;
+}
+
 @media only screen and (max-width: 720px) {
   .contentWrapper {
     margin: 32px 0;
-    padding: 0 12px;
   }
 
   .title {
