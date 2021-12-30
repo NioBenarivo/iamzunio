@@ -8,7 +8,7 @@ const NotionText = ({ text }) => {
   return text.map((value, index) => {
     const {
       annotations: { bold, code, color, italic, strikethrough, underline },
-      text,
+      text
     } = value;
     return (
       <span
@@ -18,7 +18,7 @@ const NotionText = ({ text }) => {
           [styles.code]: code,
           [styles.italic]: italic,
           [styles.strikethrough]: strikethrough,
-          [styles.underline]: underline,
+          [styles.underline]: underline
         })}
       >
         {text.link ? <a href={text.link.url}>{text.content}</a> : text.content}

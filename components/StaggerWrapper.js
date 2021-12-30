@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
-import { motion, useAnimation } from "framer-motion";
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { motion, useAnimation } from 'framer-motion';
 
 export default function FadeInWrapper({ children, className, customVariant, inViewProps }) {
   const controls = useAnimation();
@@ -12,21 +12,21 @@ export default function FadeInWrapper({ children, className, customVariant, inVi
 
   useEffect(() => {
     if (inView) {
-      controls.start("visible");
+      controls.start('visible');
     }
   }, [controls, inView]);
 
   const normalVariant = {
     hidden: {
-      opacity: 0,
+      opacity: 0
     },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.2
       }
     }
-  }
+  };
 
   return (
     <motion.div

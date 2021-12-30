@@ -24,48 +24,54 @@ const MediaItem = ({ title, list }) => {
             <h5 className={styles.mediaItemTitle}>{name}</h5>
           </div>
           <div className={styles.mediaItemWrapper}>
-            <span className={styles.sub}>Author: <b>{author}</b></span>
-            {
-              readingTime !== 0 &&
-              <span className={styles.sub}><b>{readingTime}</b> min read</span>
-            }
+            <span className={styles.sub}>
+              Author: <b>{author}</b>
+            </span>
+            {readingTime !== 0 && (
+              <span className={styles.sub}>
+                <b>{readingTime}</b> min read
+              </span>
+            )}
           </div>
           <div className={styles.mediaItemFooter}>
-            <span className={classNames(styles.mediaItemType, styles[`notion-${colorType}`] )}>{type}</span>
-            <span className={classNames(styles.mediaItemStatus, styles[`notion-${statusColorType}`])}>{status}</span>
+            <span className={classNames(styles.mediaItemType, styles[`notion-${colorType}`])}>
+              {type}
+            </span>
+            <span
+              className={classNames(styles.mediaItemStatus, styles[`notion-${statusColorType}`])}
+            >
+              {status}
+            </span>
           </div>
         </>
-      )
+      );
 
       if (ready) {
         return (
-          <Link 
-            href={`/contents/${mediaID}`} 
-            key={index}
-          >
+          <Link href={`/contents/${mediaID}`} key={index}>
             <a className={styles.mediaItem} style={{ cursor: 'pointer' }}>
               {content}
             </a>
           </Link>
-        )
+        );
       } else {
         return (
           <div className={styles.mediaItem} key={index}>
             {content}
           </div>
-        )
+        );
       }
-    })
+    });
 
     return allMedia;
-  }
+  };
 
   return (
     <div className={styles.mediaSection}>
       <h2>{title}</h2>
       {renderMedia()}
-    </div> 
+    </div>
   );
-}
+};
 
 export default MediaItem;

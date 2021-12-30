@@ -2,33 +2,33 @@
 
 :root {
   /* Notion Colours */
-  --notion-default: #37352F;
-  --notion-gray: #9B9A97;
-  --notion-brown: #64473A;
-  --notion-orange: #D9730D;
-  --notion-yellow: #DFAB01;
-  --notion-green: #0F7B6C;
-  --notion-blue: #0B6E99;
-  --notion-purple: #6940A5;
-  --notion-pink: #AD1A72;
-  --notion-red: #E03E3E;
+  --notion-default: #37352f;
+  --notion-gray: #9b9a97;
+  --notion-brown: #64473a;
+  --notion-orange: #d9730d;
+  --notion-yellow: #dfab01;
+  --notion-green: #0f7b6c;
+  --notion-blue: #0b6e99;
+  --notion-purple: #6940a5;
+  --notion-pink: #ad1a72;
+  --notion-red: #e03e3e;
 
   /* Greyscale Colours */
   --greyScale-0: #212529;
-  --greyScale-1: #343A40;
+  --greyScale-1: #343a40;
   --greyScale-2: #495057;
-  --greyScale-3: #6C757D;
-  --greyScale-4: #ADB5BD;
-  --greyScale-5: #CED4DA;
-  --greyScale-6: #DEE2E6;
-  --greyScale-7: #E9ECEF;
-  --greyScale-8: #F8F9FA;
+  --greyScale-3: #6c757d;
+  --greyScale-4: #adb5bd;
+  --greyScale-5: #ced4da;
+  --greyScale-6: #dee2e6;
+  --greyScale-7: #e9ecef;
+  --greyScale-8: #f8f9fa;
 
   --primary: #55d6c2;
   --danger: #c14953;
   --alert: #f5e960;
 
-  --white: #FFFFFF;
+  --white: #ffffff;
   --black: #0b0b0a;
 }
 
@@ -48,18 +48,18 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   box-sizing: border-box;
   height: 100%;
-  background-color: var(--greyScale-0); 
+  background-color: var(--greyScale-0);
   color: var(--greyScale-6);
   font-weight: 300;
 }
 
 a {
   display: inline-block;
-  color: var(--notion-blue);
+  color: var(--greyScale-6);
   text-decoration: underline;
 }
 
@@ -108,7 +108,7 @@ a {
   width: 120px;
   height: 120px;
   position: relative;
-	display: inline-block;
+  display: inline-block;
 }
 
 .circle-loader {
@@ -336,9 +336,9 @@ section {
 
 .floating-icon {
   position: absolute;
-  display: flex; 
-  justify-content: center; 
-  flex-direction: column; 
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -354,7 +354,7 @@ section {
   .global-nav__button {
     display: none;
   }
-  
+
   .global-nav__copy {
     width: 100%;
     text-align: center;

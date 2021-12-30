@@ -27,31 +27,31 @@
 }
 
 .yellow {
-  color: var(--notion-yellow)
+  color: var(--notion-yellow);
 }
 
 .gray {
-  color: var(--notion-gray)
+  color: var(--notion-gray);
 }
 
 .brown {
-  color: var(--notion-brown)
+  color: var(--notion-brown);
 }
 
 .orange {
-  color: var(--notion-orange)
+  color: var(--notion-orange);
 }
 
 .green {
-  color: var(--notion-green)
+  color: var(--notion-green);
 }
 
 .purple {
-  color: var(--notion-purple)
+  color: var(--notion-purple);
 }
 
 .pink {
-  color: var(--notion-pink)
+  color: var(--notion-pink);
 }
 
 .blue {

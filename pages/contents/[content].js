@@ -9,10 +9,7 @@ import styles from 'styles/contentList.module.css';
 import { getBlocks, getPage, getDatabase, databaseId } from 'notion';
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
-const MediaContent = ({ 
-  pageData,
-  blocksWithChildren,
-}) => {
+const MediaContent = ({ pageData, blocksWithChildren }) => {
   const renderHead = () => {
     // Head Data
     const headData = pageData || {};
@@ -23,39 +20,53 @@ const MediaContent = ({
     const author = properties?.Author?.rich_text[0]?.plain_text || '';
     const readingTime = properties?.['Reading Time']?.formula?.number || 0;
 
-    const title = headData.parent?.type === 'page_id' ? 
-      properties?.title?.title[0]?.plain_text : properties?.Name?.title[0]?.plain_text;
-    
+    const title =
+      headData.parent?.type === 'page_id'
+        ? properties?.title?.title[0]?.plain_text
+        : properties?.Name?.title[0]?.plain_text;
+
     return (
       <div>
         <h1 className={styles.title}>{title}</h1>
-        {
-          headData.parent?.type !== 'page_id' &&
+        {headData.parent?.type !== 'page_id' && (
           <>
             <div className={styles.subtitle}>
               <span>{emoji}</span>
               <span>{author}</span>
             </div>
-            {
-              readingTime !== 0 &&
-              <span><b>{readingTime}</b> min read</span>
-            }
+            {readingTime !== 0 && (
+              <span>
+                <b>{readingTime}</b> min read
+              </span>
+            )}
           </>
-        }
+        )}
       </div>
-    )
-  }
+    );
+  };
 
   const renderBlock = (block) => {
     const { type, id: index } = block;
     const value = block[type];
     switch (type) {
-      case "heading_1":
-        return <h1 className={styles.heading1} key={index}>{value?.text[0].plain_text}</h1>;
-      case "heading_2":
-        return <h2 className={styles.heading2} key={index}>{value?.text[0].plain_text}</h2>;
-      case "heading_3":
-        return <h3 className={styles.heading3} key={index}>{value?.text[0].plain_text}</h3>;
+      case 'heading_1':
+        return (
+          <h1 className={styles.heading1} key={index}>
+            {value?.text[0].plain_text}
+          </h1>
+        );
+      case 'heading_2':
+        return (
+          <h2 className={styles.heading2} key={index}>
+            {value?.text[0].plain_text}
+          </h2>
+        );
+      case 'heading_3':
+        return (
+          <h3 className={styles.heading3} key={index}>
+            {value?.text[0].plain_text}
+          </h3>
+        );
       case 'bulleted_list_item':
         return (
           <ul key={index} className={styles.ul}>
@@ -67,7 +78,7 @@ const MediaContent = ({
             </li>
           </ul>
         );
-      case 'numbered_list_item':         
+      case 'numbered_list_item':
         return (
           <ul key={index} className={styles.ul}>
             <li className={styles.li}>
@@ -78,9 +89,9 @@ const MediaContent = ({
             </li>
           </ul>
         );
-      case 'quote': 
+      case 'quote':
         return (
-          <blockquote className='blockquote' key={index}>
+          <blockquote className="blockquote" key={index}>
             <p className={styles.paragraph}>
               <NotionText text={value?.text} />
             </p>
@@ -88,9 +99,11 @@ const MediaContent = ({
         );
       case 'callout':
         return (
-          <div key={index} className='callout'>
+          <div key={index} className="callout">
             <span>{value?.icon?.emoji}</span>
-            <p><NotionText text={value?.text} /></p>
+            <p>
+              <NotionText text={value?.text} />
+            </p>
           </div>
         );
       case 'paragraph':
@@ -100,9 +113,8 @@ const MediaContent = ({
           </p>
         );
       case 'image':
-        const src =
-          value.type === "external" ? value?.external?.url : value?.file?.url;
-        const caption = value?.caption ? value?.caption[0]?.plain_text : "";
+        const src = value.type === 'external' ? value?.external?.url : value?.file?.url;
+        const caption = value?.caption ? value?.caption[0]?.plain_text : '';
         return (
           <figure>
             <img src={src} alt={caption} />
@@ -114,18 +126,16 @@ const MediaContent = ({
           <Link href={`/contents/${index}`}>
             <a className={styles.link}>{value?.title}</a>
           </Link>
-        )
+        );
       case 'divider':
-        return (
-          <div className={styles.divider} />
-        )
+        return <div className={styles.divider} />;
       default:
         return `❌ Not Yet Implemented (${
-          type === "unsupported" ? "unsupported by Notion API" : type
+          type === 'unsupported' ? 'unsupported by Notion API' : type
         })`;
     }
-  }
-  
+  };
+
   const titleContent = pageData?.properties?.Name?.title[0]?.plain_text || '';
   return (
     <>
@@ -140,12 +150,12 @@ const MediaContent = ({
           {blocksWithChildren?.map((block) => (
             <Fragment key={block.id}>{renderBlock(block)}</Fragment>
           ))}
-        <ScrollArrow />
+          <ScrollArrow />
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 const fetchBlocks = async (block) => {
   let fetchMoreBlocksCombined = [];
@@ -157,35 +167,35 @@ const fetchBlocks = async (block) => {
         options = {
           block_id: blockId,
           start_cursor: startCursor
-        }
+        };
       } else {
         options = {
           block_id: blockId
-        }
+        };
       }
-  
+
       const blocksData = await notion.blocks.children.list(options);
       fetchMoreBlocksCombined = [...fetchMoreBlocksCombined, ...blocksData?.results];
       if (!blocksData?.has_more) {
         return fetchMoreBlocksCombined;
       } else {
-        return await fetchSingleBlock(blockId, blocksData?.next_cursor)
+        return await fetchSingleBlock(blockId, blocksData?.next_cursor);
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   await fetchSingleBlock(block);
-  
+
   return fetchMoreBlocksCombined;
-}
+};
 
 export const getStaticPaths = async () => {
   const database = await getDatabase(databaseId);
   return {
     paths: database.results.map((page) => ({ params: { content: page.id } })),
-    fallback: true,
+    fallback: true
   };
 };
 
@@ -200,16 +210,14 @@ export async function getStaticProps(context) {
       .map(async (block) => {
         return {
           id: block.id,
-          children: await getBlocks(block.id),
+          children: await getBlocks(block.id)
         };
       })
   );
 
   const blocksWithChildren = allBlocks.map((block) => {
     if (block.has_children && !block[block.type].children) {
-      block[block.type]["children"] = childBlocks.find(
-        (x) => x.id === block.id
-      )?.children;
+      block[block.type]['children'] = childBlocks.find((x) => x.id === block.id)?.children;
     }
     return block;
   });

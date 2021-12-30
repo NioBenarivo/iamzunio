@@ -1,3 +1,3 @@
-import ScrollArrow from "./ScrollToTop";
+import ScrollArrow from './ScrollToTop';
 
 export default ScrollArrow;

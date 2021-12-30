@@ -1,7 +1,7 @@
-import { Client } from "@notionhq/client";
+import { Client } from '@notionhq/client';
 
 const notion = new Client({
-  auth: process.env.NOTION_API_KEY,
+  auth: process.env.NOTION_API_KEY
 });
 
 export const databaseId = process.env.NOTION_MEDIA_ID;
@@ -21,7 +21,7 @@ export const getPage = async (pageId) => {
 
 export const getBlocks = async (blockId) => {
   const response = await notion.blocks.children.list({
-    block_id: blockId,
+    block_id: blockId
   });
   return response.results;
 };

@@ -1,4 +1,4 @@
-import { SiZeit, SiGithub, SiLinkedin, SiNextDotJs, SiFramer } from "react-icons/si"
+import { SiZeit, SiGithub, SiLinkedin, SiNextDotJs, SiFramer } from 'react-icons/si';
 
 export default function Footer() {
   return (
@@ -11,10 +11,19 @@ export default function Footer() {
       </div>
       <div className="flex flex-wrap items-center justify-between footer-bottom p3">
         <div className="flex items-center justify-center">
-          <a href="https://github.com/NioBenarivo" className="mr1" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://github.com/NioBenarivo"
+            className="mr1"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <SiGithub size={32} title="Github" />
           </a>
-          <a href="https://www.linkedin.com/in/zunio-benarivo-954679118/" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://www.linkedin.com/in/zunio-benarivo-954679118/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <SiLinkedin size={32} title="LinkedIn" />
           </a>
         </div>
@@ -23,5 +32,5 @@ export default function Footer() {
         </div>
       </div>
     </div>
-  )
+  );
 }

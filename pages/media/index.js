@@ -20,7 +20,7 @@ const MediaList = ({ finished, reading, summary }) => {
       </div>
     </>
   );
-}
+};
 
 export async function getStaticProps() {
   // Get books database list
@@ -29,25 +29,29 @@ export async function getStaticProps() {
       {
         property: 'Type',
         timestamp: 'created_time',
-        direction: 'descending',
+        direction: 'descending'
       }
     ]
-  }
+  };
   const response = await getDatabase(databaseId, options);
   const allMedia = response?.results || [];
-  const finished = allMedia.filter(item => item?.properties?.Status?.select?.name === mediaStatus.finished) || [];
-  const reading = allMedia.filter(item => item?.properties?.Status?.select?.name === mediaStatus.reading) || [];
-  const summary = allMedia.filter(item => item?.properties?.Status?.select?.name === mediaStatus.todo) || [];
+  const finished =
+    allMedia.filter((item) => item?.properties?.Status?.select?.name === mediaStatus.finished) ||
+    [];
+  const reading =
+    allMedia.filter((item) => item?.properties?.Status?.select?.name === mediaStatus.reading) || [];
+  const summary =
+    allMedia.filter((item) => item?.properties?.Status?.select?.name === mediaStatus.todo) || [];
 
   return {
     props: {
       media: allMedia,
       finished: finished,
       reading: reading,
-      summary: summary,
+      summary: summary
     },
     revalidate: 300
-  }
+  };
 }
 
 export default MediaList;

@@ -47,7 +47,7 @@
   color: var(--greyScale-8);
   padding: 4px 8px;
   border-radius: 4px;
-  margin-right: 4px
+  margin-right: 4px;
 }
 
 .mediaItemWrapper {
@@ -70,7 +70,7 @@
   color: var(--greyScale-6);
   padding: 4px 8px;
   border-radius: 4px;
-  margin-right: 4px
+  margin-right: 4px;
 }
 
 .sub {
@@ -79,34 +79,34 @@
 }
 
 .notion-default {
-  background-color: #37352F;
+  background-color: #37352f;
 }
 .notion-gray {
-  background-color:#9B9A97;
+  background-color: #9b9a97;
 }
 .notion-brown {
-  background-color: #64473A;
-} 
+  background-color: #64473a;
+}
 .notion-orange {
-  background-color: #D9730D;
+  background-color: #d9730d;
 }
 .notion-yellow {
-  background-color: #DFAB01;
+  background-color: #dfab01;
 }
 .notion-green {
-  background-color: #0F7B6C;
-} 
+  background-color: #0f7b6c;
+}
 .notion-blue {
-  background-color: #0B6E99;
+  background-color: #0b6e99;
 }
 .notion-purple {
-  background-color: #6940A5;
-} 
+  background-color: #6940a5;
+}
 .notion-pink {
-  background-color: #AD1A72;
+  background-color: #ad1a72;
 }
 .notion-red {
-  background-color: #E03E3E;
+  background-color: #e03e3e;
 }
 
 /* CONTENT PART */
@@ -181,7 +181,7 @@
 }
 
 .bullet {
-  list-style: disc; 
+  list-style: disc;
 }
 
 .ul {

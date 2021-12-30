@@ -3,5 +3,5 @@ export default function GlobalNav() {
     <>
       <span className="global-nav__copy">Iamzun.io © 2021</span>
     </>
-  )
+  );
 }
