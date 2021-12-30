@@ -37,7 +37,7 @@
 }
 
 .bold {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .underline {
@@ -53,13 +53,14 @@ body {
   box-sizing: border-box;
   height: 100%;
   background-color: var(--greyScale-0); 
-  color: var(--greyScale-8);
+  color: var(--greyScale-6);
+  font-weight: 300;
 }
 
 a {
   display: inline-block;
-  color: inherit;
-  text-decoration: none;
+  color: var(--notion-blue);
+  text-decoration: underline;
 }
 
 * {
@@ -206,7 +207,7 @@ section {
 
 .divider {
   width: 100%;
-  background-color: var(--greyScale-0);
+  background-color: var(--greyScale-8);
   height: 2px;
   border-radius: 4px;
 }
@@ -500,13 +501,13 @@ section {
   width: 100%;
   text-align: center;
   transition: top 0.2s;
-  background-color: var(--greyScale-8);
-  border-bottom: 1px solid var(--greyScale-7);
+  background-color: var(--greyScale-0);
+  border-bottom: 1px solid var(--greyScale-1);
 }
 
 /* Custom Content */
 .blockquote {
-  box-shadow: inset 3px 0 0 0 var(--greyScale-0);
+  box-shadow: inset 3px 0 0 0 var(--greyScale-8);
   padding-left: 23px;
   margin-left: 0;
 }
@@ -521,7 +522,7 @@ section {
   justify-content: flex-start;
   width: 100%;
   border-radius: 3px;
-  background-color: var(--greyScale-7);
+  background-color: var(--greyScale-1);
   padding: 16px 16px 16px 12px;
 }
 
@@ -558,59 +559,4 @@ section {
   .landing-page > a {
     text-align: center;
   }
-}
-
-/* ALWAYS ON VERY BOTTOM  */
-/* DARK MODE LIGHT MODE */
-@media (prefers-color-scheme: light) {
-  .top { background-color: var(--greyScale-8); color: var(--greyScale-0); }
-  .top.dark-mode { background-color: var(--greyScale-0); color: var(--greyScale-8); }
-  body {
-    color: var(--greyScale-0);
-    background: var(--greyScale-8);
-  }
-
-  .landing-page > a:hover {
-    background-color: var(--greyScale-7);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .top { background-color: var(--greyScale-0); color: var(--greyScale-8); }
-  body {
-    color: var(--greyScale-8);
-    background: var(--greyScale-0);
-  }
-
-  .blockquote {
-    box-shadow: inset 3px 0 0 0 var(--greyScale-8);
-    padding-left: 23px;
-    margin-left: 0;
-  }
-
-  .callout {
-    background-color: var(--greyScale-1);
-  }
-
-  .navbar {
-    background-color: var(--greyScale-0);
-    border-bottom: 1px solid var(--greyScale-1);
-  }
-}
-
-.light-mode { background-color: var(--greyScale-8); color: var(--greyScale-0); }
-
-
-.dark-mode .divider {
-  background-color: var(--greyScale-8);
-}
-
-.light-mode .initial-page__bg {
-  color: var(--greyScale-8);
-  background-color: var(--greyScale-0);
-}
-
-.dark-mode .initial-page__bg {
-  color: var(--greyScale-0);
-  background-color: var(--greyScale-8);
 }

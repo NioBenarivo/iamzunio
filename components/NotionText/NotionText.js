@@ -13,14 +13,13 @@ const NotionText = ({ text }) => {
     return (
       <span
         key={`${value}-${index}`}
-        className={classNames({
+        className={classNames(styles[color], {
           [styles.bold]: bold,
           [styles.code]: code,
           [styles.italic]: italic,
           [styles.strikethrough]: strikethrough,
           [styles.underline]: underline,
         })}
-        style={color !== "default" ? { color } : {}}
       >
         {text.link ? <a href={text.link.url}>{text.content}</a> : text.content}
       </span>

@@ -13,8 +13,8 @@ const MediaList = ({ finished, reading, summary }) => {
       </Head>
       <div>
         <div className={styles.container}>
-          <MediaItem title="Finished" list={finished} />
           <MediaItem title="Reading" list={reading} />
+          <MediaItem title="Finished" list={finished} />
           <MediaItem title="No Summary" list={summary} />
         </div>
       </div>
