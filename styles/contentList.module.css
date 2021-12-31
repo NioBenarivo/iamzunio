@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 840px;
+  max-width: 780px;
   margin: 0 auto;
-  padding: 8 12px;
+  padding: 12px;
 }
 
 /* MEDIA */
@@ -215,6 +215,21 @@
   height: 1px;
   background-color: var(--greyScale-3);
   margin: 16px 0;
+}
+
+/* Carbon custom styles */
+.tabContainer {
+  justify-content: center;
+}
+
+.tabContainer button {
+  text-align: center !important;
+  color: var(--greyScale-6) !important;
+  border-bottom: 1px solid var(--greyScale-6) !important;
+}
+
+.tabContainer button:hover {
+  border-bottom: 1px solid var(--greyScale-2) !important;
 }
 
 @media only screen and (max-width: 720px) {

@@ -3,6 +3,7 @@ import { mediaStatus } from 'constants/mediaStatus';
 import { getDatabase, databaseId } from 'notion';
 import styles from 'styles/contentList.module.css';
 import MediaItem from './MediaItem';
+import { Tabs, Tab } from 'carbon-components-react';
 
 const MediaList = ({ finished, reading, summary }) => {
   return (
@@ -12,11 +13,20 @@ const MediaList = ({ finished, reading, summary }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <div className={styles.container}>
-          <MediaItem title="Reading" list={reading} />
-          <MediaItem title="Finished" list={finished} />
-          <MediaItem title="No Summary" list={summary} />
-        </div>
+
+      <div className={styles.container}>
+        <Tabs className={styles.tabContainer}>
+          <Tab id="tab-1" label="Reading">
+            <MediaItem title="Reading" list={reading} />
+          </Tab>
+          <Tab id="tab-2" label="Finished">
+            <MediaItem title="Finished" list={finished} />
+          </Tab>
+          <Tab id="tab-3" label="Others">
+            <MediaItem title="No Summary" list={summary} />
+          </Tab>
+        </Tabs>
+      </div>
       </div>
     </>
   );
