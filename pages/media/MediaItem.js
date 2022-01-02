@@ -2,7 +2,7 @@ import Link from 'next/link';
 import styles from 'styles/contentList.module.css';
 import classNames from 'classnames';
 
-const MediaItem = ({ title, list }) => {
+const MediaItem = ({ list }) => {
   const renderMedia = () => {
     const allMedia = list?.map((item, index) => {
       const icon = item?.icon?.emoji;
@@ -68,7 +68,6 @@ const MediaItem = ({ title, list }) => {
 
   return (
     <div className={styles.mediaSection}>
-      <h2>{title}</h2>
       {renderMedia()}
     </div>
   );

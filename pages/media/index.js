@@ -17,13 +17,13 @@ const MediaList = ({ finished, reading, summary }) => {
       <div className={styles.container}>
         <Tabs className='tabContainer'>
           <Tab id="tab-1" label="Reading">
-            <MediaItem title="Reading" list={reading} />
+            <MediaItem list={reading} />
           </Tab>
           <Tab id="tab-2" label="Finished">
-            <MediaItem title="Finished" list={finished} />
+            <MediaItem list={finished} />
           </Tab>
           <Tab id="tab-3" label="Others">
-            <MediaItem title="No Summary" list={summary} />
+            <MediaItem list={summary} />
           </Tab>
         </Tabs>
       </div>
