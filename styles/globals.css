@@ -544,6 +544,17 @@ section {
   margin: 0;
 }
 
+/* Carbon custom styles */
+.tabContainer {
+  justify-content: center;
+}
+
+.tabContainer button {
+  text-align: center !important;
+  color: var(--greyScale-6) !important;
+  outline: none !important;
+}
+
 @media only screen and (max-width: 720px) {
   .landing-page {
     flex-direction: column;
