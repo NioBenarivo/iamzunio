@@ -15,7 +15,7 @@ const MediaList = ({ finished, reading, summary }) => {
       <div>
 
       <div className={styles.container}>
-        <Tabs className='tabContainer'>
+        <Tabs className='tab-container'>
           <Tab id="tab-1" label="Reading">
             <MediaItem list={reading} />
           </Tab>

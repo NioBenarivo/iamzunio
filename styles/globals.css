@@ -545,14 +545,23 @@ section {
 }
 
 /* Carbon custom styles */
-.tabContainer {
+.tab-container {
   justify-content: center;
 }
 
-.tabContainer button {
+.tab-container button {
   text-align: center !important;
   color: var(--greyScale-6) !important;
   outline: none !important;
+}
+
+.tab-container .bx--tabs__overflow-indicator--right,
+.tab-container .bx--tabs__overflow-indicator--left {
+  display: none !important;
+}
+
+.tab-container .bx--tab--overflow-nav-button svg {
+  fill: var(--greyScale-6) !important;
 }
 
 @media only screen and (max-width: 720px) {
