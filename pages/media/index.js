@@ -5,7 +5,7 @@ import styles from 'styles/contentList.module.css';
 import MediaItem from './MediaItem';
 import { Tabs, Tab } from 'carbon-components-react';
 
-const MediaList = ({ finished, reading, summary }) => {
+const MediaList = ({ media, finished, reading, summary }) => {
   return (
     <>
       <Head>

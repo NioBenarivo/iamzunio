@@ -21,7 +21,6 @@ import {
   SiAbstract
 } from 'react-icons/si';
 import { IoLocation, IoPhonePortraitOutline } from 'react-icons/io5';
-import InitialTransitionPage from '@components/InitialTransitionPage';
 import StaggerWrapper from '@components/StaggerWrapper';
 import GlobalNav from '@components/GlobalNav';
 
@@ -87,18 +86,6 @@ const divider = {
   }
 };
 
-const projectImg = (index) => ({
-  initial: {
-    x: `${(index - 1) * 25}%`,
-    y: index % 2 === 0 ? '-50%' : 0,
-    zIndex: 4 - index
-  },
-  hover: {
-    scale: 1.15,
-    zIndex: 10
-  }
-});
-
 const tokopediaLogo = {
   hidden: {
     strokeDashoffset: 2296
@@ -121,7 +108,6 @@ export default function Porto({ isFirstMount }) {
         <title>Hi, I am Zunio</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {isFirstMount && <InitialTransitionPage />}
       <div className="landing">
         <motion.h1 initial="hidden" animate="visible" variants={headline(isFirstMount)}>
           <motion.span variants={text}>UX</motion.span>{' '}
