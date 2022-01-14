@@ -10,6 +10,3 @@ Using [Next.js](https://nextjs.org/) and [Vercel](https://vercel.com/) as a foun
 
 ### API
 Currently using [Notion API](https://developers.notion.com/) to store my writings of notes and books.
-
-### Components
-Some of the UI Components are using [Carbon Design System](https://www.carbondesignsystem.com/) components

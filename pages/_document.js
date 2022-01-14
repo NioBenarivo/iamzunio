@@ -14,7 +14,6 @@ class MyDocument extends Document {
         <Head>
           <script dangerouslySetInnerHTML={{ __html: themeScript }} />
           <link href="https://fonts.googleapis.com/css2?family=Inter" rel="stylesheet" />
-          <link href="https://unpkg.com/carbon-components/css/carbon-components.min.css" rel="stylesheet" type="text/css" />
         </Head>
         <body>
           <Main />

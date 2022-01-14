@@ -20,7 +20,7 @@ const MediaItem = ({ list }) => {
       const content = (
         <>
           <div className={styles.mediaItemHeader}>
-            <div className={styles.mediaItemIcon}>{icon}</div>{' '}
+            {/* <div className={styles.mediaItemIcon}>{icon}</div>{' '} */}
             <h5 className={styles.mediaItemTitle}>{name}</h5>
           </div>
           <div className={styles.mediaItemWrapper}>
