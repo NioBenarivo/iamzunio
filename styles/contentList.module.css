@@ -17,7 +17,8 @@
 .mediaItem {
   display: flex;
   flex-direction: column;
-  width: 22%;
+  width: calc(25% - 16px);
+  min-height: 180px;
   padding: 12px 16px;
   border-radius: 4px;
   margin: 0 16px 16px 0;
@@ -33,7 +34,6 @@
 
 .mediaItemHeader {
   display: flex;
-  flex: 1;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
@@ -63,8 +63,9 @@
 
 .mediaItemWrapper {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex: 1;
+  align-items: flex-end;
+  justify-content: flex-start;
   padding: 8px 0;
 }
 

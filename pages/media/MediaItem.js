@@ -20,20 +20,10 @@ const MediaItem = ({ list }) => {
       const content = (
         <>
           <div className={styles.mediaItemHeader}>
-            {/* <div className={styles.mediaItemIcon}>{icon}</div>{' '} */}
             <h5 className={styles.mediaItemTitle}>{name}</h5>
           </div>
+          <span className={styles.sub}>by <b>{author}</b></span>
           <div className={styles.mediaItemWrapper}>
-            <span className={styles.sub}>
-              Author: <b>{author}</b>
-            </span>
-            {readingTime !== 0 && (
-              <span className={styles.sub}>
-                <b>{readingTime}</b> min read
-              </span>
-            )}
-          </div>
-          <div className={styles.mediaItemFooter}>
             <span className={classNames(styles.mediaItemType, styles[`notion-${colorType}`])}>
               {type}
             </span>
@@ -43,6 +33,13 @@ const MediaItem = ({ list }) => {
               {status}
             </span>
           </div>
+          {readingTime !== 0 && (
+          <div className={styles.mediaItemFooter}>
+            <span className={styles.sub}>
+              <b>{readingTime}</b> min read
+            </span>
+          </div>
+          )}
         </>
       );
 
