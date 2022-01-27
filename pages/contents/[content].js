@@ -227,7 +227,7 @@ export async function getStaticProps(context) {
       pageData,
       blocksWithChildren
     },
-    revalidate: 300
+    revalidate: 10
   };
 }
 
