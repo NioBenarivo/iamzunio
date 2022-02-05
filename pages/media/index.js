@@ -4,7 +4,7 @@ import { getDatabase, databaseId } from 'notion';
 import styles from 'styles/contentList.module.css';
 import MediaItem from './MediaItem';
 
-const MediaList = ({ media, finished, reading, summary }) => {
+const MediaList = ({ books, blogs }) => {
   return (
     <>
       <Head>
@@ -14,16 +14,12 @@ const MediaList = ({ media, finished, reading, summary }) => {
 
       <div className={styles.container}>
         <div style={{ width: '100%' }}>
-          <h2>Reading</h2>
-          <MediaItem list={reading} />
+          <h2>Blogs</h2>
+          <MediaItem list={blogs} />
         </div>
         <div style={{ width: '100%' }}>
-          <h2>Finished</h2>
-          <MediaItem list={finished} />
-        </div>
-        <div style={{ width: '100%' }}>
-          <h2>Others</h2>
-          <MediaItem list={summary} />
+          <h2>Books</h2>
+          <MediaItem list={books} />
         </div>
       </div>
     </>
@@ -48,15 +44,16 @@ export async function getStaticProps() {
     [];
   const reading =
     allMedia.filter((item) => item?.properties?.Status?.select?.name === mediaStatus.reading) || [];
-  const summary =
-    allMedia.filter((item) => item?.properties?.Status?.select?.name === mediaStatus.todo) || [];
+
+  const books = allMedia.filter((item) => item?.properties?.Type?.select?.name === 'Book') || [];
+  const blogs = allMedia.filter((item) => item?.properties?.Type?.select?.name === 'Blog') || [];
 
   return {
     props: {
-      media: allMedia,
       finished: finished,
       reading: reading,
-      summary: summary
+      books,
+      blogs,
     },
     revalidate: 10
   };

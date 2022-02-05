@@ -5,7 +5,6 @@ import classNames from 'classnames';
 const MediaItem = ({ list }) => {
   const renderMedia = () => {
     const allMedia = list?.map((item, index) => {
-      const icon = item?.icon?.emoji;
       const properties = item?.properties || {};
       const name = properties?.Name?.title[0]?.plain_text || '';
       const type = properties?.Type?.select?.name || '';
@@ -52,15 +51,11 @@ const MediaItem = ({ list }) => {
           </Link>
         );
       } else {
-        return (
-          <div className={styles.mediaItem} key={index}>
-            {content}
-          </div>
-        );
+        return;
       }
     });
 
-    return allMedia;
+    return allMedia.sort();
   };
 
   return (
