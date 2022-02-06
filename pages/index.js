@@ -44,6 +44,14 @@ export default function Portfolio() {
                 <p>Trakteer</p>
               </a>
             </li>
+            <li>
+              <a
+                href="https://www.patreon.com/NioBen"
+                target="_blank"
+                rel="noopener noreferrer">
+                <p>Patreon</p>
+              </a>
+            </li>
           </ul>
           
         </div>
