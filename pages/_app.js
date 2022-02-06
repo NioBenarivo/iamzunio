@@ -58,10 +58,10 @@ function MyApp({ Component, pageProps, router }) {
   return (
     <>
       <Head>
-        <title>Portfolio and Books keypoints</title>
+        <title>Iamzun.io</title>
         <meta
           name="description"
-          content="Personal website and digital garden of books and reading notes"
+          content="Personal blog, research and books keypoints"
         />
       </Head>
       <AnimatePresence exitBeforeEnter>
