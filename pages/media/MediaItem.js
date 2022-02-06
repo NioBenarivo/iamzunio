@@ -55,7 +55,7 @@ const MediaItem = ({ list }) => {
       }
     });
 
-    return allMedia.sort();
+    return allMedia;
   };
 
   return (

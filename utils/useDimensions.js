@@ -6,7 +6,7 @@ const useDimensions = (ref) => {
   useEffect(() => {
     dimensions.current.width = ref.current.offsetWidth;
     dimensions.current.height = ref.current.offsetHeight;
-  }, []);
+  }, [ref]);
 
   return dimensions.current;
 };

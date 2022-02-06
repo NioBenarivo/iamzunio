@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps, router }) {
     return () => {
       router.events.off('routeChangeStart', handleRouteChange);
     };
-  }, []);
+  }, [isFirstMount, router.events]);
 
   useEffect(() => {
     const start = () => setLoading(true);

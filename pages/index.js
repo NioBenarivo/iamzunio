@@ -19,7 +19,7 @@ export default function Portfolio() {
             Books -{' '}
             <Link href="/media">
               <a style={{ cursor: 'pointer' }}>
-                <p>Content of knowledge accumulated of books I've read</p>
+                <p>Content of knowledge accumulated of books I&apos;ve read</p>
               </a>
             </Link>
           </li>
