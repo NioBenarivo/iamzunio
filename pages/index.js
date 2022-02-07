@@ -11,15 +11,15 @@ export default function Portfolio() {
             Profile -{' '}
             <Link href="/profile">
               <a style={{ cursor: 'pointer' }}>
-                <p>Everything about me on this journey of life</p>
+                <p>Everything about me</p>
               </a>
             </Link>
           </li>
           <li>
-            Books -{' '}
+            Books & Blogs -{' '}
             <Link href="/media">
               <a style={{ cursor: 'pointer' }}>
-                <p>Content of knowledge accumulated of books I&apos;ve read</p>
+                <p>Personal blogs and notes of books read</p>
               </a>
             </Link>
           </li>
