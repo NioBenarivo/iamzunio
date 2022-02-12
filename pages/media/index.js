@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { mediaStatus } from 'constants/mediaStatus';
 import { getDatabase, databaseId } from 'notion';
-import styles from 'styles/contentList.module.css';
 import MediaItem from './MediaItem';
+import styles from 'styles/contentList.module.css';
 
 const MediaList = ({ books, blogs }) => {
   return (
@@ -13,11 +13,11 @@ const MediaList = ({ books, blogs }) => {
       </Head>
 
       <div className={styles.container}>
-        <div style={{ width: '100%' }}>
+        <div className={styles.mediaWrapper}>
           <h2>Blogs</h2>
           <MediaItem list={blogs} />
         </div>
-        <div style={{ width: '100%' }}>
+        <div className={styles.mediaWrapper}>
           <h2>Books</h2>
           <MediaItem list={books} />
         </div>

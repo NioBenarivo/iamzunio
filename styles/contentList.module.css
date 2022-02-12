@@ -6,6 +6,10 @@
   padding: 24px;
 }
 
+.mediaWrapper {
+  width: 100%;
+}
+
 /* MEDIA */
 .mediaSection {
   display: flex;
