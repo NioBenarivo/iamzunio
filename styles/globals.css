@@ -203,15 +203,20 @@ a {
   font-size: 18px;
   line-height: 26px;
   color: var(--primary);
+  cursor: pointer;
 }
 
 .landing-page ul, .landing-page li {
   margin: 0;
 }
 
+.landing-page li {
+  margin: 8px 0;
+}
+
 .landing-page .divider {
   height: 1px;
-  margin: 16px 0;
+  margin: 12px auto;
 }
 
 .landing-page h2 {
