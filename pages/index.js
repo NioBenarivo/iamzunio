@@ -33,6 +33,15 @@ export default function Portfolio() {
                 <a>Medium</a>
               </Link>
             </li>
+            <li>
+              <Link
+                href="https://zuniopicks.substack.com/?r=6x19k&utm_campaign=pub&utm_medium=web"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <a>Substack</a>
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="divider" />
