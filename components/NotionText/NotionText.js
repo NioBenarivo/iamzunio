@@ -1,14 +1,14 @@
-import classNames from 'classnames';
-import styles from './NotionText.module.css';
+import classNames from "classnames";
+import styles from "./NotionText.module.css";
 
 const NotionText = ({ text }) => {
-  if (!text) {
+  if (!text || !Array.isArray(text)) {
     return null;
   }
   return text.map((value, index) => {
     const {
       annotations: { bold, code, color, italic, strikethrough, underline },
-      text
+      text,
     } = value;
     return (
       <span
@@ -18,10 +18,16 @@ const NotionText = ({ text }) => {
           [styles.code]: code,
           [styles.italic]: italic,
           [styles.strikethrough]: strikethrough,
-          [styles.underline]: underline
+          [styles.underline]: underline,
         })}
       >
-        {text.link ? <a href={text.link.url}>{text.content}</a> : text.content}
+        {text.link ? (
+          <a href={text.link.url} target="_blank" rel="noopener noreferrer">
+            {text.content}
+          </a>
+        ) : (
+          text.content
+        )}
       </span>
     );
   });

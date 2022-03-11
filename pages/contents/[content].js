@@ -1,12 +1,12 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import { Fragment } from 'react';
-import { Client } from '@notionhq/client';
-import ScrollArrow from 'components/ScrollToTop';
-import NavBar from 'components/Navbar';
-import NotionText from 'components/NotionText';
-import styles from 'styles/contentList.module.css';
-import { getBlocks, getPage, getDatabase, databaseId } from 'notion';
+import Head from "next/head";
+import Link from "next/link";
+import { Fragment } from "react";
+import { Client } from "@notionhq/client";
+import ScrollArrow from "components/ScrollToTop";
+import NavBar from "components/Navbar";
+import NotionText from "components/NotionText";
+import styles from "styles/contentList.module.css";
+import { getBlocks, getPage, getDatabase, databaseId } from "notion";
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const MediaContent = ({ pageData, blocksWithChildren }) => {
@@ -14,31 +14,31 @@ const MediaContent = ({ pageData, blocksWithChildren }) => {
     // Head Data
     const headData = pageData || {};
     const icon = headData.icon || {};
-    const emoji = icon.emoji || '';
+    const emoji = icon.emoji || "";
 
     const properties = headData.properties || {};
-    const author = properties?.Author?.rich_text[0]?.plain_text || '';
-    const readingTime = properties?.['Reading Time']?.formula?.number || 0;
+    const author = properties?.Author?.rich_text[0]?.plain_text || "";
+    const readingTime = properties?.["Reading Time"]?.formula?.number || 0;
 
     const title =
-      headData.parent?.type === 'page_id'
+      headData.parent?.type === "page_id"
         ? properties?.title?.title[0]?.plain_text
         : properties?.Name?.title[0]?.plain_text;
 
     return (
       <div>
         <h1 className={styles.title}>{title}</h1>
-        {headData.parent?.type !== 'page_id' && (
+        {headData.parent?.type !== "page_id" && (
           <>
             <div className={styles.subtitle}>
               <span>{emoji}</span>
               <span>{author}</span>
+              {readingTime !== 0 && (
+                <span>
+                  <b>{readingTime}</b> min read
+                </span>
+              )}
             </div>
-            {readingTime !== 0 && (
-              <span>
-                <b>{readingTime}</b> min read
-              </span>
-            )}
           </>
         )}
       </div>
@@ -49,25 +49,25 @@ const MediaContent = ({ pageData, blocksWithChildren }) => {
     const { type, id: index } = block;
     const value = block[type];
     switch (type) {
-      case 'heading_1':
+      case "heading_1":
         return (
           <h1 className={styles.heading1} key={index}>
             {value?.text[0].plain_text}
           </h1>
         );
-      case 'heading_2':
+      case "heading_2":
         return (
           <h2 className={styles.heading2} key={index}>
             {value?.text[0].plain_text}
           </h2>
         );
-      case 'heading_3':
+      case "heading_3":
         return (
           <h3 className={styles.heading3} key={index}>
             {value?.text[0].plain_text}
           </h3>
         );
-      case 'bulleted_list_item':
+      case "bulleted_list_item":
         return (
           <ul key={index} className={styles.ul}>
             <li className={styles.li}>
@@ -78,7 +78,7 @@ const MediaContent = ({ pageData, blocksWithChildren }) => {
             </li>
           </ul>
         );
-      case 'numbered_list_item':
+      case "numbered_list_item":
         return (
           <ul key={index} className={styles.ul}>
             <li className={styles.li}>
@@ -89,7 +89,7 @@ const MediaContent = ({ pageData, blocksWithChildren }) => {
             </li>
           </ul>
         );
-      case 'quote':
+      case "quote":
         return (
           <blockquote className="blockquote" key={index}>
             <p className={styles.paragraph}>
@@ -97,7 +97,7 @@ const MediaContent = ({ pageData, blocksWithChildren }) => {
             </p>
           </blockquote>
         );
-      case 'callout':
+      case "callout":
         return (
           <div key={index} className="callout">
             <span>{value?.icon?.emoji}</span>
@@ -106,37 +106,58 @@ const MediaContent = ({ pageData, blocksWithChildren }) => {
             </p>
           </div>
         );
-      case 'paragraph':
+      case "paragraph":
         return (
           <p className={styles.paragraph} key={index}>
             <NotionText text={value?.text} />
           </p>
         );
-      case 'image':
-        const src = value.type === 'external' ? value?.external?.url : value?.file?.url;
-        const caption = value?.caption ? value?.caption[0]?.plain_text : '';
+
+      case "text":
+        const content = value?.content;
+        if (value?.link?.url) {
+          return (
+            <a
+              href={value?.link?.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {content}
+            </a>
+          );
+        }
+        return <span key={index}>{content}</span>;
+      case "image":
+        const src =
+          value.type === "external" ? value?.external?.url : value?.file?.url;
         return (
           <figure>
-            <img src={src} alt={caption} />
-            {caption && <figcaption>{caption}</figcaption>}
+            <img src={src} />
+            {value?.caption && (
+              <figcaption className={styles.figcaption}>
+                {value?.caption.map((block, index) => (
+                  <Fragment key={index}>{renderBlock(block)}</Fragment>
+                ))}
+              </figcaption>
+            )}
           </figure>
         );
-      case 'child_page':
+      case "child_page":
         return (
           <Link href={`/contents/${index}`}>
             <a className={styles.link}>{value?.title}</a>
           </Link>
         );
-      case 'divider':
+      case "divider":
         return <div className={styles.divider} />;
       default:
         return `❌ Not Yet Implemented (${
-          type === 'unsupported' ? 'unsupported by Notion API' : type
+          type === "unsupported" ? "unsupported by Notion API" : type
         })`;
     }
   };
 
-  const titleContent = pageData?.properties?.Name?.title[0]?.plain_text || '';
+  const titleContent = pageData?.properties?.Name?.title[0]?.plain_text || "";
   return (
     <>
       <Head>
@@ -166,16 +187,19 @@ const fetchBlocks = async (block) => {
       if (startCursor) {
         options = {
           block_id: blockId,
-          start_cursor: startCursor
+          start_cursor: startCursor,
         };
       } else {
         options = {
-          block_id: blockId
+          block_id: blockId,
         };
       }
 
       const blocksData = await notion.blocks.children.list(options);
-      fetchMoreBlocksCombined = [...fetchMoreBlocksCombined, ...blocksData?.results];
+      fetchMoreBlocksCombined = [
+        ...fetchMoreBlocksCombined,
+        ...blocksData?.results,
+      ];
       if (!blocksData?.has_more) {
         return fetchMoreBlocksCombined;
       } else {
@@ -195,7 +219,7 @@ export const getStaticPaths = async () => {
   const database = await getDatabase(databaseId);
   return {
     paths: database.results.map((page) => ({ params: { content: page.id } })),
-    fallback: true
+    fallback: true,
   };
 };
 
@@ -210,14 +234,16 @@ export async function getStaticProps(context) {
       .map(async (block) => {
         return {
           id: block.id,
-          children: await getBlocks(block.id)
+          children: await getBlocks(block.id),
         };
       })
   );
 
   const blocksWithChildren = allBlocks.map((block) => {
     if (block.has_children && !block[block.type].children) {
-      block[block.type]['children'] = childBlocks.find((x) => x.id === block.id)?.children;
+      block[block.type]["children"] = childBlocks.find(
+        (x) => x.id === block.id
+      )?.children;
     }
     return block;
   });
@@ -225,9 +251,9 @@ export async function getStaticProps(context) {
   return {
     props: {
       pageData,
-      blocksWithChildren
+      blocksWithChildren,
     },
-    revalidate: 10
+    revalidate: 10,
   };
 }
 
