@@ -1,20 +1,13 @@
 import { motion } from "framer-motion";
-import { useRef } from "react";
 import Head from "next/head";
 import StaggerWrapper from "@components/StaggerWrapper";
 import Footer from "@components/Footer";
-import {
-  tokopediaLogo,
-  text,
-  headline,
-} from "utils/animations";
+import { tokopediaLogo, bibitLogo, text, headline } from "utils/animations";
 import styles from "styles/profile.module.css";
 
-export default function Porto({ isFirstMount }) {
-  const containerRef = useRef(null);
-
+export default function Porto() {
   return (
-    <motion.div exit={{ opacity: 0 }} className="top" ref={containerRef}>
+    <div className="top">
       <Head>
         <title>Hi, I am Zunio</title>
         <link rel="icon" href="/favicon.ico" />
@@ -71,7 +64,7 @@ export default function Porto({ isFirstMount }) {
               />
             </motion.svg>
           </StaggerWrapper>
-          <StaggerWrapper>
+          <StaggerWrapper className={styles.expTextRight}>
             <motion.p variants={text}>
               working at Tokopedia for 4+ years
             </motion.p>
@@ -85,6 +78,37 @@ export default function Porto({ isFirstMount }) {
               create design system library and guidelines
             </motion.p>
           </StaggerWrapper>
+          <StaggerWrapper
+            inViewProps={{ threshold: 0.8 }}
+            className={styles.expBibit}
+          >
+            <motion.svg
+              style={{ width: "20%" }}
+              variants={bibitLogo}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 120 120"
+            >
+              <motion.path
+                id="bibitSVG"
+                fill="transparent"
+                stroke="#FFFFFF"
+                d="M71.25 22.5 60 37.5h45v45H15v-45h45l-11.25-15H15a15 15 0 0 0-15 15v45a15 15 0 0 0 15 15h90a15.001 15.001 0 0 0 15-15v-45a15 15 0 0 0-15-15H71.25ZM90 52.5H75v15h15v-15Zm-45 0H30v15h15v-15Z"
+                strokeDasharray="769 769"
+                strokeWidth="2"
+              />
+            </motion.svg>
+          </StaggerWrapper>
+          <StaggerWrapper className={styles.expTextLeft}>
+            <motion.p variants={text}>
+              Currently working at Bibit (ongoing 1 year)
+            </motion.p>
+            <motion.p variants={text}>
+              contributing into different teams
+            </motion.p>
+            <motion.p variants={text}>
+              contributing in UIkit/design system library and guidelines
+            </motion.p>
+          </StaggerWrapper>
         </div>
       </section>
       <section className={styles.education}>
@@ -96,23 +120,15 @@ export default function Porto({ isFirstMount }) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <motion.p variants={text}>
-                Binus
-              </motion.p>
-              <motion.p variants={text}>
-                International
-              </motion.p>
-              <motion.p variants={text}>
-                University
-              </motion.p>
+              <motion.p variants={text}>Binus</motion.p>
+              <motion.p variants={text}>International</motion.p>
+              <motion.p variants={text}>University</motion.p>
             </motion.a>
-            <motion.h4 variants={text}>
-              Bachelor of Computer Science
-            </motion.h4>
+            <motion.h4 variants={text}>Bachelor of Computer Science</motion.h4>
           </StaggerWrapper>
         </div>
       </section>
       <Footer />
-    </motion.div>
+    </div>
   );
 }

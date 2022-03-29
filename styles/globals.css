@@ -57,6 +57,7 @@ body {
   background-color: var(--greyScale-0);
   color: var(--greyScale-6);
   font-weight: 400;
+  color-scheme: dark;
 }
 
 a {

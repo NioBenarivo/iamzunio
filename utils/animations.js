@@ -41,3 +41,17 @@ export const tokopediaLogo = {
     }
   }
 };
+
+// Get StrokeDashoffset from path.getTotalLength()
+export const bibitLogo = {
+  hidden: {
+    strokeDashoffset: 769
+  },
+  visible: {
+    strokeDashoffset: 0,
+    transition: {
+      duration: 2,
+      ease: [0.85, 0, 0.15, 1]
+    }
+  }
+}
