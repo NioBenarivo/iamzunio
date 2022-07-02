@@ -10,7 +10,6 @@ const MediaItem = ({ list }) => {
       const type = properties?.Type?.select?.name || '';
       const colorType = properties?.Type?.select?.color || '';
       const status = properties?.Status?.select?.name || '';
-      const statusColorType = properties?.Status?.select?.color || '';
       const readingTime = properties?.['Reading Time']?.formula?.number || 0;
       const author = properties?.Author?.rich_text[0]?.plain_text || '';
       const mediaID = item?.id;
@@ -25,11 +24,6 @@ const MediaItem = ({ list }) => {
           <div className={styles.mediaItemWrapper}>
             <span className={classNames(styles.mediaItemType, styles[`notion-${colorType}`])}>
               {type}
-            </span>
-            <span
-              className={classNames(styles.mediaItemStatus, styles[`notion-${statusColorType}`])}
-            >
-              {status}
             </span>
           </div>
           {readingTime !== 0 && (
