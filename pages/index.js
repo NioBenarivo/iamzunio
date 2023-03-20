@@ -19,6 +19,12 @@ export default function Portfolio() {
               <a>Personal blogs and notes of books read</a>
             </Link>
           </li>
+          <li>
+            Compounding Calculator -{" "}
+            <Link href="/compounding">
+              <a>Calculate your goal to financial freedom!</a>
+            </Link>
+          </li>
         </ul>
         <div className="divider" />
         <div>
