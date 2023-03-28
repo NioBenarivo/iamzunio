@@ -6,34 +6,27 @@ function removeCommas(value) {
 export function calculateCompoundInterest(
   principal,
   interestRate,
-  compoundingFrequency,
   timeYears,
-  monthlyContribution
 ) {
-  const rate = interestRate / 100;
-  const periods = compoundingFrequency;
-  const time = timeYears;
-  const contribution = removeCommas(monthlyContribution) || 0;
-  const n = periods * time;
-  const r = rate / periods;
-  const p = removeCommas(principal);
-  let total = 0;
+
+  const compoundedInterestRate = 1 + (interestRate / 100);
+  let totalCompounded = Math.pow(compoundedInterestRate, timeYears);
+  let currentFutureValue = removeCommas(principal);
+  let currentYearGrowth = 0;
   let growth = [];
 
-  for (let i = 1; i <= n; i++) {
-    const currentPeriod = i;
-    const futureValue = p * (1 + r) ** currentPeriod;
-    const futureContributionValue =
-      contribution * (((1 + r) ** currentPeriod - 1) / r);
-    total += futureValue + futureContributionValue;
+  for (let i = 1; i <= timeYears; i++) {
+    currentYearGrowth = (currentFutureValue * (compoundedInterestRate - 1)).toFixed(2);
+    currentFutureValue = (currentFutureValue * compoundedInterestRate).toFixed(2);
     growth.push({
-      total: total.toFixed(),
+      total: Number(currentFutureValue),
       years: i
-    })
+    });
   }
 
   return {
-    totalValue: total.toFixed(2),
+    totalCompounded: (Number(currentFutureValue) - principal) / principal * 100,
+    futureValue: Number(currentFutureValue),
     growth: growth
   };
 }

@@ -49,6 +49,7 @@
   border: none;
   color: var(--greyScale-bg);
   background-color: var(--greyScale-8);
+  margin-top: 16px;
 }
 
 .flex {
