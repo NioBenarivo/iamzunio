@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 import { Fragment } from "react";
 import { Client } from "@notionhq/client";
 import ScrollArrow from "components/ScrollToTop";
@@ -132,7 +133,7 @@ const MediaContent = ({ pageData, blocksWithChildren }) => {
           value.type === "external" ? value?.external?.url : value?.file?.url;
         return (
           <figure>
-            <img src={src} />
+            <Image src={src} unoptimized alt='img-content' width={1000} height={1000} />
             {value?.caption && (
               <figcaption className={styles.figcaption}>
                 {value?.caption.map((block, index) => (
@@ -144,8 +145,8 @@ const MediaContent = ({ pageData, blocksWithChildren }) => {
         );
       case "child_page":
         return (
-          <Link href={`/contents/${index}`}>
-            <a className={styles.link}>{value?.title}</a>
+          <Link href={`/contents/${index}`} className={styles.link}>
+            {value?.title}
           </Link>
         );
       case "divider":

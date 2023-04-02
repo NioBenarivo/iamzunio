@@ -10,21 +10,27 @@ export default function Portfolio() {
           <li>
             Profile -{" "}
             <Link href="/profile">
-              <a>Everything about me</a>
+              Everything about me
             </Link>
           </li>
           <li>
             Books & Blogs -{" "}
             <Link href="/media">
-              <a>Personal blogs and notes of books read</a>
+              Personal blogs and notes of books read
             </Link>
           </li>
           <li>
             Compounding Calculator -{" "}
             <Link href="/compounding">
-              <a>Calculate your goal to financial freedom!</a>
+              Calculate your goal to financial freedom!
             </Link>
           </li>
+          {/* <li>
+            Wedding -{" "}
+            <Link href="/wedding">
+              Zunio & Abong
+            </Link>
+          </li> */}
         </ul>
         <div className="divider" />
         <div>
@@ -36,7 +42,7 @@ export default function Portfolio() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <a>Medium</a>
+                Medium
               </Link>
             </li>
             <li>
@@ -45,40 +51,7 @@ export default function Portfolio() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <a>Substack</a>
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="divider" />
-        <div>
-          <p>or you can support me for my work here:</p>
-          <ul>
-            <li>
-              <Link
-                href="https://paypal.me/NioBen?country.x=ID&locale.x=id_ID"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <a>Paypal</a>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="https://trakteer.id/zunio-benarivo-7t5wl/tip"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <a>Trakteer</a>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="https://www.patreon.com/NioBen"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <a>Patreon</a>
+                Substack
               </Link>
             </li>
           </ul>

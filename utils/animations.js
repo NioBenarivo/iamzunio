@@ -55,3 +55,18 @@ export const bibitLogo = {
     }
   }
 }
+
+// Wedding Animation Text
+export const WeddingInvitationText = {
+  hidden: {
+    y: 100,
+    opacity: 0
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.35,
+    }
+  }
+};

@@ -38,10 +38,8 @@ const MediaItem = ({ list }) => {
 
       if (ready) {
         return (
-          <Link href={`/contents/${mediaID}`} key={index}>
-            <a className={styles.mediaItem} style={{ cursor: 'pointer' }}>
-              {content}
-            </a>
+          <Link href={`/contents/${mediaID}`} key={index} className={styles.mediaItem}>
+            {content}
           </Link>
         );
       } else {

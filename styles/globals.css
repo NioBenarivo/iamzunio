@@ -325,3 +325,8 @@ a {
     max-width: 100%;
   }
 }
+
+/* Additionals */
+.align-center {
+  align-items: center;
+}

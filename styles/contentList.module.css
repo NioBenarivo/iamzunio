@@ -30,6 +30,7 @@
   background-color: var(--greyScale-bg);
   text-decoration: none;
   transition: 0.2s all ease-in-out;
+  cursor: pointer;
 }
 
 .mediaItem:hover {
