@@ -19,12 +19,12 @@ export default function Portfolio() {
               Personal blogs and notes of books read
             </Link>
           </li>
-          <li>
+          {/* <li>
             Compounding Calculator -{" "}
             <Link href="/compounding">
               Calculate your goal to financial freedom!
             </Link>
-          </li>
+          </li> */}
           {/* <li>
             Wedding -{" "}
             <Link href="/wedding">
