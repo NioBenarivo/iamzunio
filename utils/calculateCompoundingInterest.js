@@ -1,8 +1,3 @@
-function removeCommas(value) {
-  const newValue = value.replace(/,/g, '');
-  return newValue
-}
-
 export function calculateCompoundInterest(
   principal,
   interestRate,
@@ -11,7 +6,7 @@ export function calculateCompoundInterest(
 
   const compoundedInterestRate = 1 + (interestRate / 100);
   let totalCompounded = Math.pow(compoundedInterestRate, timeYears);
-  let currentFutureValue = removeCommas(principal);
+  let currentFutureValue = principal;
   let currentYearGrowth = 0;
   let growth = [];
 

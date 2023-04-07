@@ -11,6 +11,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import { NumericFormat } from 'react-number-format';
 import { headline } from "utils/animations";
 import styles from "styles/compounding.module.css";
 import { calculateCompoundInterest } from "../../utils/calculateCompoundingInterest";
@@ -24,6 +25,9 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+
+const MAX_LIMIT = 100;
+const MIN_LIMIT = 0;
 
 export const options = {
   responsive: true,
@@ -40,9 +44,9 @@ export const options = {
 
 export default function Compounding() {
   // Compounding Form State
-  const [principal, setPrincipal] = useState("");
-  const [interestRate, setInterestRate] = useState(0);
-  const [years, setYears] = useState(0);
+  const [principal, setPrincipal] = useState(undefined);
+  const [interestRate, setInterestRate] = useState(undefined);
+  const [years, setYears] = useState(undefined);
   const [hideForm, setHideForm] = useState(false);
 
   // Chart Data & Results
@@ -82,35 +86,16 @@ export default function Compounding() {
     setChartData(undefined);
   };
 
-  const handleChangePrincipal = (event) => {
-    const inputValue = event.target.value;
-
-    // Remove all non-numeric characters from the input value
-    const numericValue = inputValue.replace(/[^0-9]/g, "");
-
-    // Format the numeric value as a currency value
-    const formattedValue = Number(numericValue).toLocaleString("en-US");
-
-    // Set the formatted value as the new state value
-    setPrincipal(formattedValue);
+  const handleChangePrincipal = (value) => {
+    setPrincipal(value);
   };
 
-  const handleChangeInterest = (e) => {
-    const inputValue = event.target.value;
-    const maxValue = 100; // Set the maximum value to 100
-
-    if (Number(inputValue) <= maxValue) {
-      setInterestRate(Number(inputValue));
-    }
+  const handleChangeInterest = (value) => {
+    setInterestRate(value);
   };
 
-  const handleChangePeriod = (e) => {
-    const inputValue = event.target.value;
-    const maxValue = 100; // Set the maximum value to 100
-
-    if (Number(inputValue) <= maxValue) {
-      setYears(Number(inputValue));
-    }
+  const handleChangePeriod = (value) => {
+    setYears(value);
   };
 
   return (
@@ -125,35 +110,39 @@ export default function Compounding() {
             {/* Principal */}
             <div className={styles.inputWrapper}>
               <label>Principal / Capital</label>
-              <input
-                type="text"
-                placeholder="Example: 100,000,000"
+              <NumericFormat
                 value={principal}
-                onChange={handleChangePrincipal}
+                placeholder='Example: Rp. 1.000.000'
+                thousandSeparator=','
+                prefix='Rp.'
+                onValueChange={(values) => {
+                  handleChangePrincipal(values.floatValue);
+                }}
               />
             </div>
 
             {/* Period */}
             <div className={styles.inputWrapper}>
               <label>Investment Period (Years)</label>
-              <input
-                type="text"
-                placeholder="Example: 10 Years"
-                max={100}
+              <NumericFormat
                 value={years}
-                onChange={handleChangePeriod}
+                placeholder="Example: 10 Years"
+                onValueChange={({ floatValue }) => {
+                  handleChangePeriod(floatValue);
+                }}
               />
             </div>
 
             {/* Interest */}
             <div className={styles.inputWrapper}>
               <label>Annual Interest (%)</label>
-              <input
-                type="text"
-                placeholder="Example: 8%"
-                max={100}
+              <NumericFormat
                 value={interestRate}
-                onChange={handleChangeInterest}
+                suffix=" %"
+                placeholder="Example: 10 Years"
+                onValueChange={({ floatValue }) => {
+                  handleChangeInterest(floatValue);
+                }}
               />
             </div>
 
