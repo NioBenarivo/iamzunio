@@ -66,7 +66,7 @@ export const WeddingInvitationText = {
     y: 0,
     opacity: 1,
     transition: {
-      staggerChildren: 0.35,
+      staggerChildren: 0.25,
     }
   }
 };

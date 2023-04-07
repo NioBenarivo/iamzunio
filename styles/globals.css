@@ -23,8 +23,14 @@
   --greyScale-6: #dee2e6;
   --greyScale-7: #e9ecef;
   --greyScale-8: #f8f9fa;
-
   --greyScale-bg: #292F36;
+
+  /* Rustic Wedding Colors */
+  --rustic-1: #F5EACF;
+  --rustic-2: #CEB793;
+  --rustic-3: #8A584C;
+  --rustic-4: #85865F;
+  --rustic-5: #4F583D;
 
   --primary: #55d6c2;
   --danger: #c14953;

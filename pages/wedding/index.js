@@ -13,20 +13,42 @@ const App = () => {
 
 
   return (
-    <div className="landing-page align-center">
+    <div className={styles.weddingWrapper}>
       <div className={styles.flexContainer}>
-        <motion.h1
+        <motion.div
           initial="hidden"
           animate="visible"
           variants={WeddingInvitationText}
+          className={styles.flexContainer}
         >
-          {renderText('Zunio')}&nbsp;
-          {renderText(`&`)}&nbsp;
-          {renderText('Angelita')}
-        </motion.h1>
-        <h2>We are getting married on July 20th 2023.</h2>
-        {/* <MusicPlayer videoId="6POZlJAZsok" /> */}
+          <h1 className={styles.name}>
+            {renderText('Zunio')}&nbsp;
+            {renderText(`&`)}&nbsp;
+            {renderText('Angelita')}
+          </h1>
+          <h2 className={styles.desc}>
+            {renderText('INVITING')}&nbsp;
+            {renderText(`YOU`)}&nbsp;
+            {renderText('TO')}&nbsp;
+            {renderText('THE')}&nbsp;
+            {renderText(`CELEBRATION`)}&nbsp;
+            {renderText('OF')}&nbsp;
+            {renderText('OUR')}&nbsp;
+            {renderText(`WEDDING`)}&nbsp;
+          </h2>
+        </motion.div>
         
+        <div className={styles.schedule}>
+          <p className={styles.month}>JULY</p>
+          <div className={styles.date}>
+            <p>SATURDAY</p>
+            <p>20</p>
+            <p>6.30 PM</p>
+          </div>
+          <p className={styles.hotelName}>Mercure Hotel</p>
+          <p className={styles.hotelFloor}>8th Floor Ballroom</p>
+        </div>
+        {/* <MusicPlayer videoId="6POZlJAZsok" /> */}
       </div>
     </div>
   );
