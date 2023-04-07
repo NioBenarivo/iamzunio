@@ -1,5 +1,12 @@
 .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 24px;
+}
+
+.wrapper div {
+  width: 100%;
 }
 
 .inputWrapper {
@@ -57,4 +64,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+}
+
+@media only screen and (min-width: 720px) {
+  .wrapper {
+    width: 65%;
+    margin: 0 auto;
+  }
 }

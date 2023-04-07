@@ -80,6 +80,9 @@ export default function Compounding() {
 
   const handleRecalculate = () => {
     setHideForm(false);
+    setPrincipal(undefined);
+    setYears(undefined);
+    setInterestRate(undefined);
     setChartData(undefined);
   };
 
