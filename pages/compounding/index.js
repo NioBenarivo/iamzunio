@@ -26,9 +26,6 @@ ChartJS.register(
   Legend
 );
 
-const MAX_LIMIT = 100;
-const MIN_LIMIT = 0;
-
 export const options = {
   responsive: true,
   plugins: {
