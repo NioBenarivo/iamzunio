@@ -1,5 +1,5 @@
 .weddingWrapper {
-  background-image: url('/assets/wedding-bg-2.jpeg');
+  background-image: url('/assets/wedding-bg.jpeg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -35,6 +35,32 @@
   margin-bottom: 16px;
   padding: 12px;
   border-radius: 4px;
+}
+
+.name-2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 72px;
+  font-weight: 700;
+  background-color: rgba(245, 234, 207, 0.55);
+  color: var(--rustic-3);
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: 4px;
+  letter-spacing: 2px;
+}
+
+.name-3 {
+  font-family: 'Zeyada', cursive;
+  font-size: 72px;
+  font-weight: 700;
+  background-color: rgba(245, 234, 207, 0.55);
+  color: var(--rustic-3);
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: 4px;
+  letter-spacing: 2px;
 }
 
 .desc {
@@ -106,3 +132,4 @@
     text-align: center;
   }
 }
+

@@ -1,0 +1,195 @@
+.weddingWrapper {
+  background-image: url('/assets/wedding-bg-3.jpeg');
+  background-repeat: no-repeat;
+  background-size: 80% 120%;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background-position: center;
+  background-color: #FFFFFF;
+}
+
+.weddingLogo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  opacity: 0.15;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+}
+
+.flexContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  position: relative;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+}
+
+.flexContainer span {
+  display: inline-block;
+}
+
+.cardContainer {
+  border-radius: 8px;
+  padding: 0 40px;
+}
+
+.imgContainer {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.imgFlexWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.introText {
+  text-align: center;
+  color: var(--greyScale-0);
+  margin-top: 0;
+}
+
+.name {
+  font-family: 'Dancing Script', cursive;
+  font-size: 72px;
+  font-weight: 700;
+  color: var(--rustic-3);
+  margin: 0;
+  padding: 12px;
+  border-radius: 4px;
+}
+
+.desc {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 2.2px;
+  color: var(--greyScale-0);
+  padding: 12px;
+  margin: 16px 0;
+}
+
+.schedule {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--greyScale-0);
+  font-weight: 400;
+}
+
+.month {
+  color: var(--rustic-2);
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  margin-right: 32px;
+}
+
+.date p:first-child {
+  padding: 0 16px;
+  border-right: 3px solid var(--rustic-3);
+  margin: 0;
+}
+
+.date p:nth-child(2) {
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0 16px;
+  color: var(--rustic-3)
+}
+
+.date p:last-child {
+  padding: 0 16px;
+  border-left: 3px solid var(--rustic-3);
+  margin: 0;
+}
+
+.hotelText {
+  color: var(--rustic-2);
+  font-weight: 700;
+  font-size: 20px;
+  margin: 16px 0;
+}
+
+@media only screen and (max-width: 720px) {
+  .weddingLogo {
+    width: 260px;
+    height: 260px;
+  }
+
+  .weddingWrapper {
+    background-size: 100% 100%;
+  }
+
+  .name {
+    font-size: 36px;
+  }
+
+  .desc {
+    font-size: 18px;
+    margin: 16px;
+    text-align: center;
+  }
+
+  .hotelText, .month {
+    font-size: 18px;
+  }
+
+  .date p:nth-child(2) {
+    font-size: 42px;
+  }
+  
+  .date {
+    font-size: 16px;
+  }
+
+  .introText {
+    font-size: 20px;
+  }
+
+}
+
+@media only screen and (max-width: 480px) {
+  .weddingLogo {
+    width: 180px;
+    height: 180px;
+  }
+
+  .weddingWrapper {
+    background-size: 140% 90%;
+  }
+
+  .hotelText, .month {
+    font-size: 16px;
+  }
+
+  .date p:nth-child(2) {
+    font-size: 36px;
+  }
+  
+  .date {
+    font-size: 14px;
+    margin-right: 16px;
+  }
+
+  .introText {
+    font-size: 18px;
+  }
+
+  .cardContainer {
+    padding: 0;
+  }
+}
